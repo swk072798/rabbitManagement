@@ -1,0 +1,15 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://116.62.150.116:8888/eureka/
+server:
+  port: 8300
+
+spring:
+  application:
+    name: account-login-management
+  datasource:
+    url: jdbc:mysql://116.62.150.116:3306/rabbit_admin?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
