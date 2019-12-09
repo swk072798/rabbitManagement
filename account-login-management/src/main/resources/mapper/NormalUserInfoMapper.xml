@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- mapper 为根元素节点， 一个namespace对应一个dao -->
+<mapper namespace="com.nwafu.accountloginmanagement.dao.NormalUserDao">
+    <resultMap id="NormalUserInfo">
+        <id property="username" column="username" javaType="String" jdbcType="VARCHAR"></id>
+        <result property="password" colunm="password" javaType = "String" jdbcType="VARCHAR"></result>
+        <result property="farmUuids" colunm="farmUuids" javaType = "String" jdbcType="VARCHAR"></result>
+        <result property="status" colunm="status" javaType = "String" jdbcType="VARCHAR"></result>
+        <result property="registrationTime" colunm="registrationTime" javaType = "String" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <select id="getNormalUserInfoByUsername" parameterType="string" resultMap="UserMap">
+        select * from user_info where username=${username}
+    </select>
+
+
+</mapper>
