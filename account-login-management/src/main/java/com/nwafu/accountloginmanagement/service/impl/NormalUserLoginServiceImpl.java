@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * @program: rabbitmanagement
  * @description: 普通用户登录操作service层
@@ -18,7 +20,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class NormalUserLoginServiceImpl implements NormalUserLoginService {
 
-    @Autowired
     NormalUserDao normalUserDao;
 
     @Override

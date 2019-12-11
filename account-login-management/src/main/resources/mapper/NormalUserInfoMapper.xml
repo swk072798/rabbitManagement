@@ -9,10 +9,10 @@
         <result property="password" colunm="password" javaType = "String" jdbcType="VARCHAR"></result>
         <result property="farmUuids" colunm="farmUuids" javaType = "String" jdbcType="VARCHAR"></result>
         <result property="status" colunm="status" javaType = "String" jdbcType="VARCHAR"></result>
-        <result property="registrationTime" colunm="registrationTime" javaType = "String" jdbcType="VARCHAR"></result>
+        <result property="registrationTime" colunm="registrationTime" javaType = "String" jdbcType="DATE"></result>
     </resultMap>
 
-    <select id="getNormalUserInfoByUsername" parameterType="string" resultMap="UserMap">
+    <select id="getNormalUserInfoByUsername" parameterType="string" resultMap="NormalUserInfo">
         select * from user_info where username=${username}
     </select>
 
