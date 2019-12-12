@@ -15,6 +15,13 @@
     <select id="getNormalUserInfoByUsername" parameterType="string" resultMap="NormalUserInfo">
         select * from user_info where username=#{username}
     </select>
+    
+    <insert id="addAccount" parameterType="string">
+        insert into user_info(username,password) value (#{username},#{password})
+    </insert>
 
+    <insert id="addSubAccount" parameterType="string">
+        insert into user_info(subUsername,subPassword,parentUser) value (#{subUsername},#{subPassword},#{parentUser})
+    </insert>
 
 </mapper>

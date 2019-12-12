@@ -13,4 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface NormalUserDao {
     NormalUserInfo getNormalUserInfoByUsername(String username);
+    int addAccount(String username,String password);
+    int addSubAccount(String subUsername, String subPassword, String parentUser);
 }
