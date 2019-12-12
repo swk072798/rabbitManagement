@@ -4,16 +4,16 @@
 
 <!-- mapper 为根元素节点， 一个namespace对应一个dao -->
 <mapper namespace="com.nwafu.accountloginmanagement.dao.NormalUserDao">
-    <resultMap id="NormalUserInfo">
+    <resultMap id="NormalUserInfo" type="com.nwafu.accountloginmanagement.entity.NormalUserInfo">
         <id property="username" column="username" javaType="String" jdbcType="VARCHAR"></id>
-        <result property="password" colunm="password" javaType = "String" jdbcType="VARCHAR"></result>
-        <result property="farmUuids" colunm="farmUuids" javaType = "String" jdbcType="VARCHAR"></result>
-        <result property="status" colunm="status" javaType = "String" jdbcType="VARCHAR"></result>
-        <result property="registrationTime" colunm="registrationTime" javaType = "String" jdbcType="DATE"></result>
+        <result property="password" javaType = "String" jdbcType="VARCHAR" column="password"></result>
+        <result property="farmUuids" javaType = "String" jdbcType="VARCHAR" column="farmUuids"></result>
+        <result property="status" javaType = "String" jdbcType="VARCHAR" column="status"></result>
+        <result property="registrationTime" javaType = "String" jdbcType="DATE" column="registrationTime"></result>
     </resultMap>
 
     <select id="getNormalUserInfoByUsername" parameterType="string" resultMap="NormalUserInfo">
-        select * from user_info where username=${username}
+        select * from user_info where username=#{username}
     </select>
 
 

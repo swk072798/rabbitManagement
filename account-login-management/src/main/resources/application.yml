@@ -9,7 +9,12 @@ spring:
   application:
     name: account-login-management
   datasource:
-    url: jdbc:mysql://116.62.150.116:3306/rabbit_admin?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://116.62.150.116:3306/rabbit_admin?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=true&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
     username: root
     password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#  mybatis.type-aliases-package=com.nwafu.PISMDB.entity
+#  mybatis.mapper-locations=classpath:mapper/*.xml
+mybatis:
+  type-aliases-package: com.nwafu.accountloginmanagement
+  mapper-locations: classpath:mapper/*.xml

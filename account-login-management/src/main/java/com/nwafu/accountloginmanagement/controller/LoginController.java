@@ -5,9 +5,9 @@ import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.service.NormalUserLoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.rmi.ServerException;
 
 /**
  * @program: rabbitmanagement
@@ -23,12 +23,14 @@ public class LoginController {
     @Autowired
     NormalUserLoginService normalUserLoginService;
 
-    @GetMapping("/login")
-    public ResponseMessage nornalUserLogin(@RequestParam(required = false) String username, @RequestParam(required = false) String password){
+    @RequestMapping("/login")
+    public ResponseMessage nornalUserLogin(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password) throws ServerException {
         log.info("入参：{},{}",username,password);
-        NormalUserInfo normalUserInfo = normalUserLoginService.getUserInfo(username);
-        ResponseMessage result = new ResponseMessage();
-        result.setData(normalUserInfo);
+        ResponseMessage<NormalUserInfo> info = normalUserLoginService.getUserInfo(username);
+        if(!info.getData().getPassword().equals(password)){
+            throw new ServerException("用户名或密码错误");
+        }
+        ResponseMessage result = new ResponseMessage("登录成功");
         return result;
     }
 

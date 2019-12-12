@@ -13,4 +13,16 @@ import lombok.Data;
 public class  ResponseMessage <T>{
     private String message;
     private T data;
+
+    public ResponseMessage(){}
+
+    public ResponseMessage(String message){
+        this.message = message;
+        data = null;
+    }
+
+    public ResponseMessage(String message, T data){
+        this.message = message;
+        this.data = data;
+    }
 }

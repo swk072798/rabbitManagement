@@ -1,6 +1,7 @@
 package com.nwafu.accountloginmanagement.dao;
 
 import com.nwafu.accountloginmanagement.entity.NormalUserInfo;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @program: rabbitmanagement
@@ -8,6 +9,8 @@ import com.nwafu.accountloginmanagement.entity.NormalUserInfo;
  * @author: liu qinchang
  * @create: 2019-12-09 17:16
  **/
+
+@Mapper
 public interface NormalUserDao {
     NormalUserInfo getNormalUserInfoByUsername(String username);
 }
