@@ -50,8 +50,7 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
             throw new ServerException("该账号已在其他地方登录");
         }
         normalUserDao.updataLoginStatus("正在登录", username);
-        ResponseMessage result = new ResponseMessage();
-        result.setData(info);
+        ResponseMessage result = new ResponseMessage("success", 1);
         return result;
     }
 
@@ -101,20 +100,7 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
         return responseMessage;
     }
 
-    @Override
-    public ResponseMessage<Integer> addSubAccount(String subUsername, String subPassword, String parentUser) throws ServerException {
-        int flag = 0;
-        try{
-            flag = normalUserDao.addSubAccount(subUsername,subPassword,parentUser);
-        }catch (Exception e){
-            log.error(e.getMessage());
-        }
-        if(flag == 0){
-            throw new ServerException("分配子用户失败");
-        }
-        ResponseMessage<Integer> responseMessage = new ResponseMessage<>("添加子用户成功",1);
-        return responseMessage;
-    }
+
 
     @Override
     public ResponseMessage exitNormalUserLogin(String username) throws ServerException {
@@ -122,8 +108,8 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
         if(statusFlag == 0){
             throw new ServerException("修改普通用户登录状态失败");
         }
-
-        return null;
+        ResponseMessage responseMessage = new ResponseMessage("success", 1);
+        return responseMessage;
     }
 
 

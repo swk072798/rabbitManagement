@@ -25,7 +25,7 @@
     </update>
 
     <insert id="addSubAccount" parameterType="java.lang.String">
-        insert into user_info(subUsername,subPassword,parentUser) value (#{subUsername},#{subPassword},#{parentUser})
+        insert into sub_user_info(subUsername, subPassword, parentUser, permissions) value (#{subUsername},#{subPassword},#{parentUser}, #{permissions})
     </insert>
 
     <update id="createDatabase" parameterType="java.lang.String">
@@ -34,6 +34,10 @@
 
     <delete id="deleteDatabase" parameterType="java.lang.String">
         drop database ${_parameter}
+    </delete>
+
+    <delete id="deleteSubAccount" parameterType="java.lang.String">
+        delete from sub_user_info where subUsername=#{subUsername} and parentUser=#{parentUser}
     </delete>
 
 

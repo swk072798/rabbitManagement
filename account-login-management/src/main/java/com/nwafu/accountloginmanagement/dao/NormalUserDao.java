@@ -17,4 +17,5 @@ public interface NormalUserDao {
     int addSubAccount(String subUsername, String subPassword, String parentUser);
     int createDatabase(String dbName);
     int updataLoginStatus(String newStatus, String username);
+    int deleteSubAccount(String username);
 }

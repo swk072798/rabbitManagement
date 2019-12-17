@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- mapper 为根元素节点， 一个namespace对应一个dao -->
+<mapper namespace="com.nwafu.accountloginmanagement.dao.SubUserDao">
+    <resultMap id="SubAccountInfo" type="com.nwafu.accountloginmanagement.entity.SubAccountInfoPO">
+        <id property="subUsername" column="subUsername" javaType="java.lang.String" jdbcType="VARCHAR"></id>
+        <result property="subPassword" javaType = "java.lang.String" jdbcType="VARCHAR" column="subPassword"></result>
+        <result property="parentUser" javaType = "java.lang.String" jdbcType="VARCHAR" column="parentUser"></result>
+        <result property="permissions" javaType = "java.lang.String" jdbcType="VARCHAR" column="permissions"></result>
+    </resultMap>
+
+
+    <select id="subUserLogin" parameterType="java.lang.String" resultMap="SubAccountInfo">
+        select * from sub_user_info where subUsername=#{subUsername}
+    </select>
+
+</mapper>
+
+
+
