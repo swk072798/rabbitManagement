@@ -7,6 +7,7 @@ import com.nwafu.accountloginmanagement.entity.SubAccountInfo;
 import com.nwafu.accountloginmanagement.service.NormalUserLoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.rmi.ServerException;
@@ -34,14 +35,11 @@ public class LoginController {
     */
     @GetMapping("/login")
     public ResponseMessage normalUserLogin(@RequestParam(value = "username") String username, @RequestParam(value = "password", required = false) String password) throws ServerException {
-        log.info("normalUserLogin入参：{},{}",username,password);
+        log.info("normalUserLogin  入参：{},{}",username,password);
         if(username == null || password == null){
             throw new ServerException("用户名或密码不能为空");
         }
-        ResponseMessage<NormalUserInfo> info = normalUserLoginService.getUserInfo(username);
-        if(!info.getData().getPassword().equals(password)){
-            throw new ServerException("用户名或密码错误");
-        }
+        ResponseMessage<NormalUserInfo> info = normalUserLoginService.normalUserLogin(username, password);
         ResponseMessage result = new ResponseMessage("success");
         return result;
     }
@@ -54,8 +52,8 @@ public class LoginController {
     * @Date: 2019/12/12 
     */
     @PostMapping("/register")
-    public ResponseMessage normalUserRegister(@RequestBody AccountInfo accountInfo) throws ServerException {
-        log.info("normalUserRegister入参为:{}",accountInfo);
+    public ResponseMessage<Integer> normalUserRegister(@RequestBody AccountInfo accountInfo) throws ServerException {
+        log.info("normalUserRegister  入参为:{}",accountInfo);
         if(accountInfo == null || accountInfo.getUsername() == null || accountInfo.getPassword() == null){
             throw new ServerException("账号注册信息为空");
         }
@@ -63,6 +61,17 @@ public class LoginController {
         return responseMessage;
     }
     
+    /** 
+    * @Description: 普通用户退出登录
+    * @Param:  
+    * @return:  
+    * @Author: liu qinchang
+    * @Date: 2019/12/17 
+    */
+//    @GetMapping
+//    public ResponseMessage exitLogin(@RequestParam String username){
+//
+//    }
 
 
 }

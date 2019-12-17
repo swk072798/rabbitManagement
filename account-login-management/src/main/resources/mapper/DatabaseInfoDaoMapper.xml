@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- mapper 为根元素节点， 一个namespace对应一个dao -->
+<mapper namespace="com.nwafu.accountloginmanagement.dao.DatabaseInfoDao">
+    <resultMap id="DatabaseInfo" type="com.nwafu.accountloginmanagement.entity.DatabaseInfo">
+        <id property="dbName" column="dbName" javaType="String" jdbcType="VARCHAR"></id>
+        <result property="owner" javaType = "String" jdbcType="VARCHAR" column="owner"></result>
+        <result property="jdbcUrl" javaType = "String" jdbcType="LONGVARCHAR" column="jdbcUrl"></result>
+        <result property="linkUsername" javaType = "String" jdbcType="VARCHAR" column="linkUsername"></result>
+        <result property="linkPassword" javaType = "String" jdbcType="VARCHAR" column="linkPassword"></result>
+        <result property="driverClassName" javaType = "String" jdbcType="VARCHAR" column="driverClassName"></result>
+    </resultMap>
+
+    <select id="getDatabaseInfo" parameterType="java.lang.String" resultMap="DatabaseInfo">
+        select * from datasource_info where dbName=#{dbName}
+    </select>
+
+    <insert id="addDatabaseInfo" parameterType="java.lang.String">
+        insert into datasource_info (dbName,owner,jdbcUrl,linkUsername,linkPassword,driverClassName)
+        values (#{dbName}, #{owner}, #{jdbcUrl}, #{linkUsername}, #{linkPassword}, #{driverClassName})
+    </insert>
+
+
+
+</mapper>

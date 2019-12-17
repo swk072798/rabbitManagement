@@ -12,16 +12,29 @@
         <result property="registrationTime" javaType = "String" jdbcType="DATE" column="registrationTime"></result>
     </resultMap>
 
-    <select id="getNormalUserInfoByUsername" parameterType="string" resultMap="NormalUserInfo">
+    <select id="getNormalUserInfoByUsername" parameterType="java.lang.String" resultMap="NormalUserInfo">
         select * from user_info where username=#{username}
     </select>
     
-    <insert id="addAccount" parameterType="string">
+    <insert id="addAccount" parameterType="java.lang.String">
         insert into user_info(username,password) value (#{username},#{password})
     </insert>
 
-    <insert id="addSubAccount" parameterType="string">
+    <update id="updataLoginStatus" parameterType="java.lang.String">
+        update user_info set status=#{newStatus} where username=#{username}
+    </update>
+
+    <insert id="addSubAccount" parameterType="java.lang.String">
         insert into user_info(subUsername,subPassword,parentUser) value (#{subUsername},#{subPassword},#{parentUser})
     </insert>
+
+    <update id="createDatabase" parameterType="java.lang.String">
+        create database ${_parameter}
+    </update>
+
+    <delete id="deleteDatabase" parameterType="java.lang.String">
+        drop database ${_parameter}
+    </delete>
+
 
 </mapper>

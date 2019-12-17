@@ -15,4 +15,6 @@ public interface NormalUserDao {
     NormalUserInfo getNormalUserInfoByUsername(String username);
     int addAccount(String username,String password);
     int addSubAccount(String subUsername, String subPassword, String parentUser);
+    int createDatabase(String dbName);
+    int updataLoginStatus(String newStatus, String username);
 }

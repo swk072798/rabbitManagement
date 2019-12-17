@@ -1,11 +1,11 @@
 package com.nwafu.accountloginmanagement.controller;
 
-import com.netflix.discovery.converters.Auto;
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.entity.SubAccountInfo;
 import com.nwafu.accountloginmanagement.service.NormalUserLoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,14 +32,19 @@ public class NormalUserAction {
      * @Author: liu qinchang
      * @Date: 2019/12/12
      */
-    @PostMapping("/addSubAccount")
-    public ResponseMessage addSubAccount(@RequestBody SubAccountInfo subAccountInfo) throws ServerException {
+    @PostMapping("/{normalUsername}/addSubAccount")
+    public ResponseMessage addSubAccount(@RequestBody SubAccountInfo subAccountInfo, @PathVariable String normalUsername) throws ServerException {
         log.info("addSubAccount入参为:{}",subAccountInfo);
         if(subAccountInfo == null || subAccountInfo.getSubUsername() == null
             ||subAccountInfo.getSubPassword() == null || subAccountInfo.getParentUser() == null){
             throw new ServerException("传入参数不正确");
         }
+        if(!normalUsername.equals(subAccountInfo.getParentUser())){
+            throw new ServerException("normalUsername不一致");
+        }
         ResponseMessage responseMessage = normalUserLoginService.addSubAccount(subAccountInfo.getSubUsername(), subAccountInfo.getSubPassword(), subAccountInfo.getParentUser());
         return responseMessage;
     }
+
+
 }
