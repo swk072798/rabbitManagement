@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SubUserDao {
     SubAccountInfoPO subUserLogin(String username);
+    int updateSubUserStatus(String status, String subUsername);
 }

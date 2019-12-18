@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- mapper 为根元素节点， 一个namespace对应一个dao -->
+<mapper namespace="com.nwafu.accountloginmanagement.dao.SuperUserDao">
+    <resultMap id="SubAccountInfo" type="com.nwafu.accountloginmanagement.entity.SuperAdminInfo">
+        <id property="superUsername" column="superUsername" javaType="java.lang.String" jdbcType="VARCHAR"></id>
+        <result property="superPassword" javaType = "java.lang.String" jdbcType="VARCHAR" column="superPassword"></result>
+        <result property="status" javaType = "java.lang.String" jdbcType="VARCHAR" column="status"></result>
+    </resultMap>
+
+
+</mapper>

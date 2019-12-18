@@ -51,10 +51,12 @@ public class NormalUserLoginController {
     @PostMapping("/normalUser/register")
     public ResponseMessage<Integer> normalUserRegister(@RequestBody AccountInfo accountInfo) throws ServerException {
         log.info("normalUserRegister  入参为:{}",accountInfo);
+        long startTime = System.currentTimeMillis();
         if(accountInfo == null || accountInfo.getUsername() == null || accountInfo.getPassword() == null){
             throw new ServerException("账号注册信息为空");
         }
         ResponseMessage<Integer> responseMessage = normalUserLoginService.addUserAccount(accountInfo.getUsername(),accountInfo.getPassword());
+        log.info("normalUserRegister  执行时间： {} ms",System.currentTimeMillis() - startTime);
         return responseMessage;
     }
     
@@ -65,12 +67,12 @@ public class NormalUserLoginController {
     * @Author: liu qinchang
     * @Date: 2019/12/17 
     */
-    @GetMapping("/normalUser/exitLogin")
-    public ResponseMessage exitLogin(@RequestParam String username) throws ServerException {
-        if(username == null || username.length() == 0){
+    @GetMapping("/{normalUser}/normal/normalUserExitLogin")
+    public ResponseMessage exitLogin(@PathVariable String normalUser) throws ServerException {
+        if(normalUser == null || normalUser.length() == 0){
             throw new ServerException("exitLogin  用户名不能为空");
         }
-       ResponseMessage responseMessage = normalUserLoginService.exitNormalUserLogin(username);
+       ResponseMessage responseMessage = normalUserLoginService.exitNormalUserLogin(normalUser);
         return responseMessage;
     }
 

@@ -16,6 +16,10 @@
         select * from sub_user_info where subUsername=#{subUsername}
     </select>
 
+    <update id="updateSubUserStatus" parameterType="java.lang.String">
+        update sub_user_info set status=#{status} where subUsername=#{subUsername}
+    </update>
+
 </mapper>
 
 

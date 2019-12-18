@@ -25,7 +25,7 @@
     </update>
 
     <insert id="addSubAccount" parameterType="java.lang.String">
-        insert into sub_user_info(subUsername, subPassword, parentUser, permissions) value (#{subUsername},#{subPassword},#{parentUser}, #{permissions})
+        insert into sub_user_info(subUsername, subPassword, parentUser) value (#{subUsername},#{subPassword},#{parentUser})
     </insert>
 
     <update id="createDatabase" parameterType="java.lang.String">
@@ -40,5 +40,20 @@
         delete from sub_user_info where subUsername=#{subUsername} and parentUser=#{parentUser}
     </delete>
 
+    <update id="updateSubUserPermissions" parameterType="java.lang.String">
+        update sub_user_info set permissions=#{permissions} where subusername=#{subUsername}
+    </update>
+
+    <resultMap id="SubAccountInfoPO" type="com.nwafu.accountloginmanagement.entity.SubAccountInfoPO">
+        <id property="subUsername" column="subUsername" javaType="java.lang.String" jdbcType="VARCHAR"></id>
+        <result property="subPassword" column="subPassword" javaType="java.lang.String" jdbcType="VARCHAR"></result>
+        <result property="parentUser" column="parentUser" javaType="java.lang.String" jdbcType="VARCHAR"></result>
+        <result property="permissions" column="permissions" javaType="java.lang.String" jdbcType="VARCHAR"></result>
+        <result property="status" column="status" javaType="java.lang.String" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <select id="getAllSubUserInfo" parameterType="java.lang.String" resultMap="SubAccountInfoPO">
+        select * from sub_user_info where parentUser=#{parentUser}
+    </select>
 
 </mapper>

@@ -2,13 +2,15 @@ package com.nwafu.accountloginmanagement.service.impl;
 
 import com.nwafu.accountloginmanagement.dao.NormalUserDao;
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
+import com.nwafu.accountloginmanagement.entity.SubAccountInfoPO;
+import com.nwafu.accountloginmanagement.entity.SubUserInfo;
 import com.nwafu.accountloginmanagement.service.NormalUserActionService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.Server;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.rmi.ServerException;
+import java.util.List;
 
 /**
  * @program: rabbitmanagement
@@ -37,11 +39,18 @@ public class NormalUserActionServiceImpl implements NormalUserActionService {
         return responseMessage;
     }
 
+    /** 
+    * @Description: 删除子用户 
+    * @Param:  
+    * @return:  
+    * @Author: liu qinchang
+    * @Date: 2019/12/18 
+    */
     @Override
     public ResponseMessage<Integer> deleteSubAccount(String subUsername, String parentUser) throws ServerException {
         int flag = 0;
         try {
-            flag = normalUserDao.deleteSubAccount(subUsername);
+            flag = normalUserDao.deleteSubAccount(subUsername,parentUser);
         }catch (Exception e){
             log.error(e.getMessage());
         }
@@ -52,5 +61,36 @@ public class NormalUserActionServiceImpl implements NormalUserActionService {
         return responseMessage;
     }
 
+    /** 
+    * @Description: 修改子用户权限
+    * @Param:  
+    * @return:  
+    * @Author: liu qinchang
+    * @Date: 2019/12/18 
+    */
+    @Override
+    public ResponseMessage<Integer> updateSubUserPermissions(List<String> permissions, String subUsername) throws ServerException {
+        int flag = 0;
+        flag = normalUserDao.updateSubUserPermissions(permissions.toString(),subUsername);
+        if(flag == 0){
+            throw new ServerException("修改权限失败");
+        }
+        ResponseMessage responseMessage = new ResponseMessage("success", 1);
+        return responseMessage;
+    }
+
+    /** 
+    * @Description:
+    * @Param:  
+    * @return:  
+    * @Author: liu qinchang
+    * @Date: 2019/12/18 
+    */
+    @Override
+    public ResponseMessage<List<SubAccountInfoPO>> getAllSubUserInfo(String parentUsername) {
+        List<SubAccountInfoPO> subUserInfoList = normalUserDao.getAllSubUserInfo(parentUsername);
+        ResponseMessage<List<SubAccountInfoPO>> result = new ResponseMessage<>("seccess",subUserInfoList);
+        return result;
+    }
 
 }
