@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="account-login-management" />
         <module name="database-operations" />
+        <module name="gateway" />
         <module name="rabbit-eureka" />
         <module name="rabbitmanagement" />
       </profile>
@@ -17,6 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="account-login-management" options="-parameters" />
       <module name="database-operations" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="rabbit-eureka" options="-parameters" />
     </option>
   </component>

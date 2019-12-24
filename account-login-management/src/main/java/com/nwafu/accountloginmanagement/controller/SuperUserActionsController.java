@@ -1,5 +1,6 @@
 package com.nwafu.accountloginmanagement.controller;
 
+import com.nwafu.accountloginmanagement.entity.NormalUserVO;
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.service.SuperUserActionService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.rmi.ServerException;
+import java.util.List;
 
 /**
  * @program: rabbitmanagement
@@ -39,6 +41,14 @@ public class SuperUserActionsController {
         long starTime = System.currentTimeMillis();
         ResponseMessage<Integer> responseMessage= superUserActionService.deleteNormalUserInfo(username);
         log.info("deleteNormalUserInfo 执行时间：{} ms", System.currentTimeMillis() - starTime);
+        return responseMessage;
+    }
+
+    @GetMapping("/{superUsername}/super/getAllNormalUserInfo")
+    public ResponseMessage<List<NormalUserVO>> getAllNormalUserInfo(@PathVariable String superUsername){
+        log.info("getAllNormalUserInfo  传入参数:  {}",superUsername);
+        ResponseMessage<List<NormalUserVO>> responseMessage = superUserActionService.getAllNormalUserInfo();
+        log.info("getAllNormalUserInfo  执行成功，查询总数： {}",responseMessage.getData().size());
         return responseMessage;
     }
 }

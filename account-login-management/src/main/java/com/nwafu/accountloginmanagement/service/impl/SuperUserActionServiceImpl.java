@@ -1,7 +1,8 @@
 package com.nwafu.accountloginmanagement.service.impl;
 
-import com.nwafu.accountloginmanagement.dao.NormalUserDao;
 import com.nwafu.accountloginmanagement.dao.SuperUserDao;
+import com.nwafu.accountloginmanagement.entity.NormalUserInfo;
+import com.nwafu.accountloginmanagement.entity.NormalUserVO;
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.service.SuperUserActionService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,8 @@ import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import java.rmi.ServerException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @program: rabbitmanagement
@@ -26,13 +29,17 @@ public class SuperUserActionServiceImpl implements SuperUserActionService {
     @Resource
     SuperUserDao superUserDao;
 
-    @Resource
-    NormalUserDao normalUserDao;
-
+    /** 
+    * @Description: 超级用户修改普通用户信息 
+    * @Param:  
+    * @return:  
+    * @Author: liu qinchang
+    * @Date: 2019/12/24 
+    */
     @Override
-    public ResponseMessage<Integer> updateNornalUserInfo(String oldUserName, String newUserName, String newPassword) throws ServerException {
+    public ResponseMessage<Integer> updateNornalUserInfo(String oldUserName, String newUserName, String newPassword){
         if(oldUserName == null){
-            throw new ServerException("updateNornalUserInfo  oldUserName不能为空");
+            throw new RuntimeException("updateNornalUserInfo  oldUserName不能为空");
         }
         String newSecurityPassword = null;
         if(newPassword != null){
@@ -40,13 +47,20 @@ public class SuperUserActionServiceImpl implements SuperUserActionService {
         }
         int flag = superUserDao.updateNormalUserInfo(oldUserName,newUserName,newSecurityPassword);
         if(flag == 0){
-            throw new ServerException("updateNornalUserInfo 修改失败");
+            throw new RuntimeException("updateNornalUserInfo 修改失败");
         }
         log.info("updateNornalUserInfo  修改成功");
         ResponseMessage<Integer> responseMessage = new ResponseMessage<>("success", 1);
         return responseMessage;
     }
 
+    /** 
+    * @Description: 超级用户删除普通用户 
+    * @Param:  
+    * @return:  
+    * @Author: liu qinchang
+    * @Date: 2019/12/24 
+    */
     @Transactional
     @Override
     public ResponseMessage<Integer> deleteNormalUserInfo(String username) {
@@ -62,6 +76,29 @@ public class SuperUserActionServiceImpl implements SuperUserActionService {
         }
         log.info("deleteNormalUserInfo  删除普通用户成功");
         ResponseMessage<Integer> responseMessage = new ResponseMessage<>("success", 1);
+        return responseMessage;
+    }
+    
+
+    /** 
+    * @Description: 超级用户获取所有用户信息
+    * @Param:  
+    * @return:  
+    * @Author: liu qinchang
+    * @Date: 2019/12/24 
+    */
+    @Override
+    public ResponseMessage<List<NormalUserVO>> getAllNormalUserInfo() {
+        List<NormalUserInfo> normalUserInfos = superUserDao.getAllNormalUserInfo();
+        List<NormalUserVO> normalUserVOList = new ArrayList<>(normalUserInfos.size());
+        if(normalUserInfos == null || normalUserInfos.size() == 0){
+            throw new RuntimeException("getAllNormalUserInfo  没有查询到用户信息");
+        }
+        for(int i = 0; i < normalUserInfos.size(); i++){
+            NormalUserVO normalUserVO = new NormalUserVO(normalUserInfos.get(i));
+            normalUserVOList.add(normalUserVO);
+        }
+        ResponseMessage<List<NormalUserVO>> responseMessage = new ResponseMessage<>("success", normalUserVOList);
         return responseMessage;
     }
 }
