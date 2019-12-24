@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper 为根元素节点， 一个namespace对应一个dao -->
+<mapper namespace="com.nwafu.accountloginmanagement.dao.SuperUserDao">
+    <resultMap id="SuperAdminInfo" type="com.nwafu.accountloginmanagement.entity.SuperAdminInfo">
+        <id property="superUsername" column="superUsername" javaType="java.lang.String" jdbcType="VARCHAR"></id>
+        <result property="superPassword" javaType = "java.lang.String" jdbcType="VARCHAR" column="superPassword"></result>
+        <result property="status" javaType = "java.lang.String" jdbcType="VARCHAR" column="status"></result>
+    </resultMap>
+
+    <select id="getSuperUserInfo" parameterType="java.lang.String" resultMap="SuperAdminInfo">
+        select * from super_user_info where superUsername=#{superUsername}
+    </select>
+
+    <update id="updateSuperUserStatus" parameterType="java.lang.String">
+        update super_user_info set status=#{status} where superUsername=#{superUsername}
+    </update>
+
+    <insert id="addSuperUserAccount" parameterType="java.lang.String">
+        insert into super_user_info(superUsername, superPassword) value (#{superUsername}, #{superPassword})
+    </insert>
+
+    <update id="updateNormalUserInfo" parameterType="java.lang.String">
+        update user_info set
+        <if test="newNormalUsername == null and newPassword != null">
+            (password) value (#{newPassword})
+        </if>
+        <if test="newNormalUsername != null and newPassword == null">
+            (username) value (#{newNormalUsername})
+        </if>
+        <if test="newNormalUsername != null and newPassword != null">
+            (username,password) value (#{newNormalUsername}, #{newPassword})
+        </if>
+        where username = #{oldNormalUsername}
+    </update>
+</mapper>

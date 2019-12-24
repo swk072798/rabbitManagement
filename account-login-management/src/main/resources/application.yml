@@ -20,5 +20,9 @@ spring:
 #  mybatis.type-aliases-package=com.nwafu.PISMDB.entity
 #  mybatis.mapper-locations=classpath:mapper/*.xml
 mybatis:
-  type-aliases-package: com.nwafu.accountloginmanagement
+  type-aliases-package: com.nwafu.accountloginmanagement.entity
   mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    com.nwafu.accountloginmanagement.dao: DEBUG

@@ -12,6 +12,6 @@ import lombok.Data;
 @Data
 public class SuperAdminInfo {
     private String superUsername;
-    private String superUserPassword;
+    private String superPassword;
     private String status;
 }
