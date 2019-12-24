@@ -30,18 +30,18 @@ public class SuperUserLoginServiceImpl implements SuperAdminLoginService {
     * @Date: 2019/12/19
     */
     @Override
-    public ResponseMessage<Integer> superUserLogin(String superUsername, String superPassword) throws ServerException {
+    public ResponseMessage<Integer> superUserLogin(String superUsername, String superPassword){
         SuperAdminInfo superAdminInfo = superUserDao.getSuperUserInfo(superUsername);
         if(superAdminInfo == null || !DigestUtils.md5DigestAsHex(superPassword.getBytes()).equals(superAdminInfo.getSuperPassword())){
-            throw new ServerException("超级用户登录失败");
+            throw new RuntimeException("超级用户登录失败");
         }
         if(superAdminInfo.getStatus().equals("正在登录")){
-            throw new ServerException("该账号正在登录");
+            throw new RuntimeException("该账号正在登录");
         }
         int flag = 0;
         flag = superUserDao.updateSuperUserStatus("正在登录", superUsername);
         if(flag == 0){
-            throw new ServerException("超级用户登陆失败");
+            throw new RuntimeException("超级用户登陆失败");
         }
         ResponseMessage<Integer> responseMessage = new ResponseMessage<>("success", 1);
         return responseMessage;
@@ -55,11 +55,11 @@ public class SuperUserLoginServiceImpl implements SuperAdminLoginService {
     * @Date: 2019/12/19
     */
     @Override
-    public ResponseMessage<Integer> superUserExitLogin(String superUsername) throws ServerException {
+    public ResponseMessage<Integer> superUserExitLogin(String superUsername){
         int flag;
         flag = superUserDao.updateSuperUserStatus("未登录", superUsername);
         if(flag == 0){
-            throw new ServerException("登陆失败");
+            throw new RuntimeException("登陆失败");
         }
         ResponseMessage<Integer> responseMessage = new ResponseMessage<>("success", 1);
         return responseMessage;
@@ -73,12 +73,12 @@ public class SuperUserLoginServiceImpl implements SuperAdminLoginService {
      * @Date: 2019/12/19
      */
     @Override
-    public ResponseMessage<Integer> addSuperUserAccount(String superUsername, String superPassword) throws ServerException {
+    public ResponseMessage<Integer> addSuperUserAccount(String superUsername, String superPassword){
         String securitySuperPassword = DigestUtils.md5DigestAsHex(superPassword.getBytes());
         int flag;
         flag = superUserDao.addSuperUserAccount(superUsername,securitySuperPassword);
         if(flag == 0){
-            throw new ServerException("addSuperUserAccount  创建超级用户账号失败");
+            throw new RuntimeException("addSuperUserAccount  创建超级用户账号失败");
         }
         ResponseMessage<Integer> responseMessage = new ResponseMessage<>("success", 1);
         return responseMessage;

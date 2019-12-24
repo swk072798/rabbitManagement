@@ -32,10 +32,6 @@
         create database ${_parameter}
     </update>
 
-    <delete id="deleteDatabase" parameterType="java.lang.String">
-        drop database ${_parameter}
-    </delete>
-
     <delete id="deleteSubAccount" parameterType="java.lang.String">
         delete from sub_user_info where subUsername=#{subUsername} and parentUser=#{parentUser}
     </delete>

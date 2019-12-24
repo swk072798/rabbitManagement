@@ -16,10 +16,10 @@ import java.rmi.ServerException;
 @RestControllerAdvice("com.nwafu.accountloginmanagement.controller")
 @Slf4j
 public class ExceptionHandler {
-    @org.springframework.web.bind.annotation.ExceptionHandler(value = ServerException.class)
-    public ResponseMessage handException(ServerException se){
-        log.error("服务调用异常：{}",se.getMessage());
-        ResponseMessage result = new ResponseMessage(se.getMessage(), -1);
+    @org.springframework.web.bind.annotation.ExceptionHandler(value = RuntimeException.class)
+    public ResponseMessage handException(RuntimeException re){
+        log.error("服务调用异常：{}",re.getMessage());
+        ResponseMessage result = new ResponseMessage(re.getMessage(), -1);
         return result;
     }
 }

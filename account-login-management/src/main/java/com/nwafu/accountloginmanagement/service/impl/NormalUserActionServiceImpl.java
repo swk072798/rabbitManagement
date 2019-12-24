@@ -3,13 +3,11 @@ package com.nwafu.accountloginmanagement.service.impl;
 import com.nwafu.accountloginmanagement.dao.NormalUserDao;
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.entity.SubAccountInfoPO;
-import com.nwafu.accountloginmanagement.entity.SubUserInfo;
 import com.nwafu.accountloginmanagement.service.NormalUserActionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.rmi.ServerException;
 import java.util.List;
 
 /**
@@ -25,7 +23,7 @@ public class NormalUserActionServiceImpl implements NormalUserActionService {
     NormalUserDao normalUserDao;
 
     @Override
-    public ResponseMessage<Integer> addSubAccount(String subUsername, String subPassword, String parentUser, String permissions) throws ServerException {
+    public ResponseMessage<Integer> addSubAccount(String subUsername, String subPassword, String parentUser, String permissions) {
         int flag = 0;
         try{
             flag = normalUserDao.addSubAccount(subUsername,subPassword,parentUser);
@@ -33,7 +31,7 @@ public class NormalUserActionServiceImpl implements NormalUserActionService {
             log.error(e.getMessage());
         }
         if(flag == 0){
-            throw new ServerException("分配子用户失败");
+            throw new RuntimeException("分配子用户失败");
         }
         ResponseMessage<Integer> responseMessage = new ResponseMessage<>("添加子用户成功",1);
         return responseMessage;
@@ -47,7 +45,7 @@ public class NormalUserActionServiceImpl implements NormalUserActionService {
     * @Date: 2019/12/18 
     */
     @Override
-    public ResponseMessage<Integer> deleteSubAccount(String subUsername, String parentUser) throws ServerException {
+    public ResponseMessage<Integer> deleteSubAccount(String subUsername, String parentUser){
         int flag = 0;
         try {
             flag = normalUserDao.deleteSubAccount(subUsername,parentUser);
@@ -55,7 +53,7 @@ public class NormalUserActionServiceImpl implements NormalUserActionService {
             log.error(e.getMessage());
         }
         if(flag == 0){
-            throw new ServerException("删除账号失败");
+            throw new RuntimeException("删除账号失败");
         }
         ResponseMessage<Integer> responseMessage = new ResponseMessage("success",1);
         return responseMessage;
@@ -69,11 +67,11 @@ public class NormalUserActionServiceImpl implements NormalUserActionService {
     * @Date: 2019/12/18 
     */
     @Override
-    public ResponseMessage<Integer> updateSubUserPermissions(List<String> permissions, String subUsername) throws ServerException {
+    public ResponseMessage<Integer> updateSubUserPermissions(List<String> permissions, String subUsername){
         int flag = 0;
         flag = normalUserDao.updateSubUserPermissions(permissions.toString(),subUsername);
         if(flag == 0){
-            throw new ServerException("修改权限失败");
+            throw new RuntimeException("修改权限失败");
         }
         ResponseMessage responseMessage = new ResponseMessage("success", 1);
         return responseMessage;

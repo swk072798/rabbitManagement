@@ -12,9 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.rmi.ServerException;
 import java.sql.SQLException;
 
 
@@ -36,19 +34,19 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
     JdbcActions jdbcActions;
 
     @Override
-    public ResponseMessage<NormalUserInfo> normalUserLogin(String username, String password) throws ServerException {
+    public ResponseMessage<NormalUserInfo> normalUserLogin(String username, String password){
         log.info("{}",username);
         String securityPassword = DigestUtils.md5DigestAsHex(password.getBytes());
         NormalUserInfo info = normalUserDao.getNormalUserInfoByUsername(username);
         log.info("查询结果:{}",info);
         if (info == null){
-            throw new ServerException("未找到相关账号信息");
+            throw new RuntimeException("未找到相关账号信息");
         }
         if(!info.getPassword().equals(securityPassword)){
-            throw new ServerException("用户名或密码错误");
+            throw new RuntimeException("用户名或密码错误");
         }
         if(!info.getStatus().equals("未登录")){
-            throw new ServerException("该账号已在其他地方登录");
+            throw new RuntimeException("该账号已在其他地方登录");
         }
         normalUserDao.updataLoginStatus("正在登录", username);
         ResponseMessage result = new ResponseMessage("success", 1);
@@ -59,7 +57,7 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
 
     @Transactional(rollbackFor = Exception.class)       //出现任何错误都将进行回滚
     @Override
-    public ResponseMessage<Integer> addUserAccount(String username, String password) throws ServerException {
+    public ResponseMessage<Integer> addUserAccount(String username, String password){
         int flag = 0;
         String securityPassword = DigestUtils.md5DigestAsHex(password.getBytes());
         try{
@@ -68,13 +66,13 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
             log.info(e.getMessage());
         }
         if(flag == 0){
-            throw new ServerException("添加账号失败,该账号已存在或传入的参数有误");
+            throw new RuntimeException("添加账号失败,该账号已存在或传入的参数有误");
         }
         try {
             normalUserDao.createDatabase(username);
         }catch (Exception e){
             log.error(e.getMessage());
-            throw new ServerException("创建账户数据库失败");
+            throw new RuntimeException("创建账户数据库失败");
         }
         log.info("创建账号绑定数据库成功");
         try {
@@ -82,10 +80,10 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
             jdbcActions.runSqlScript();
         } catch (SQLException e) {
             log.error(e.getMessage());
-            throw new ServerException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         } catch (ClassNotFoundException e) {
             log.error(e.getMessage());
-            throw new ServerException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }  catch (IOException e) {
             log.error(e.getMessage());
         }
@@ -93,7 +91,7 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
         String jdbcUrl = "jdbc:mysql://116.62.150.116:3306/" + username + "?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=true&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true";
         int addDatabaseInfoFlag = databaseInfoDao.addDatabaseInfo(username,username, jdbcUrl,"root", "123456", "com.mysql.cj.jdbc.Driver");
         if(addDatabaseInfoFlag == 0){
-            throw new ServerException("数据库信息添加失败");
+            throw new RuntimeException("数据库信息添加失败");
         }
         log.info("数据库信息添加成功");
         ResponseMessage responseMessage = new ResponseMessage("注册成功",1);
@@ -103,10 +101,10 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
 
 
     @Override
-    public ResponseMessage exitNormalUserLogin(String username) throws ServerException {
+    public ResponseMessage exitNormalUserLogin(String username){
         int statusFlag = normalUserDao.updataLoginStatus("未登录", username);
         if(statusFlag == 0){
-            throw new ServerException("修改普通用户登录状态失败");
+            throw new RuntimeException("修改普通用户登录状态失败");
         }
         ResponseMessage responseMessage = new ResponseMessage("success", 1);
         return responseMessage;

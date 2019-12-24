@@ -24,14 +24,34 @@
     <update id="updateNormalUserInfo" parameterType="java.lang.String">
         update user_info set
         <if test="newNormalUsername == null and newPassword != null">
-            (password) value (#{newPassword})
+            password = #{newPassword}
         </if>
         <if test="newNormalUsername != null and newPassword == null">
-            (username) value (#{newNormalUsername})
+            username = #{newNormalUsername}
         </if>
         <if test="newNormalUsername != null and newPassword != null">
-            (username,password) value (#{newNormalUsername}, #{newPassword})
+            username = #{newNormalUsername}, password = #{newPassword}
         </if>
         where username = #{oldNormalUsername}
     </update>
+
+    <delete id="deleteNormalUserInfo" parameterType="java.lang.String">
+        delete from user_info where username=#{username}
+    </delete>
+
+    <delete id="deleteDatabase" parameterType="java.lang.String">
+        drop database ${_parameter}
+    </delete>
+
+    <resultMap id="NormalUserInfo" type="com.nwafu.accountloginmanagement.entity.NormalUserInfo">
+        <id property="username" column="username" javaType="String" jdbcType="VARCHAR"></id>
+        <result property="password" javaType = "String" jdbcType="VARCHAR" column="password"></result>
+        <result property="farmUuids" javaType = "String" jdbcType="VARCHAR" column="farmUuids"></result>
+        <result property="status" javaType = "String" jdbcType="VARCHAR" column="status"></result>
+        <result property="registrationTime" javaType = "String" jdbcType="DATE" column="registrationTime"></result>
+    </resultMap>
+
+    <select id="getAllNormalUserInfo" resultMap="NormalUserInfo">
+        select username, farmUuids, status, registrationTime from user_info
+    </select>
 </mapper>

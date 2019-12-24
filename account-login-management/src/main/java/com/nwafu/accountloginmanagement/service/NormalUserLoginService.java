@@ -2,10 +2,9 @@ package com.nwafu.accountloginmanagement.service;
 
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 
-import java.rmi.ServerException;
 
 public interface NormalUserLoginService {
-    ResponseMessage normalUserLogin(String username, String password) throws ServerException;
-    ResponseMessage addUserAccount(String username, String password) throws ServerException;
-    ResponseMessage exitNormalUserLogin(String username) throws ServerException;
+    ResponseMessage normalUserLogin(String username, String password);
+    ResponseMessage addUserAccount(String username, String password);
+    ResponseMessage exitNormalUserLogin(String username);
 }

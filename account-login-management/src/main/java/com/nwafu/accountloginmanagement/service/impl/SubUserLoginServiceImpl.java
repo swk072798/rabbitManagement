@@ -32,10 +32,10 @@ public class SubUserLoginServiceImpl implements SubUserLoginService {
     * @Date: 2019/12/18 
     */
     @Override
-    public ResponseMessage<Integer> subUserLogin(String subUsername, String subPassword) throws ServerException {
+    public ResponseMessage<Integer> subUserLogin(String subUsername, String subPassword){
         SubAccountInfoPO subAccountInfoPO = subUserDao.subUserLogin(subUsername);
         if(!DigestUtils.md5DigestAsHex(subPassword.getBytes()).equals(subAccountInfoPO.getSubPassword())){
-            throw new ServerException("账号密码错误");
+            throw new RuntimeException("账号密码错误");
         }
         subUserDao.updateSubUserStatus("正在登录", subUsername);
         ResponseMessage<Integer> responseMessage = new ResponseMessage<>("success");
@@ -49,11 +49,11 @@ public class SubUserLoginServiceImpl implements SubUserLoginService {
     * @Author: liu qinchang
     * @Date: 2019/12/18 
     */
-    public ResponseMessage<Integer> exitSubUserLogin(String subUsername) throws ServerException {
+    public ResponseMessage<Integer> exitSubUserLogin(String subUsername){
         int flag = 0;
         flag = subUserDao.updateSubUserStatus("未登录",subUsername);
         if(flag == 0){
-            throw new ServerException("退出登录失败");
+            throw new RuntimeException("退出登录失败");
         }
         ResponseMessage<Integer> responseMessage = new ResponseMessage<>("success", 1);
         return responseMessage;
