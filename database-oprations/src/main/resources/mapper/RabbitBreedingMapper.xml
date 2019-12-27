@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.databaseoprations.dao.RabbitBreedingMapper">
+  <resultMap id="BaseResultMap" type="com.nwafu.databaseoprations.entity.RabbitBreeding">
+    <result column="breedingInformationId" jdbcType="INTEGER" property="breedingInformationId" />
+    <result column="femaleRabbitNo" jdbcType="VARCHAR" property="femaleRabbitNo" />
+    <result column="maleRabbitNo" jdbcType="VARCHAR" property="maleRabbitNo" />
+    <result column="breedingTime" jdbcType="TIMESTAMP" property="breedingTime" />
+    <result column="twelve-dayMoldTire" jdbcType="VARCHAR" property="twelve-dayMoldTire" />
+    <result column="birthTime" jdbcType="TIMESTAMP" property="birthTime" />
+    <result column="nestLittersNumber" jdbcType="INTEGER" property="nestLittersNumber" />
+    <result column="nestLiveRabbitsNumber" jdbcType="INTEGER" property="nestLiveRabbitsNumber" />
+    <result column="nestLiveRabbitsRate" jdbcType="DOUBLE" property="nestLiveRabbitsRate" />
+    <result column="nestWeakDeadRabbitsNumber" jdbcType="INTEGER" property="nestWeakDeadRabbitsNumber" />
+    <result column="nestWeakDeadRabbitsRate" jdbcType="DOUBLE" property="nestWeakDeadRabbitsRate" />
+    <result column="nestWeakRabbitsNumber" jdbcType="INTEGER" property="nestWeakRabbitsNumber" />
+    <result column="nestWeakRabbitsRate" jdbcType="DOUBLE" property="nestWeakRabbitsRate" />
+    <result column="nestDeathRabbitRate" jdbcType="DOUBLE" property="nestDeathRabbitRate" />
+    <result column="deathRabbitRate" jdbcType="DOUBLE" property="deathRabbitRate" />
+    <result column="newbornNestWeight" jdbcType="DOUBLE" property="newbornNestWeight" />
+    <result column="newbornAverageWeight" jdbcType="DOUBLE" property="newbornAverageWeight" />
+    <result column="sucklingRabbitsNumber" jdbcType="INTEGER" property="sucklingRabbitsNumber" />
+    <result column="twenty-oneDaysOldNestWeight" jdbcType="DOUBLE" property="twenty-oneDaysOldNestWeight" />
+    <result column="weaningNestWeight" jdbcType="DOUBLE" property="weaningNestWeight" />
+    <result column="lactationAverageDailyGain" jdbcType="DOUBLE" property="lactationAverageDailyGain" />
+    <result column="lactationConsumption" jdbcType="DOUBLE" property="lactationConsumption" />
+    <result column="lactationAverageMaterialWeightRatio" jdbcType="DOUBLE" property="lactationAverageMaterialWeightRatio" />
+    <result column="tiresNumber" jdbcType="VARCHAR" property="tiresNumber" />
+  </resultMap>
+  <insert id="insert" parameterType="com.nwafu.databaseoprations.entity.RabbitBreeding">
+    insert into rabbit_breeding (breedingInformationId, femaleRabbitNo, 
+      maleRabbitNo, breedingTime, twelve-dayMoldTire, 
+      birthTime, nestLittersNumber, nestLiveRabbitsNumber, 
+      nestLiveRabbitsRate, nestWeakDeadRabbitsNumber, 
+      nestWeakDeadRabbitsRate, nestWeakRabbitsNumber, 
+      nestWeakRabbitsRate, nestDeathRabbitRate, 
+      deathRabbitRate, newbornNestWeight, newbornAverageWeight, 
+      sucklingRabbitsNumber, twenty-oneDaysOldNestWeight, 
+      weaningNestWeight, lactationAverageDailyGain, 
+      lactationConsumption, lactationAverageMaterialWeightRatio, 
+      tiresNumber)
+    values (#{breedingInformationId,jdbcType=INTEGER}, #{femaleRabbitNo,jdbcType=VARCHAR}, 
+      #{maleRabbitNo,jdbcType=VARCHAR}, #{breedingTime,jdbcType=TIMESTAMP}, #{twelve-dayMoldTire,jdbcType=VARCHAR}, 
+      #{birthTime,jdbcType=TIMESTAMP}, #{nestLittersNumber,jdbcType=INTEGER}, #{nestLiveRabbitsNumber,jdbcType=INTEGER}, 
+      #{nestLiveRabbitsRate,jdbcType=DOUBLE}, #{nestWeakDeadRabbitsNumber,jdbcType=INTEGER}, 
+      #{nestWeakDeadRabbitsRate,jdbcType=DOUBLE}, #{nestWeakRabbitsNumber,jdbcType=INTEGER}, 
+      #{nestWeakRabbitsRate,jdbcType=DOUBLE}, #{nestDeathRabbitRate,jdbcType=DOUBLE}, 
+      #{deathRabbitRate,jdbcType=DOUBLE}, #{newbornNestWeight,jdbcType=DOUBLE}, #{newbornAverageWeight,jdbcType=DOUBLE}, 
+      #{sucklingRabbitsNumber,jdbcType=INTEGER}, #{twenty-oneDaysOldNestWeight,jdbcType=DOUBLE}, 
+      #{weaningNestWeight,jdbcType=DOUBLE}, #{lactationAverageDailyGain,jdbcType=DOUBLE}, 
+      #{lactationConsumption,jdbcType=DOUBLE}, #{lactationAverageMaterialWeightRatio,jdbcType=DOUBLE}, 
+      #{tiresNumber,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select breedingInformationId, femaleRabbitNo, maleRabbitNo, breedingTime, twelve-dayMoldTire, 
+    birthTime, nestLittersNumber, nestLiveRabbitsNumber, nestLiveRabbitsRate, nestWeakDeadRabbitsNumber, 
+    nestWeakDeadRabbitsRate, nestWeakRabbitsNumber, nestWeakRabbitsRate, nestDeathRabbitRate, 
+    deathRabbitRate, newbornNestWeight, newbornAverageWeight, sucklingRabbitsNumber, 
+    twenty-oneDaysOldNestWeight, weaningNestWeight, lactationAverageDailyGain, lactationConsumption, 
+    lactationAverageMaterialWeightRatio, tiresNumber
+    from rabbit_breeding
+  </select>
+  <resultMap id="BaseResultMap" type="com.nwafu.databaseoprations.entity.RabbitBreeding">
+    <result column="breedingInformationId" jdbcType="INTEGER" property="breedingInformationId" />
+    <result column="femaleRabbitNo" jdbcType="VARCHAR" property="femaleRabbitNo" />
+    <result column="maleRabbitNo" jdbcType="VARCHAR" property="maleRabbitNo" />
+    <result column="breedingTime" jdbcType="TIMESTAMP" property="breedingTime" />
+    <result column="twelve-dayMoldTire" jdbcType="VARCHAR" property="twelve-dayMoldTire" />
+    <result column="birthTime" jdbcType="TIMESTAMP" property="birthTime" />
+    <result column="nestLittersNumber" jdbcType="INTEGER" property="nestLittersNumber" />
+    <result column="nestLiveRabbitsNumber" jdbcType="INTEGER" property="nestLiveRabbitsNumber" />
+    <result column="nestLiveRabbitsRate" jdbcType="DOUBLE" property="nestLiveRabbitsRate" />
+    <result column="nestWeakDeadRabbitsNumber" jdbcType="INTEGER" property="nestWeakDeadRabbitsNumber" />
+    <result column="nestWeakDeadRabbitsRate" jdbcType="DOUBLE" property="nestWeakDeadRabbitsRate" />
+    <result column="nestWeakRabbitsNumber" jdbcType="INTEGER" property="nestWeakRabbitsNumber" />
+    <result column="nestWeakRabbitsRate" jdbcType="DOUBLE" property="nestWeakRabbitsRate" />
+    <result column="nestDeathRabbitRate" jdbcType="DOUBLE" property="nestDeathRabbitRate" />
+    <result column="deathRabbitRate" jdbcType="DOUBLE" property="deathRabbitRate" />
+    <result column="newbornNestWeight" jdbcType="DOUBLE" property="newbornNestWeight" />
+    <result column="newbornAverageWeight" jdbcType="DOUBLE" property="newbornAverageWeight" />
+    <result column="sucklingRabbitsNumber" jdbcType="INTEGER" property="sucklingRabbitsNumber" />
+    <result column="twenty-oneDaysOldNestWeight" jdbcType="DOUBLE" property="twenty-oneDaysOldNestWeight" />
+    <result column="weaningNestWeight" jdbcType="DOUBLE" property="weaningNestWeight" />
+    <result column="lactationAverageDailyGain" jdbcType="DOUBLE" property="lactationAverageDailyGain" />
+    <result column="lactationConsumption" jdbcType="DOUBLE" property="lactationConsumption" />
+    <result column="lactationAverageMaterialWeightRatio" jdbcType="DOUBLE" property="lactationAverageMaterialWeightRatio" />
+    <result column="tiresNumber" jdbcType="VARCHAR" property="tiresNumber" />
+  </resultMap>
+  <insert id="insert" parameterType="com.nwafu.databaseoprations.entity.RabbitBreeding">
+    insert into rabbit_breeding (breedingInformationId, femaleRabbitNo, 
+      maleRabbitNo, breedingTime, twelve-dayMoldTire, 
+      birthTime, nestLittersNumber, nestLiveRabbitsNumber, 
+      nestLiveRabbitsRate, nestWeakDeadRabbitsNumber, 
+      nestWeakDeadRabbitsRate, nestWeakRabbitsNumber, 
+      nestWeakRabbitsRate, nestDeathRabbitRate, 
+      deathRabbitRate, newbornNestWeight, newbornAverageWeight, 
+      sucklingRabbitsNumber, twenty-oneDaysOldNestWeight, 
+      weaningNestWeight, lactationAverageDailyGain, 
+      lactationConsumption, lactationAverageMaterialWeightRatio, 
+      tiresNumber)
+    values (#{breedingInformationId,jdbcType=INTEGER}, #{femaleRabbitNo,jdbcType=VARCHAR}, 
+      #{maleRabbitNo,jdbcType=VARCHAR}, #{breedingTime,jdbcType=TIMESTAMP}, #{twelve-dayMoldTire,jdbcType=VARCHAR}, 
+      #{birthTime,jdbcType=TIMESTAMP}, #{nestLittersNumber,jdbcType=INTEGER}, #{nestLiveRabbitsNumber,jdbcType=INTEGER}, 
+      #{nestLiveRabbitsRate,jdbcType=DOUBLE}, #{nestWeakDeadRabbitsNumber,jdbcType=INTEGER}, 
+      #{nestWeakDeadRabbitsRate,jdbcType=DOUBLE}, #{nestWeakRabbitsNumber,jdbcType=INTEGER}, 
+      #{nestWeakRabbitsRate,jdbcType=DOUBLE}, #{nestDeathRabbitRate,jdbcType=DOUBLE}, 
+      #{deathRabbitRate,jdbcType=DOUBLE}, #{newbornNestWeight,jdbcType=DOUBLE}, #{newbornAverageWeight,jdbcType=DOUBLE}, 
+      #{sucklingRabbitsNumber,jdbcType=INTEGER}, #{twenty-oneDaysOldNestWeight,jdbcType=DOUBLE}, 
+      #{weaningNestWeight,jdbcType=DOUBLE}, #{lactationAverageDailyGain,jdbcType=DOUBLE}, 
+      #{lactationConsumption,jdbcType=DOUBLE}, #{lactationAverageMaterialWeightRatio,jdbcType=DOUBLE}, 
+      #{tiresNumber,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select breedingInformationId, femaleRabbitNo, maleRabbitNo, breedingTime, twelve-dayMoldTire, 
+    birthTime, nestLittersNumber, nestLiveRabbitsNumber, nestLiveRabbitsRate, nestWeakDeadRabbitsNumber, 
+    nestWeakDeadRabbitsRate, nestWeakRabbitsNumber, nestWeakRabbitsRate, nestDeathRabbitRate, 
+    deathRabbitRate, newbornNestWeight, newbornAverageWeight, sucklingRabbitsNumber, 
+    twenty-oneDaysOldNestWeight, weaningNestWeight, lactationAverageDailyGain, lactationConsumption, 
+    lactationAverageMaterialWeightRatio, tiresNumber
+    from rabbit_breeding
+  </select>
+</mapper>

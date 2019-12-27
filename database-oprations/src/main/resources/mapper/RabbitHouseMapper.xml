@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.databaseoprations.dao.RabbitHouseMapper">
+  <resultMap id="BaseResultMap" type="com.nwafu.databaseoprations.entity.RabbitHouse">
+    <result column="rabbitHouseNo" jdbcType="VARCHAR" property="rabbitHouseNo" />
+    <result column="outdoorTemperature" jdbcType="DOUBLE" property="outdoorTemperature" />
+    <result column="outdoorUmidity" jdbcType="DOUBLE" property="outdoorUmidity" />
+    <result column="indoorTemperature" jdbcType="DOUBLE" property="indoorTemperature" />
+    <result column="indoorUmidity" jdbcType="DOUBLE" property="indoorUmidity" />
+    <result column="indoorWindSpeed" jdbcType="DOUBLE" property="indoorWindSpeed" />
+    <result column="ammonia" jdbcType="DOUBLE" property="ammonia" />
+    <result column="hydrogenSulfide" jdbcType="DOUBLE" property="hydrogenSulfide" />
+    <result column="carbonMonoxideConcentration" jdbcType="DOUBLE" property="carbonMonoxideConcentration" />
+    <result column="fanOperation" jdbcType="VARCHAR" property="fanOperation" />
+    <result column="wetCurtainOperation" jdbcType="VARCHAR" property="wetCurtainOperation" />
+    <result column="lightingControl" jdbcType="VARCHAR" property="lightingControl" />
+  </resultMap>
+  <insert id="insert" parameterType="com.nwafu.databaseoprations.entity.RabbitHouse">
+    insert into rabbit_house (rabbitHouseNo, outdoorTemperature, 
+      outdoorUmidity, indoorTemperature, indoorUmidity, 
+      indoorWindSpeed, ammonia, hydrogenSulfide, 
+      carbonMonoxideConcentration, fanOperation, 
+      wetCurtainOperation, lightingControl)
+    values (#{rabbitHouseNo,jdbcType=VARCHAR}, #{outdoorTemperature,jdbcType=DOUBLE}, 
+      #{outdoorUmidity,jdbcType=DOUBLE}, #{indoorTemperature,jdbcType=DOUBLE}, #{indoorUmidity,jdbcType=DOUBLE}, 
+      #{indoorWindSpeed,jdbcType=DOUBLE}, #{ammonia,jdbcType=DOUBLE}, #{hydrogenSulfide,jdbcType=DOUBLE}, 
+      #{carbonMonoxideConcentration,jdbcType=DOUBLE}, #{fanOperation,jdbcType=VARCHAR}, 
+      #{wetCurtainOperation,jdbcType=VARCHAR}, #{lightingControl,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select rabbitHouseNo, outdoorTemperature, outdoorUmidity, indoorTemperature, indoorUmidity, 
+    indoorWindSpeed, ammonia, hydrogenSulfide, carbonMonoxideConcentration, fanOperation, 
+    wetCurtainOperation, lightingControl
+    from rabbit_house
+  </select>
+  <resultMap id="BaseResultMap" type="com.nwafu.databaseoprations.entity.RabbitHouse">
+    <result column="rabbitHouseNo" jdbcType="VARCHAR" property="rabbitHouseNo" />
+    <result column="outdoorTemperature" jdbcType="DOUBLE" property="outdoorTemperature" />
+    <result column="outdoorUmidity" jdbcType="DOUBLE" property="outdoorUmidity" />
+    <result column="indoorTemperature" jdbcType="DOUBLE" property="indoorTemperature" />
+    <result column="indoorUmidity" jdbcType="DOUBLE" property="indoorUmidity" />
+    <result column="indoorWindSpeed" jdbcType="DOUBLE" property="indoorWindSpeed" />
+    <result column="ammonia" jdbcType="DOUBLE" property="ammonia" />
+    <result column="hydrogenSulfide" jdbcType="DOUBLE" property="hydrogenSulfide" />
+    <result column="carbonMonoxideConcentration" jdbcType="DOUBLE" property="carbonMonoxideConcentration" />
+    <result column="fanOperation" jdbcType="VARCHAR" property="fanOperation" />
+    <result column="wetCurtainOperation" jdbcType="VARCHAR" property="wetCurtainOperation" />
+    <result column="lightingControl" jdbcType="VARCHAR" property="lightingControl" />
+  </resultMap>
+  <insert id="insert" parameterType="com.nwafu.databaseoprations.entity.RabbitHouse">
+    insert into rabbit_house (rabbitHouseNo, outdoorTemperature, 
+      outdoorUmidity, indoorTemperature, indoorUmidity, 
+      indoorWindSpeed, ammonia, hydrogenSulfide, 
+      carbonMonoxideConcentration, fanOperation, 
+      wetCurtainOperation, lightingControl)
+    values (#{rabbitHouseNo,jdbcType=VARCHAR}, #{outdoorTemperature,jdbcType=DOUBLE}, 
+      #{outdoorUmidity,jdbcType=DOUBLE}, #{indoorTemperature,jdbcType=DOUBLE}, #{indoorUmidity,jdbcType=DOUBLE}, 
+      #{indoorWindSpeed,jdbcType=DOUBLE}, #{ammonia,jdbcType=DOUBLE}, #{hydrogenSulfide,jdbcType=DOUBLE}, 
+      #{carbonMonoxideConcentration,jdbcType=DOUBLE}, #{fanOperation,jdbcType=VARCHAR}, 
+      #{wetCurtainOperation,jdbcType=VARCHAR}, #{lightingControl,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select rabbitHouseNo, outdoorTemperature, outdoorUmidity, indoorTemperature, indoorUmidity, 
+    indoorWindSpeed, ammonia, hydrogenSulfide, carbonMonoxideConcentration, fanOperation, 
+    wetCurtainOperation, lightingControl
+    from rabbit_house
+  </select>
+</mapper>
