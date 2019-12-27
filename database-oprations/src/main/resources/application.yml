@@ -1,0 +1,20 @@
+server:
+  port: 8450
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://116.62.150.116:8888/eureka/
+
+spring:
+  application:
+    name: database-oprations
+  datasource:
+    url: jdbc:mysql://116.62.150.116:3306/rabbit_admin?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=true&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  type-aliases-package: com.nwafu.database-oprations.entity
+  mapper-locations: classpath:mapper/*.xml

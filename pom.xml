@@ -16,8 +16,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.nwafu.datasource</groupId>
-            <artifactId>datasource</artifactId>
+            <groupId>com.nwafu.databaseoprations</groupId>
+            <artifactId>database-oprations</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

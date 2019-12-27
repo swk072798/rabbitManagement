@@ -4,7 +4,6 @@ import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.rmi.ServerException;
 
 /**
  * @program: rabbitmanagement

@@ -9,3 +9,27 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://116.62.150.116:8888/eureka/
+
+zuul:
+  routes:
+    account-login-management: /userActions/**
+  host:
+    connect-timeout-millis: 30000
+    socket-timeout-millis: 30000
+
+ribbon:
+  ConnectTimeout:  10000
+  ReadTimeout:  10000
+  eager-load:
+    enabled: true
+  eureka:
+    enabled: true
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeout-in-milliseconds: 300000

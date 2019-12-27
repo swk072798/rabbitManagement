@@ -6,9 +6,9 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/rabbit-eureka/pom.xml" />
-        <option value="$PROJECT_DIR$/database-operations/pom.xml" />
         <option value="$PROJECT_DIR$/account-login-management/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/database-oprations/pom.xml" />
       </list>
     </option>
   </component>
