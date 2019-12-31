@@ -22,6 +22,9 @@
         values (#{dbName}, #{owner}, #{jdbcUrl}, #{linkUsername}, #{linkPassword}, #{driverClassName})
     </insert>
 
+    <select id="getAllDatabaseInfo" resultMap="DatabaseInfo">
+        select * from datasource_info
+    </select>
 
 
 </mapper>

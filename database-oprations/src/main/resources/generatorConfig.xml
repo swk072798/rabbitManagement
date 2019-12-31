@@ -18,15 +18,14 @@
 
         <!-- 注释 -->
         <commentGenerator >
-            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
             <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
         </commentGenerator>
 
         <!--数据库链接地址账号密码-->
-        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
-                        connectionURL="${spring.datasource.url}"
-                        userId="${spring.datasource.username}"
-                        password="${spring.datasource.password}">
+        <jdbcConnection driverClass="${driver-class-name}"
+                        connectionURL="${url}"
+                        userId="${username}"
+                        password="${password}">
         </jdbcConnection>
 
         <!-- 类型转换 -->
@@ -51,32 +50,32 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
 
-        <table tableName="farm_infomation" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+        <table schema="root" tableName="farm_infomation" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="true"></property>
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>
 
-        <table tableName="rabbit_breeding" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+        <table schema="root" tableName="rabbit_breeding" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="true"></property>
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>
 
-        <table tableName="rabbit_dynamic_information" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+        <table schema="root" tableName="rabbit_dynamic_information" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="true"></property>
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>
 
-        <table tableName="rabbit_health" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+        <table schema="root" tableName="rabbit_health" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="true"></property>
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>
 
-        <table tableName="rabbit_house" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+        <table schema="root" tableName="rabbit_house" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="true"></property>
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>
 
-        <table tableName="rabbit_info" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+        <table schema="root" tableName="rabbit_info" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="true"></property>
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>

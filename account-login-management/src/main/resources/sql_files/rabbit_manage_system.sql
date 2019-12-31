@@ -3,14 +3,14 @@ Navicat MySQL Data Transfer
 
 Source Server         : rabbit
 Source Server Version : 50646
-Source Host           : localhost:3306
+Source Host           : 116.62.150.116:3306
 Source Database       : rabbit_manage_system
 
 Target Server Type    : MYSQL
 Target Server Version : 50646
 File Encoding         : 65001
 
-Date: 2019-12-16 11:50:06
+Date: 2019-12-31 14:08:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,13 +22,14 @@ DROP TABLE IF EXISTS `farm_infomation`;
 CREATE TABLE `farm_infomation` (
   `farmUuid` varchar(255) DEFAULT NULL,
   `farmName` varchar(255) DEFAULT NULL,
-  `owner` varchar(255) DEFAULT NULL,
+  `ownUser` varchar(255) DEFAULT NULL,
   `farmAddress` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of farm_infomation
 -- ----------------------------
+INSERT INTO `farm_infomation` VALUES ('jiwoeuriowue', '哈哈兔场', 'lqc', '中国');
 
 -- ----------------------------
 -- Table structure for rabbit_breeding
@@ -39,7 +40,7 @@ CREATE TABLE `rabbit_breeding` (
   `femaleRabbitNo` varchar(255) DEFAULT NULL,
   `maleRabbitNo` varchar(255) DEFAULT NULL,
   `breedingTime` datetime DEFAULT NULL,
-  `twelve-dayMoldTire` varchar(255) DEFAULT NULL,
+  `twelveDayMoldTire` varchar(255) DEFAULT NULL,
   `birthTime` datetime DEFAULT NULL,
   `nestLittersNumber` int(11) DEFAULT NULL,
   `nestLiveRabbitsNumber` int(11) DEFAULT NULL,
@@ -53,7 +54,7 @@ CREATE TABLE `rabbit_breeding` (
   `newbornNestWeight` double DEFAULT NULL,
   `newbornAverageWeight` double DEFAULT NULL,
   `sucklingRabbitsNumber` int(11) DEFAULT NULL,
-  `twenty-oneDaysOldNestWeight` double DEFAULT NULL,
+  `twentyOneDaysOldNestWeight` double DEFAULT NULL,
   `weaningNestWeight` double DEFAULT NULL,
   `lactationAverageDailyGain` double DEFAULT NULL,
   `lactationConsumption` double DEFAULT NULL,

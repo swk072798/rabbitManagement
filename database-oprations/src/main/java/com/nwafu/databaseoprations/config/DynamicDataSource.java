@@ -46,5 +46,6 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         super.setTargetDataSources(dataSources);
         // 将数据源的 key 放到数据源上下文的 key 集合中，用于切换时判断数据源是否有效
         DynamicDataSourceContextHolder.addDataSourceKeys(dataSources.keySet());
+        System.out.println("设置数据源..." + dataSources.keySet());
     }
 }

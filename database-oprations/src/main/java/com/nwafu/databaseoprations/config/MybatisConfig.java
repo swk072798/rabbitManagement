@@ -33,7 +33,7 @@ public class MybatisConfig {
     }
 
     @Bean("slave")
-    @ConfigurationProperties(prefix = "spring.datasource.slave")
+    @ConfigurationProperties(prefix = "spring.datasource.lqcccc")
     public DataSource slave() {
         return DataSourceBuilder.create().build();
     }
@@ -42,12 +42,18 @@ public class MybatisConfig {
     public DataSource dynamicDataSource() {
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         Map<Object, Object> dataSourceMap = new HashMap<>(2);
-        dataSourceMap.put("master", master());
-        dataSourceMap.put("slave", slave());
+//        dataSourceMap.put("master", master());
+//        dataSourceMap.put("lqcccc", slave());
         // 将 master 数据源作为默认指定的数据源
         dynamicDataSource.setDefaultDataSource(master());
         // 将 master 和 slave 数据源作为指定的数据源
-        dynamicDataSource.setDataSources(dataSourceMap);
+
+        //读取数据库中的数据库配置
+        AddNewDatabase addNewDatabase = new AddNewDatabase();
+        addNewDatabase.initDatabase();
+        addNewDatabase.getDatasourceMap().put("master", master());
+        //生成map加入到datasource对象中
+        dynamicDataSource.setDataSources(addNewDatabase.getDatasourceMap());
         return dynamicDataSource;
     }
 
@@ -56,9 +62,9 @@ public class MybatisConfig {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         // 配置数据源，此处配置为关键配置，如果没有将 dynamicDataSource作为数据源则不能实现切换
         sessionFactory.setDataSource(dynamicDataSource());
-        sessionFactory.setTypeAliasesPackage("com.louis.**.model");    // 扫描Model
+        sessionFactory.setTypeAliasesPackage("com.nwafu.databaseoprations.entity");    // 扫描Model
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sessionFactory.setMapperLocations(resolver.getResources("classpath*:**/sqlmap/*.xml"));    // 扫描映射文件
+        sessionFactory.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));    // 扫描映射文件
         return sessionFactory;
     }
 

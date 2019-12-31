@@ -1,5 +1,5 @@
 server:
-  port: 8450
+  port: 8412
 
 eureka:
   client:
@@ -11,10 +11,17 @@ spring:
     name: database-oprations
   datasource:
     master:
-      url: jdbc:mysql://116.62.150.116:3306/rabbit_manage_system?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=true&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
+      jdbc-url: jdbc:mysql://116.62.150.116:3306/rabbit_manage_system?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=true&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
       username: root
       password: 123456
       driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+    lqcccc:
+      jdbc-url: jdbc:mysql://116.62.150.116:3306/lqcccc?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=true&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
 
 mybatis:
   type-aliases-package: com.nwafu.database-oprations.entity
