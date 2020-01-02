@@ -2,18 +2,25 @@ package com.nwafu.accountloginmanagement.service.impl;
 
 import com.nwafu.accountloginmanagement.dao.DatabaseInfoDao;
 import com.nwafu.accountloginmanagement.dao.NormalUserDao;
+import com.nwafu.accountloginmanagement.entity.DatabaseInfo;
 import com.nwafu.accountloginmanagement.entity.NormalUserInfo;
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.service.NormalUserLoginService;
 import com.nwafu.accountloginmanagement.jdbcActions.JdbcActions;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -54,7 +61,13 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
     }
 
 
-
+    /** 
+    * @Description: 普通用户注册
+    * @Param:  
+    * @return:  
+    * @Author: liu qinchang
+    * @Date: 2020/1/1 
+    */
     @Transactional(rollbackFor = Exception.class)       //出现任何错误都将进行回滚
     @Override
     public ResponseMessage<Integer> addUserAccount(String username, String password){
@@ -86,14 +99,25 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
             throw new RuntimeException(e.getMessage());
         }  catch (IOException e) {
             log.error(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
         log.info("----数据库创建成功-----");
         String jdbcUrl = "jdbc:mysql://116.62.150.116:3306/" + username + "?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=true&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true";
         int addDatabaseInfoFlag = databaseInfoDao.addDatabaseInfo(username,username, jdbcUrl,"root", "123456", "com.mysql.cj.jdbc.Driver");
+
         if(addDatabaseInfoFlag == 0){
             throw new RuntimeException("数据库信息添加失败");
         }
         log.info("数据库信息添加成功");
+        RestTemplate restTemplate = new RestTemplate();
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("username", username);
+        paramMap.put("jdbcUrl", jdbcUrl);
+        paramMap.put("user", "root");
+        paramMap.put("password", "123456");
+        paramMap.put("driverClass", "com.mysql.cj.jdbc.Driver");
+        log.info("jdbcUrl:  {}",jdbcUrl);
+        restTemplate.getForObject("http://localhost:8412/addDatabaseLink" + "?username="+ username+"&jdbcUrl="+ jdbcUrl+"&user=root&password=123456&driverClass=com.mysql.cj.jdbc.Driver", String.class, String.class);
         ResponseMessage responseMessage = new ResponseMessage("注册成功",1);
         return responseMessage;
     }

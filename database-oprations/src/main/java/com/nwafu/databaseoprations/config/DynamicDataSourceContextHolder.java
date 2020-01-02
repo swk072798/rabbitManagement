@@ -1,5 +1,7 @@
 package com.nwafu.databaseoprations.config;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
  * @author: liu qinchang
  * @create: 2019-12-27 11:51
  **/
+@Slf4j
 public class DynamicDataSourceContextHolder {
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>() {
         /**
@@ -32,6 +35,8 @@ public class DynamicDataSourceContextHolder {
      * @param key
      */
     public static void setDataSourceKey(String key) {
+        log.info("contextHolder.set({})",key);
+        log.info("contexHolder  :  {}",contextHolder);
         contextHolder.set(key);
     }
 

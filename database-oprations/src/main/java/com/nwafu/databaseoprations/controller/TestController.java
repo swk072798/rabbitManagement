@@ -38,8 +38,7 @@ public class TestController {
     @RequestMapping("/getFarmInfo_s")
     public List<FarmInfomation> getFarmInfo(@RequestParam(value = "username") String usermane){
         log.info("getFarmInfo,  {}", usermane);
-        HikariDataSource hikariDataSource = new HikariDataSource();
-        DynamicDataSourceContextHolder.setDataSourceKey("slave");
+        DynamicDataSourceContextHolder.setDataSourceKey(usermane);
         List<FarmInfomation> result = testService.selectAllFarm();
         return result;
     }

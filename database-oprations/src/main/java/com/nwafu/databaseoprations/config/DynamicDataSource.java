@@ -13,6 +13,14 @@ import java.util.Map;
  **/
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
+    private static DynamicDataSource dynamicDataSource = new DynamicDataSource();
+
+    private DynamicDataSource(){}
+
+    public static DynamicDataSource getInstance(){
+        return dynamicDataSource;
+    }
+
     /**
      * 如果不希望数据源在启动配置时就加载好，可以定制这个方法，从任何你希望的地方读取并返回数据源
      * 比如从数据库、文件、外部接口等读取数据源信息，并最终返回一个DataSource实现类对象即可
@@ -46,6 +54,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         super.setTargetDataSources(dataSources);
         // 将数据源的 key 放到数据源上下文的 key 集合中，用于切换时判断数据源是否有效
         DynamicDataSourceContextHolder.addDataSourceKeys(dataSources.keySet());
+        super.afterPropertiesSet();
         System.out.println("设置数据源..." + dataSources.keySet());
     }
 }
