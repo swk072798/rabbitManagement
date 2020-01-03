@@ -2,18 +2,16 @@ package com.nwafu.accountloginmanagement.service.impl;
 
 import com.nwafu.accountloginmanagement.dao.DatabaseInfoDao;
 import com.nwafu.accountloginmanagement.dao.NormalUserDao;
-import com.nwafu.accountloginmanagement.entity.DatabaseInfo;
 import com.nwafu.accountloginmanagement.entity.NormalUserInfo;
+
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.service.NormalUserLoginService;
 import com.nwafu.accountloginmanagement.jdbcActions.JdbcActions;
-import lombok.Data;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;

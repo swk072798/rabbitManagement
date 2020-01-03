@@ -1,8 +1,9 @@
 package com.nwafu.databaseoprations.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.nwafu.accountloginmanagement.entity.ResponseMessage;
+
 import com.nwafu.databaseoprations.entity.RabbitInfo;
+import com.nwafu.databaseoprations.entity.ResponseMessage;
 import com.nwafu.databaseoprations.service.BaseRabbitInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class AddBaseRabbitInfoController {
 
     @GetMapping("/getAllRabbitInfo")
     public ResponseMessage<PageInfo<RabbitInfo>> getAllRabbitInfo(@RequestParam int page, @RequestParam int limit,
-                                                      @PathVariable String dbName){
+                                                                  @PathVariable String dbName){
         log.info("getAllRabbitInfo  参数： {}, {}, {}", page, limit, dbName);
         long startTime = System.currentTimeMillis();
         ResponseMessage<PageInfo<RabbitInfo>> responseMessage= baseRabbitInfoService.getAllRabbitInfo(page, limit, dbName);

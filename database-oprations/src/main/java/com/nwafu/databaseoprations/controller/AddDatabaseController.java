@@ -1,6 +1,7 @@
 package com.nwafu.databaseoprations.controller;
 
-import com.nwafu.accountloginmanagement.entity.DatabaseInfo;
+
+import com.nwafu.databaseoprations.entity.DatabaseInfo;
 import com.nwafu.databaseoprations.service.AddDatabaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

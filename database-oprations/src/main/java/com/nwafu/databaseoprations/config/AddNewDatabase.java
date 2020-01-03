@@ -1,7 +1,8 @@
 package com.nwafu.databaseoprations.config;
 
-import com.nwafu.accountloginmanagement.entity.DatabaseInfo;
+
 import com.nwafu.databaseoprations.annotation.DataSource;
+import com.nwafu.databaseoprations.entity.DatabaseInfo;
 import com.zaxxer.hikari.HikariDataSource;
 //import feign.Feign;
 //import feign.Request;

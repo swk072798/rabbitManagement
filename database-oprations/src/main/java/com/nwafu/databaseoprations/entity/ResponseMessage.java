@@ -1,4 +1,4 @@
-package com.nwafu.accountloginmanagement.entity;
+package com.nwafu.databaseoprations.entity;
 
 import lombok.Data;
 

@@ -2,10 +2,11 @@ package com.nwafu.databaseoprations.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.nwafu.accountloginmanagement.entity.ResponseMessage;
+
 import com.nwafu.databaseoprations.config.DynamicDataSourceContextHolder;
 import com.nwafu.databaseoprations.dao.RabbitInfoMapper;
 import com.nwafu.databaseoprations.entity.RabbitInfo;
+import com.nwafu.databaseoprations.entity.ResponseMessage;
 import com.nwafu.databaseoprations.service.BaseRabbitInfoService;
 import org.springframework.stereotype.Service;
 
@@ -79,6 +80,26 @@ public class BaseRabbitInfoServiceImpl implements BaseRabbitInfoService {
             throw new RuntimeException("deleteRabbitInfo  删除失败");
         }
         return new ResponseMessage<Integer>("success", 1);
+    }
+
+    @Override
+    public ResponseMessage<PageInfo<RabbitInfo>> getFemaleRabbit(String dbName, int page, int limit) {
+        return null;
+    }
+
+    @Override
+    public ResponseMessage<PageInfo<RabbitInfo>> getMaleRabbit(String dbName, int page, int limit) {
+        return null;
+    }
+
+    @Override
+    public ResponseMessage<PageInfo<RabbitInfo>> getReserveFemaleRabbit(String dbName, int page, int limit) {
+        return null;
+    }
+
+    @Override
+    public ResponseMessage<PageInfo<RabbitInfo>> getReserveMaleRabbit(String dbName, int page, int limit) {
+        return null;
     }
 
 

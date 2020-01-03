@@ -1,6 +1,7 @@
 package com.nwafu.databaseoprations.service;
 
-import com.nwafu.accountloginmanagement.entity.DatabaseInfo;
+
+import com.nwafu.databaseoprations.entity.DatabaseInfo;
 
 public interface AddDatabaseService {
 

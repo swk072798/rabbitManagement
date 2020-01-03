@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @program: rabbitmanagement
- * @description: 动态数据切换处理器
+ * @description: 动态数据切换处理器   写了之后没什么用，先放在这
  * @author: liu qinchang
  * @create: 2019-12-30 14:54
  **/
