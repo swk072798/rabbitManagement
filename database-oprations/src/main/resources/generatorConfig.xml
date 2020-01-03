@@ -80,5 +80,30 @@
             <generatedKey column="id" sqlStatement="Mysql" identity="true" />
         </table>
 
+        <table schema="root" tableName="rabbit_change_record" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="true"></property>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table schema="root" tableName="rabbit_illness" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="true"></property>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table schema="root" tableName="rabbit_ingredients" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="true"></property>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table schema="root" tableName="rabbit_materials_record" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="true"></property>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table schema="root" tableName="rebbit_illness_record" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="true"></property>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+
     </context>
 </generatorConfiguration>
