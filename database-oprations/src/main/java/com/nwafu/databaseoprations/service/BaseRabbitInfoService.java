@@ -13,6 +13,6 @@ public interface BaseRabbitInfoService {
     ResponseMessage<Integer> deleteRabbitInfo(String dbName, List<String> rabbitNoList);
     ResponseMessage<PageInfo<RabbitInfo>> getFemaleRabbit(String dbName, int page, int limit);
     ResponseMessage<PageInfo<RabbitInfo>> getMaleRabbit(String dbName, int page, int limit);
-    ResponseMessage<PageInfo<RabbitInfo>> getReserveFemaleRabbit(String dbName, int page, int limit);
-    ResponseMessage<PageInfo<RabbitInfo>> getReserveMaleRabbit(String dbName, int page, int limit);
+    ResponseMessage<PageInfo<RabbitInfo>> getLittleFemaleRabbit(String dbName, int page, int limit);
+
 }

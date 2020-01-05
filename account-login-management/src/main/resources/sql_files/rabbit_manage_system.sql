@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50646
 File Encoding         : 65001
 
-Date: 2019-12-31 14:08:46
+Date: 2020-01-03 15:05:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -65,6 +65,27 @@ CREATE TABLE `rabbit_breeding` (
 
 -- ----------------------------
 -- Records of rabbit_breeding
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for rabbit_change_record
+-- ----------------------------
+DROP TABLE IF EXISTS `rabbit_change_record`;
+CREATE TABLE `rabbit_change_record` (
+  `recordId` int(11) NOT NULL AUTO_INCREMENT,
+  `rabbitNo` varchar(255) DEFAULT NULL,
+  `sex` varchar(255) DEFAULT NULL,
+  `oldCageNo` varchar(255) DEFAULT NULL,
+  `oldRabbitHouseNo` varchar(255) DEFAULT NULL,
+  `newCageNo` varchar(255) DEFAULT NULL,
+  `newRabbitHouseNo` varchar(255) DEFAULT NULL,
+  `actionUser` varchar(255) DEFAULT NULL,
+  `changeDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`recordId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of rabbit_change_record
 -- ----------------------------
 
 -- ----------------------------
@@ -226,6 +247,26 @@ CREATE TABLE `rabbit_house` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for rabbit_illness
+-- ----------------------------
+DROP TABLE IF EXISTS `rabbit_illness`;
+CREATE TABLE `rabbit_illness` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `illnessName` varchar(255) DEFAULT NULL,
+  `pathogen` varchar(255) DEFAULT NULL,
+  `drugResistance` varchar(255) DEFAULT NULL,
+  `infectionTime` datetime DEFAULT NULL,
+  `medicine` varchar(255) DEFAULT NULL,
+  `farmUuid` varchar(255) DEFAULT NULL,
+  `remark` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of rabbit_illness
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for rabbit_info
 -- ----------------------------
 DROP TABLE IF EXISTS `rabbit_info`;
@@ -252,9 +293,72 @@ CREATE TABLE `rabbit_info` (
   `coatColor` varchar(255) DEFAULT NULL,
   `bornDate` datetime DEFAULT NULL,
   `nipplesNumber` int(11) DEFAULT NULL,
-  PRIMARY KEY (`rabbitNo`)
+  PRIMARY KEY (`rabbitNo`),
+  KEY `sex` (`sex`) USING HASH,
+  KEY `paternalNo` (`paternalNo`) USING HASH,
+  KEY `maternalNo` (`maternalNo`) USING HASH,
+  KEY `age` (`age`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rabbit_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for rabbit_ingredients
+-- ----------------------------
+DROP TABLE IF EXISTS `rabbit_ingredients`;
+CREATE TABLE `rabbit_ingredients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `feedType` varchar(255) DEFAULT NULL,
+  `ingredientDates` datetime DEFAULT NULL,
+  `ingredientNumber` int(11) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of rabbit_ingredients
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for rabbit_materials_record
+-- ----------------------------
+DROP TABLE IF EXISTS `rabbit_materials_record`;
+CREATE TABLE `rabbit_materials_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `feedType` varchar(255) DEFAULT NULL,
+  `outboundDate` datetime DEFAULT NULL,
+  `outboundNumber` int(11) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `uploadUser` varchar(255) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of rabbit_materials_record
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for rebbit_illness_record
+-- ----------------------------
+DROP TABLE IF EXISTS `rebbit_illness_record`;
+CREATE TABLE `rebbit_illness_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rabbitNo` varchar(255) DEFAULT NULL,
+  `illnessName` varchar(255) DEFAULT NULL,
+  `medicine` varchar(255) DEFAULT NULL,
+  `effect` varchar(255) DEFAULT NULL,
+  `reuse` varchar(255) DEFAULT NULL,
+  `farm_Uuid` varchar(255) DEFAULT NULL,
+  `rabbitHouse` varchar(255) DEFAULT NULL,
+  `cageNo` varchar(255) DEFAULT NULL,
+  `uploadUser` varchar(255) DEFAULT NULL,
+  `remark` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of rebbit_illness_record
 -- ----------------------------

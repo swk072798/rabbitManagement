@@ -1,5 +1,8 @@
 package com.nwafu.databaseoprations.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.nwafu.databaseoprations.config.DateJsonDeserializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,6 +32,7 @@ public class RabbitIngredients implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonDeserialize(using = DateJsonDeserializer.class)
     private Date ingredientDates;
 
     /**

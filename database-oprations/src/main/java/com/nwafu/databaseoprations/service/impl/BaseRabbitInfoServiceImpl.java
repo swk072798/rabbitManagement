@@ -11,6 +11,7 @@ import com.nwafu.databaseoprations.service.BaseRabbitInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -84,22 +85,32 @@ public class BaseRabbitInfoServiceImpl implements BaseRabbitInfoService {
 
     @Override
     public ResponseMessage<PageInfo<RabbitInfo>> getFemaleRabbit(String dbName, int page, int limit) {
-        return null;
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        PageHelper.startPage(limit,page);
+        List<RabbitInfo> rabbitInfoList = rabbitInfoMapper.getFamaleRabbitInfo();
+        PageInfo<RabbitInfo> pageInfo = new PageInfo<>(rabbitInfoList);
+        ResponseMessage<PageInfo<RabbitInfo>> responseMessage = new ResponseMessage<>("success", pageInfo);
+        return responseMessage;
     }
 
     @Override
     public ResponseMessage<PageInfo<RabbitInfo>> getMaleRabbit(String dbName, int page, int limit) {
-        return null;
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        PageHelper.startPage(limit,page);
+        List<RabbitInfo> rabbitInfoList = rabbitInfoMapper.getMaleRabbitInfo();
+        PageInfo<RabbitInfo> pageInfo = new PageInfo<>(rabbitInfoList);
+        ResponseMessage<PageInfo<RabbitInfo>> responseMessage = new ResponseMessage<>("success", pageInfo);
+        return responseMessage;
     }
 
     @Override
-    public ResponseMessage<PageInfo<RabbitInfo>> getReserveFemaleRabbit(String dbName, int page, int limit) {
-        return null;
-    }
-
-    @Override
-    public ResponseMessage<PageInfo<RabbitInfo>> getReserveMaleRabbit(String dbName, int page, int limit) {
-        return null;
+    public ResponseMessage<PageInfo<RabbitInfo>> getLittleFemaleRabbit(String dbName, int page, int limit) {
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        PageHelper.startPage(limit,page);
+        List<RabbitInfo> rabbitInfoList = rabbitInfoMapper.getLittleRabbitInfo();
+        PageInfo<RabbitInfo> pageInfo = new PageInfo<>(rabbitInfoList);
+        ResponseMessage<PageInfo<RabbitInfo>> responseMessage = new ResponseMessage<>("success", pageInfo);
+        return responseMessage;
     }
 
 
