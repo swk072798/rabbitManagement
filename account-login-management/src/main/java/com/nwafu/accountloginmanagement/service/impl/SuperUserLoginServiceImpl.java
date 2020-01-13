@@ -1,14 +1,15 @@
 package com.nwafu.accountloginmanagement.service.impl;
 
 import com.nwafu.accountloginmanagement.dao.SuperUserDao;
+
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.entity.SuperAdminInfo;
 import com.nwafu.accountloginmanagement.service.SuperAdminLoginService;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
-import java.rmi.ServerException;
 
 /**
  * @program: rabbitmanagement

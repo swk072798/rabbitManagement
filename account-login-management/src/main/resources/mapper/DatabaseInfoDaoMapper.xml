@@ -19,7 +19,7 @@
 
     <insert id="addDatabaseInfo" parameterType="java.lang.String">
         insert into datasource_info (dbName,owner,jdbcUrl,linkUsername,linkPassword,driverClassName)
-        values (#{dbName}, #{owner}, #{jdbcUrl}, #{linkUsername}, #{linkPassword}, #{driverClassName})
+        value (#{dbName}, #{owner}, #{jdbcUrl}, #{linkUsername}, #{linkPassword}, #{driverClassName})
     </insert>
 
     <select id="getAllDatabaseInfo" resultMap="DatabaseInfo">

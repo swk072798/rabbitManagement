@@ -10,10 +10,11 @@
         <module name="database-oprations" />
         <module name="gateway" />
         <module name="rabbit-eureka" />
-        <module name="rabbitmanagement" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="common-utils" target="1.8" />
+      <module name="commonclasses" target="1.5" />
       <module name="database" target="1.8" />
       <module name="database-operations" target="1.8" />
     </bytecodeTargetLevel>
@@ -21,6 +22,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="account-login-management" options="-parameters" />
+      <module name="common-utils" options="-parameters" />
       <module name="database" options="-parameters" />
       <module name="database-operations" options="-parameters" />
       <module name="database-oprations" options="-parameters" />

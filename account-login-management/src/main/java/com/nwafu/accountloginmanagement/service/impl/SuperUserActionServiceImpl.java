@@ -3,15 +3,16 @@ package com.nwafu.accountloginmanagement.service.impl;
 import com.nwafu.accountloginmanagement.dao.SuperUserDao;
 import com.nwafu.accountloginmanagement.entity.NormalUserInfo;
 import com.nwafu.accountloginmanagement.entity.NormalUserVO;
+
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.service.SuperUserActionService;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
-import java.rmi.ServerException;
 import java.util.ArrayList;
 import java.util.List;
 

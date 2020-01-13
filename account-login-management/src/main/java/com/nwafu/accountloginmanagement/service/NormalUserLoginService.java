@@ -1,7 +1,7 @@
 package com.nwafu.accountloginmanagement.service;
 
-import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 
+import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 
 public interface NormalUserLoginService {
     ResponseMessage normalUserLogin(String username, String password);

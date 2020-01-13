@@ -40,7 +40,7 @@ public class MybatisConfig {
 
     @Bean("dynamicDataSource")
     public DataSource dynamicDataSource() {
-        DynamicDataSource dynamicDataSource = new DynamicDataSource();
+        DynamicDataSource dynamicDataSource = DynamicDataSource.getInstance();
         Map<Object, Object> dataSourceMap = new HashMap<>(2);
 //        dataSourceMap.put("master", master());
 //        dataSourceMap.put("lqcccc", slave());

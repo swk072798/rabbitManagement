@@ -1,8 +1,10 @@
 package com.nwafu.accountloginmanagement.controller;
 
+
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.entity.SuperAdminInfo;
 import com.nwafu.accountloginmanagement.service.SuperAdminLoginService;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,7 @@ public class SuperUserLoginController {
     * @Date: 2019/12/19
     */
     @GetMapping("/superUser/login")
-    public ResponseMessage<Integer> superUserLogin(@RequestParam String superUsername,@RequestParam String superPassword) throws ServerException {
+    public ResponseMessage<Integer> superUserLogin(@RequestParam String superUsername, @RequestParam String superPassword) throws ServerException {
         log.info("superUserLogin  传入参数: {}, {}", superUsername, superPassword);
         if(superUsername == null || superPassword == null){
             throw new ServerException("superUserLogin  传入参数不正确");

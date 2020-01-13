@@ -1,13 +1,14 @@
 package com.nwafu.databaseoprations.config;
 
-//import com.nwafu.accountloginmanagement.entity.DatabaseInfo;
+
 import com.nwafu.databaseoprations.annotation.DataSource;
-import com.nwafu.databaseoprations.feign.GetDatabaseInfoFeign;
+import com.nwafu.databaseoprations.entity.DatabaseInfo;
 import com.zaxxer.hikari.HikariDataSource;
 //import feign.Feign;
 //import feign.Request;
 //import feign.Retryer;
 import lombok.Data;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 @Data
 public class AddNewDatabase {
+
     Map<Object, Object> datasourceMap = new HashMap<>();
 
     /**
@@ -32,20 +34,19 @@ public class AddNewDatabase {
     * @Date: 2019/12/30
     */
     public void initDatabase(){
-//        GetDatabaseInfoFeign getDatabaseInfoFeign = (GetDatabaseInfoFeign) Feign.builder()
-//                .options(new Request.Options(1000,3500))
-//                .retryer(new Retryer.Default(5000, 5000, 3))
-//                .target(DatabaseInfo.class, "http://localhost:8300");
-//        List<DatabaseInfo> databaseInfoList = getDatabaseInfoFeign.getAllDatabaseInfo();
-//
-//        for(DatabaseInfo databaseInfo : databaseInfoList){
-//            HikariDataSource hikariDataSource = new HikariDataSource();
-//            hikariDataSource.setUsername(databaseInfo.getLinkUsername());
-//            hikariDataSource.setPassword(databaseInfo.getLinkPassword());
-//            hikariDataSource.setJdbcUrl(databaseInfo.getJdbcUrl());
-//            hikariDataSource.setDriverClassName(databaseInfo.getDriverClassName());
-//            datasourceMap.put(databaseInfo.getDbName(), hikariDataSource);
-//        }
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        DatabaseInfo[] databaseInfoList = restTemplate.getForObject("http://116.62.150.116:8300/getAllDatabaseInfo", DatabaseInfo[].class);
+
+        for(DatabaseInfo databaseInfo : databaseInfoList){
+            HikariDataSource hikariDataSource = new HikariDataSource();
+            hikariDataSource.setUsername(databaseInfo.getLinkUsername());
+            hikariDataSource.setPassword(databaseInfo.getLinkPassword());
+            hikariDataSource.setJdbcUrl(databaseInfo.getJdbcUrl());
+            hikariDataSource.setDriverClassName(databaseInfo.getDriverClassName());
+            datasourceMap.put(databaseInfo.getDbName(), hikariDataSource);
+        }
     }
 
     /**

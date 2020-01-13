@@ -10,7 +10,7 @@ import lombok.Data;
  **/
 
 @Data
-public class  ResponseMessage <T>{
+public class ResponseMessage<T>{
     private String message;
     private T data;
 

@@ -11,6 +11,8 @@ server:
 eureka:
   instance:
     hostname: lqc.rabbitManagement.com
+  server:
+    enable-self-preservation: false
 
   client:
     register-with-eureka: false
