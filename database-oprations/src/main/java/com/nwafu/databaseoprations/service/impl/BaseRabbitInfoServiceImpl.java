@@ -35,7 +35,7 @@ public class BaseRabbitInfoServiceImpl implements BaseRabbitInfoService {
     */
     public ResponseMessage<PageInfo<RabbitInfo>> getAllRabbitInfo(int limit, int page, String dbName){
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
-        PageHelper.startPage(limit, page);
+        PageHelper.startPage(page, limit);
         List<RabbitInfo> rabbitInfoList = rabbitInfoMapper.selectAll();
         PageInfo<RabbitInfo> rabbitInfoPageInfo = new PageInfo<>(rabbitInfoList);
         ResponseMessage<PageInfo<RabbitInfo>> responseMessage = new ResponseMessage<>("success", rabbitInfoPageInfo);
@@ -86,7 +86,7 @@ public class BaseRabbitInfoServiceImpl implements BaseRabbitInfoService {
     @Override
     public ResponseMessage<PageInfo<RabbitInfo>> getFemaleRabbit(String dbName, int page, int limit) {
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
-        PageHelper.startPage(limit,page);
+        PageHelper.startPage(page, limit);
         List<RabbitInfo> rabbitInfoList = rabbitInfoMapper.getFamaleRabbitInfo();
         PageInfo<RabbitInfo> pageInfo = new PageInfo<>(rabbitInfoList);
         ResponseMessage<PageInfo<RabbitInfo>> responseMessage = new ResponseMessage<>("success", pageInfo);
@@ -96,7 +96,7 @@ public class BaseRabbitInfoServiceImpl implements BaseRabbitInfoService {
     @Override
     public ResponseMessage<PageInfo<RabbitInfo>> getMaleRabbit(String dbName, int page, int limit) {
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
-        PageHelper.startPage(limit,page);
+        PageHelper.startPage(page, limit);
         List<RabbitInfo> rabbitInfoList = rabbitInfoMapper.getMaleRabbitInfo();
         PageInfo<RabbitInfo> pageInfo = new PageInfo<>(rabbitInfoList);
         ResponseMessage<PageInfo<RabbitInfo>> responseMessage = new ResponseMessage<>("success", pageInfo);
@@ -106,7 +106,7 @@ public class BaseRabbitInfoServiceImpl implements BaseRabbitInfoService {
     @Override
     public ResponseMessage<PageInfo<RabbitInfo>> getLittleFemaleRabbit(String dbName, int page, int limit) {
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
-        PageHelper.startPage(limit,page);
+        PageHelper.startPage(page, limit);
         List<RabbitInfo> rabbitInfoList = rabbitInfoMapper.getLittleRabbitInfo();
         PageInfo<RabbitInfo> pageInfo = new PageInfo<>(rabbitInfoList);
         ResponseMessage<PageInfo<RabbitInfo>> responseMessage = new ResponseMessage<>("success", pageInfo);

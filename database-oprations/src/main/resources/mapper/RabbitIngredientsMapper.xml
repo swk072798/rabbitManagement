@@ -33,4 +33,15 @@
     select id, feedType, ingredientDates, ingredientNumber, remark
     from rabbit_ingredients
   </select>
+
+  <select id="selectByName" resultMap="BaseResultMap">
+    select * from rabbit_ingredients where feedType = #{feedType}
+  </select>
+
+  <delete id="deleteById" parameterType="java.util.List">
+    delete from rabbit_ingredients where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=",">
+      #{item}
+    </foreach>
+  </delete>
 </mapper>

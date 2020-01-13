@@ -23,4 +23,8 @@ public interface RabbitIngredientsMapper {
      * @mbg.generated
      */
     List<RabbitIngredients> selectAll();
+
+    List<RabbitIngredients> selectByName(String feedType);
+
+    int deleteById(List<String> id);
 }

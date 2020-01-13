@@ -1,5 +1,7 @@
 package com.nwafu.databaseoprations.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.nwafu.databaseoprations.config.DynamicDataSourceContextHolder;
 import com.nwafu.databaseoprations.dao.RabbitIngredientsMapper;
 import com.nwafu.databaseoprations.entity.RabbitIngredients;
@@ -27,6 +29,13 @@ public class FeedManageServiceImpl implements FeedManageService {
     @Resource
     RabbitIngredientsMapper rabbitIngredientsMapper;
 
+    /**
+    * @Description: 添加饲料
+    * @Param:
+    * @return:
+    * @Author: liu qinchang
+    * @Date: 2020/1/13
+    */
     @Override
     public ResponseMessage<Integer> addFeedInfo(String dbName, List<RabbitIngredients> rabbitIngredients) {
         if(rabbitIngredients.size() == 0){
@@ -42,4 +51,56 @@ public class FeedManageServiceImpl implements FeedManageService {
         rabbitIngredientsMapper.insert(rabbitIngredientsPOList);
         return new ResponseMessage<>("success", 1);
     }
+
+    /**
+    * @Description:  获取所有饲料列表
+    * @Param:
+    * @return:
+    * @Author: liu qinchang
+    * @Date: 2020/1/13
+    */
+    @Override
+    public ResponseMessage<PageInfo<RabbitIngredients>> getAllFeedInfo(int limit, int page, String dbName) {
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        PageHelper.startPage(limit, page);
+        List<RabbitIngredients> rabbitIngredients = rabbitIngredientsMapper.selectAll();
+        log.info("getAllFeedInfo 总数：{}", rabbitIngredients.size());
+        PageInfo<RabbitIngredients> pageInfo = new PageInfo<>(rabbitIngredients);
+        return new ResponseMessage<>("success", pageInfo);
+    }
+
+    /**
+    * @Description: 根据名称查询
+    * @Param:
+    * @return:
+    * @Author: liu qinchang
+    * @Date: 2020/1/13
+    */
+    @Override
+    public ResponseMessage<PageInfo<RabbitIngredients>> getFeedInfoByName(int limit, int page, String feedType, String dbName) {
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        PageHelper.startPage(limit, page);
+        List<RabbitIngredients> rabbitIngredients = rabbitIngredientsMapper.selectByName(feedType);
+        log.info("getFeedInfoByName 总数：{}", rabbitIngredients.size());
+        PageInfo<RabbitIngredients> pageInfo = new PageInfo<>(rabbitIngredients);
+        return new ResponseMessage<>("success", pageInfo);
+    }
+
+    /** 
+    * @Description: 删除饲料信息
+    * @Param:  
+    * @return:  
+    * @Author: liu qinchang
+    * @Date: 2020/1/13 
+    */
+    @Override
+    public ResponseMessage<Integer> deleteFeedInfo(List<String> deleteId, String dbName) {
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        int flag = rabbitIngredientsMapper.deleteById(deleteId);
+        if(flag == 0){
+            throw new RuntimeException("删除失败");
+        }
+        return new ResponseMessage<>("success", 1);
+    }
+
 }
