@@ -1,9 +1,11 @@
 package com.nwafu.accountloginmanagement.service.impl;
 
+import com.nwafu.accountloginmanagement.config.RedisUtils;
 import com.nwafu.accountloginmanagement.dao.SubUserDao;
 
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.entity.SubAccountInfoPO;
+import com.nwafu.accountloginmanagement.entity.UserCacheInfo;
 import com.nwafu.accountloginmanagement.service.SubUserLoginService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,11 +37,20 @@ public class SubUserLoginServiceImpl implements SubUserLoginService {
     @Override
     public ResponseMessage<Integer> subUserLogin(String subUsername, String subPassword){
         SubAccountInfoPO subAccountInfoPO = subUserDao.subUserLogin(subUsername);
+        if (subAccountInfoPO == null){
+            throw new RuntimeException("未找到相关账号信息");
+        }
         if(!DigestUtils.md5DigestAsHex(subPassword.getBytes()).equals(subAccountInfoPO.getSubPassword())){
             throw new RuntimeException("账号密码错误");
         }
+        if(!subAccountInfoPO.getStatus().equals("未登录")){
+            throw new RuntimeException("该账号已在其他地方登录");
+        }
         subUserDao.updateSubUserStatus("正在登录", subUsername);
-        ResponseMessage<Integer> responseMessage = new ResponseMessage<>("success");
+        UserCacheInfo userCacheInfo = new UserCacheInfo(subUsername, subAccountInfoPO.getPermissions(), subAccountInfoPO.getParentUser());
+        RedisUtils redisUtils = new RedisUtils();
+        redisUtils.addObject(subUsername, userCacheInfo);
+        ResponseMessage<Integer> responseMessage = new ResponseMessage<>("success", 1);
         return responseMessage;
     }
     
@@ -56,6 +67,8 @@ public class SubUserLoginServiceImpl implements SubUserLoginService {
         if(flag == 0){
             throw new RuntimeException("退出登录失败");
         }
+        RedisUtils redisUtils = new RedisUtils();
+        redisUtils.delete(subUsername);
         ResponseMessage<Integer> responseMessage = new ResponseMessage<>("success", 1);
         return responseMessage;
     }

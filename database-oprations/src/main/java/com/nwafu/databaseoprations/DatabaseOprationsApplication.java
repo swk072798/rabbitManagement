@@ -8,7 +8,8 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})       //禁用数据源自动配置
-@ComponentScan(basePackages = {"com.nwafu.databaseoprations.config", "com.nwafu.databaseoprations.controller", "com.nwafu.databaseoprations.service.*"})
+@ComponentScan(basePackages = {"com.nwafu.databaseoprations.config", "com.nwafu.databaseoprations.controller",
+        "com.nwafu.databaseoprations.service.*", "com.nwafu.databaseoprations.handler"})
 @EnableEurekaClient
 
 public class DatabaseOprationsApplication {

@@ -76,7 +76,7 @@ public class NormalUserActionController {
     * @Date: 2019/12/18
     */
     @PostMapping("/{normalUsername}/normal/updateSubPermissions")
-    public ResponseMessage<Integer> addSubPermissions(@RequestBody List<String> permissions, @RequestParam String subUsername, @PathVariable String normalUsername) throws ServerException {
+    public ResponseMessage<Integer> addSubPermissions(@RequestParam String permissions, @RequestParam String subUsername, @PathVariable String normalUsername) throws ServerException {
         log.info("addSubPermissions  入参: {}, {}",permissions, normalUsername);
         if(subUsername == null){
             throw new ServerException("分配权限参数不能为空");

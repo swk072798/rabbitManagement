@@ -1,10 +1,12 @@
 package com.nwafu.accountloginmanagement.service.impl;
 
+import com.nwafu.accountloginmanagement.config.RedisUtils;
 import com.nwafu.accountloginmanagement.dao.DatabaseInfoDao;
 import com.nwafu.accountloginmanagement.dao.NormalUserDao;
 import com.nwafu.accountloginmanagement.entity.NormalUserInfo;
 
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
+import com.nwafu.accountloginmanagement.entity.UserCacheInfo;
 import com.nwafu.accountloginmanagement.service.NormalUserLoginService;
 import com.nwafu.accountloginmanagement.jdbcActions.JdbcActions;
 
@@ -54,6 +56,9 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
             throw new RuntimeException("该账号已在其他地方登录");
         }
         normalUserDao.updataLoginStatus("正在登录", username);
+        UserCacheInfo userCacheInfo = new UserCacheInfo(username, "c/u/r/d", username);
+        RedisUtils redisUtils = new RedisUtils();
+        redisUtils.addObject(username, userCacheInfo);
         ResponseMessage result = new ResponseMessage("success", 1);
         return result;
     }
@@ -128,6 +133,8 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
         if(statusFlag == 0){
             throw new RuntimeException("修改普通用户登录状态失败");
         }
+        RedisUtils redisUtils = new RedisUtils();
+        redisUtils.delete(username);
         ResponseMessage responseMessage = new ResponseMessage("success", 1);
         return responseMessage;
     }

@@ -7,6 +7,7 @@ import com.nwafu.databaseoprations.dao.RabbitIngredientsMapper;
 import com.nwafu.databaseoprations.entity.RabbitIngredients;
 import com.nwafu.databaseoprations.entity.RabbitIngredientsPO;
 import com.nwafu.databaseoprations.entity.ResponseMessage;
+import com.nwafu.databaseoprations.redis.RedisUtils;
 import com.nwafu.databaseoprations.service.FeedManageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class FeedManageServiceImpl implements FeedManageService {
     @Resource
     RabbitIngredientsMapper rabbitIngredientsMapper;
 
+    RedisUtils redisUtils = new RedisUtils();
     /**
     * @Description: 添加饲料
     * @Param:
@@ -37,7 +39,11 @@ public class FeedManageServiceImpl implements FeedManageService {
     * @Date: 2020/1/13
     */
     @Override
-    public ResponseMessage<Integer> addFeedInfo(String dbName, List<RabbitIngredients> rabbitIngredients) {
+    public ResponseMessage<Integer> addFeedInfo(String dbName, List<RabbitIngredients> rabbitIngredients, String username) {
+        List<String> permissions = redisUtils.getPermissionsToList(username);
+        if(!permissions.contains("r")){
+            throw new RuntimeException("getAllRabbitInfo 没有相关操作权限");
+        }
         if(rabbitIngredients.size() == 0){
             throw new RuntimeException("addFeedInfo 列表不为空");
         }
@@ -60,7 +66,7 @@ public class FeedManageServiceImpl implements FeedManageService {
     * @Date: 2020/1/13
     */
     @Override
-    public ResponseMessage<PageInfo<RabbitIngredients>> getAllFeedInfo(int limit, int page, String dbName) {
+    public ResponseMessage<PageInfo<RabbitIngredients>> getAllFeedInfo(int limit, int page, String dbName, String username) {
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
         PageHelper.startPage(limit, page);
         List<RabbitIngredients> rabbitIngredients = rabbitIngredientsMapper.selectAll();
@@ -77,7 +83,7 @@ public class FeedManageServiceImpl implements FeedManageService {
     * @Date: 2020/1/13
     */
     @Override
-    public ResponseMessage<PageInfo<RabbitIngredients>> getFeedInfoByName(int limit, int page, String feedType, String dbName) {
+    public ResponseMessage<PageInfo<RabbitIngredients>> getFeedInfoByName(int limit, int page, String feedType, String dbName, String username) {
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
         PageHelper.startPage(limit, page);
         List<RabbitIngredients> rabbitIngredients = rabbitIngredientsMapper.selectByName(feedType);
@@ -94,7 +100,7 @@ public class FeedManageServiceImpl implements FeedManageService {
     * @Date: 2020/1/13 
     */
     @Override
-    public ResponseMessage<Integer> deleteFeedInfo(List<String> deleteId, String dbName) {
+    public ResponseMessage<Integer> deleteFeedInfo(List<String> deleteId, String dbName, String username) {
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
         int flag = rabbitIngredientsMapper.deleteById(deleteId);
         if(flag == 0){
