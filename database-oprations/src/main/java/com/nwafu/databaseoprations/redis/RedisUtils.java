@@ -5,6 +5,7 @@ import com.nwafu.databaseoprations.entity.UserCacheInfo;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,8 +55,17 @@ public class RedisUtils {
         if(userCacheInfo.getPermissions() == null ){
             throw new RuntimeException("没有相关操作权限");
         }
-        List<String> permissions = Arrays.asList(userCacheInfo.getPermissions().split(","));
+        List<String> permissions = Arrays.asList(userCacheInfo.getPermissions().split("/"));
         return permissions;
+    }
+
+    public boolean checkPermission(String permission, String key){
+        List<String> permissions = getPermissionsToList(key);
+        if(permissions.contains(permission)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

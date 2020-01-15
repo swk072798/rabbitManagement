@@ -74,16 +74,7 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
     @Transactional(rollbackFor = Exception.class)       //出现任何错误都将进行回滚
     @Override
     public ResponseMessage<Integer> addUserAccount(String username, String password){
-        int flag = 0;
-        String securityPassword = DigestUtils.md5DigestAsHex(password.getBytes());
-        try{
-            flag = normalUserDao.addAccount(username,securityPassword);
-        } catch (Exception e){
-            log.info(e.getMessage());
-        }
-        if(flag == 0){
-            throw new RuntimeException("添加账号失败,该账号已存在或传入的参数有误");
-        }
+
         try {
             normalUserDao.createDatabase(username);
         }catch (Exception e){
@@ -121,6 +112,16 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
         paramMap.put("driverClass", "com.mysql.cj.jdbc.Driver");
         log.info("jdbcUrl:  {}",jdbcUrl);
         restTemplate.getForObject("http://localhost:8412/addDatabaseLink" + "?username="+ username+"&jdbcUrl="+ jdbcUrl+"&user=root&password=123456&driverClass=com.mysql.cj.jdbc.Driver", String.class, String.class);
+        int flag = 0;
+        String securityPassword = DigestUtils.md5DigestAsHex(password.getBytes());
+        try{
+            flag = normalUserDao.addAccount(username,securityPassword);
+        } catch (Exception e){
+            log.info(e.getMessage());
+        }
+        if(flag == 0){
+            throw new RuntimeException("添加账号失败,该账号已存在或传入的参数有误");
+        }
         ResponseMessage responseMessage = new ResponseMessage("注册成功",1);
         return responseMessage;
     }

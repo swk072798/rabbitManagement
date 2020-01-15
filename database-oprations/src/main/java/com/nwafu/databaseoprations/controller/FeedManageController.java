@@ -21,7 +21,7 @@ import java.util.List;
 
 @Api(value = "饲料管理")
 @RestController
-@RequestMapping("/{dbName}/{username}")
+@RequestMapping("/{dbName}/{username}/actions")
 @Slf4j
 public class FeedManageController {
     @Autowired

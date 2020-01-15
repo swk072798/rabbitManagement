@@ -1,6 +1,5 @@
 package com.nwafu.databaseoprations.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -8,14 +7,11 @@ import com.nwafu.databaseoprations.config.DynamicDataSourceContextHolder;
 import com.nwafu.databaseoprations.dao.RabbitInfoMapper;
 import com.nwafu.databaseoprations.entity.RabbitInfo;
 import com.nwafu.databaseoprations.entity.ResponseMessage;
-import com.nwafu.databaseoprations.entity.UserCacheInfo;
 import com.nwafu.databaseoprations.redis.RedisUtils;
 import com.nwafu.databaseoprations.service.BaseRabbitInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
-import java.util.Arrays;
 import java.util.List;
 
 /**

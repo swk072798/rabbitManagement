@@ -30,7 +30,7 @@ import java.util.List;
 @Api(value = "种兔基本信息操作接口")
 @RestController
 @Slf4j
-@RequestMapping("/{dbName}/{username}")
+@RequestMapping("/{dbName}/{username}/actions")
 public class BaseRabbitInfoController {
 
     @Autowired
