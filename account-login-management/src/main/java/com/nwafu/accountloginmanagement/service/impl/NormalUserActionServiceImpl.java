@@ -68,9 +68,9 @@ public class NormalUserActionServiceImpl implements NormalUserActionService {
     * @Date: 2019/12/18 
     */
     @Override
-    public ResponseMessage<Integer> updateSubUserPermissions(List<String> permissions, String subUsername){
+    public ResponseMessage<Integer> updateSubUserPermissions(String permissions, String subUsername){
         int flag = 0;
-        flag = normalUserDao.updateSubUserPermissions(permissions.toString(),subUsername);
+        flag = normalUserDao.updateSubUserPermissions(permissions,subUsername);
         if(flag == 0){
             throw new RuntimeException("修改权限失败");
         }

@@ -41,7 +41,7 @@ public class JdbcActions {
 
     public static void main(String[] args) {
         try {
-JdbcActions jdbcActions = new JdbcActions(                                                                                                                                                                                                                                                                                                                                                                              "lqc");
+            JdbcActions jdbcActions = new JdbcActions("lqc");
             jdbcActions.runSqlScript();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -26,3 +26,4 @@ mybatis:
 logging:
   level:
     com.nwafu.accountloginmanagement.dao: DEBUG
+

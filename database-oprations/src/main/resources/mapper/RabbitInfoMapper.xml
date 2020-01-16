@@ -44,7 +44,7 @@
       photo)
     values
     <foreach collection="list" item="item" index="index" separator=",">
-      (#{item.rabbitNo,jdbcType=VARCHAR}, #{item.cageNo,jdbcType=VARCHAR}, #{item.birthParity,jdbcType=INTEGER},
+       #{item.cageNo,jdbcType=VARCHAR}, #{item.birthParity,jdbcType=INTEGER},
       #{item.initialWeight,jdbcType=DOUBLE}, #{item.coatGloss,jdbcType=VARCHAR}, #{item.rabbitHouseNo,jdbcType=VARCHAR},
       #{item.identicalRabbits,jdbcType=INTEGER}, #{item.economiType,jdbcType=VARCHAR}, #{item.sex,jdbcType=VARCHAR},
       #{item.initialAge,jdbcType=VARCHAR}, #{item.fineHairType,jdbcType=VARCHAR}, #{item.origin,jdbcType=VARCHAR},

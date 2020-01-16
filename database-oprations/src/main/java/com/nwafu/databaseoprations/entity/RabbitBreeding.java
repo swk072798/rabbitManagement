@@ -1,5 +1,9 @@
 package com.nwafu.databaseoprations.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.nwafu.databaseoprations.config.DateJsonDeserializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -38,6 +42,8 @@ public class RabbitBreeding implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonDeserialize(using = DateJsonDeserializer.class)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date breedingTime;
 
     /**
@@ -56,6 +62,8 @@ public class RabbitBreeding implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonDeserialize(using = DateJsonDeserializer.class)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date birthTime;
 
     /**

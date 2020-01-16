@@ -1,10 +1,12 @@
 package com.nwafu.accountloginmanagement.service.impl;
 
+import com.nwafu.accountloginmanagement.config.RedisUtils;
 import com.nwafu.accountloginmanagement.dao.DatabaseInfoDao;
 import com.nwafu.accountloginmanagement.dao.NormalUserDao;
 import com.nwafu.accountloginmanagement.entity.NormalUserInfo;
 
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
+import com.nwafu.accountloginmanagement.entity.UserCacheInfo;
 import com.nwafu.accountloginmanagement.service.NormalUserLoginService;
 import com.nwafu.accountloginmanagement.jdbcActions.JdbcActions;
 
@@ -54,6 +56,9 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
             throw new RuntimeException("该账号已在其他地方登录");
         }
         normalUserDao.updataLoginStatus("正在登录", username);
+        UserCacheInfo userCacheInfo = new UserCacheInfo(username, "c/u/r/d", username);
+        RedisUtils redisUtils = new RedisUtils();
+        redisUtils.addObject(username, userCacheInfo);
         ResponseMessage result = new ResponseMessage("success", 1);
         return result;
     }
@@ -69,16 +74,7 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
     @Transactional(rollbackFor = Exception.class)       //出现任何错误都将进行回滚
     @Override
     public ResponseMessage<Integer> addUserAccount(String username, String password){
-        int flag = 0;
-        String securityPassword = DigestUtils.md5DigestAsHex(password.getBytes());
-        try{
-            flag = normalUserDao.addAccount(username,securityPassword);
-        } catch (Exception e){
-            log.info(e.getMessage());
-        }
-        if(flag == 0){
-            throw new RuntimeException("添加账号失败,该账号已存在或传入的参数有误");
-        }
+
         try {
             normalUserDao.createDatabase(username);
         }catch (Exception e){
@@ -116,6 +112,16 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
         paramMap.put("driverClass", "com.mysql.cj.jdbc.Driver");
         log.info("jdbcUrl:  {}",jdbcUrl);
         restTemplate.getForObject("http://localhost:8412/addDatabaseLink" + "?username="+ username+"&jdbcUrl="+ jdbcUrl+"&user=root&password=123456&driverClass=com.mysql.cj.jdbc.Driver", String.class, String.class);
+        int flag = 0;
+        String securityPassword = DigestUtils.md5DigestAsHex(password.getBytes());
+        try{
+            flag = normalUserDao.addAccount(username,securityPassword);
+        } catch (Exception e){
+            log.info(e.getMessage());
+        }
+        if(flag == 0){
+            throw new RuntimeException("添加账号失败,该账号已存在或传入的参数有误");
+        }
         ResponseMessage responseMessage = new ResponseMessage("注册成功",1);
         return responseMessage;
     }
@@ -128,6 +134,8 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
         if(statusFlag == 0){
             throw new RuntimeException("修改普通用户登录状态失败");
         }
+        RedisUtils redisUtils = new RedisUtils();
+        redisUtils.delete(username);
         ResponseMessage responseMessage = new ResponseMessage("success", 1);
         return responseMessage;
     }

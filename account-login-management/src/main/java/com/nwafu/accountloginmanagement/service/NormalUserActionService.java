@@ -10,6 +10,6 @@ import java.util.List;
 public interface NormalUserActionService {
     ResponseMessage addSubAccount(String subUsername, String subPassword, String parentUser, String permissions);
     ResponseMessage deleteSubAccount(String subUsername, String parentUser);
-    ResponseMessage<Integer> updateSubUserPermissions(List<String> permissions, String subUsername);
+    ResponseMessage<Integer> updateSubUserPermissions(String permissions, String subUsername);
     ResponseMessage<List<SubAccountInfoPO>> getAllSubUserInfo(String parentUsername);
 }

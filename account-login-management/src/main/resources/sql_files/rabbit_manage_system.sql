@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50646
 File Encoding         : 65001
 
-Date: 2020-01-03 15:05:50
+Date: 2020-01-15 13:27:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -60,7 +60,9 @@ CREATE TABLE `rabbit_breeding` (
   `lactationConsumption` double DEFAULT NULL,
   `lactationAverageMaterialWeightRatio` double DEFAULT NULL,
   `tiresNumber` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`breedingInformationId`)
+  PRIMARY KEY (`breedingInformationId`),
+  KEY `femaleRabbitNo` (`femaleRabbitNo`) USING BTREE,
+  KEY `maleRabbitNo` (`maleRabbitNo`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -289,7 +291,7 @@ CREATE TABLE `rabbit_info` (
   `coatFeature` varchar(255) DEFAULT NULL,
   `maternalNo` varchar(255) DEFAULT NULL,
   `roughType` varchar(255) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
+  `age` double DEFAULT NULL,
   `coatColor` varchar(255) DEFAULT NULL,
   `bornDate` datetime DEFAULT NULL,
   `nipplesNumber` int(11) DEFAULT NULL,
@@ -315,11 +317,20 @@ CREATE TABLE `rabbit_ingredients` (
   `ingredientNumber` int(11) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of rabbit_ingredients
 -- ----------------------------
+INSERT INTO `rabbit_ingredients` VALUES ('2', 'ceshi', '2018-09-06 15:03:48', '1', null);
+INSERT INTO `rabbit_ingredients` VALUES ('3', 'ceshi', '2018-09-06 15:03:48', '1', null);
+INSERT INTO `rabbit_ingredients` VALUES ('4', 'ceshi', '2018-09-06 07:03:48', '1', null);
+INSERT INTO `rabbit_ingredients` VALUES ('5', 'ceshi', '2018-09-06 07:03:48', '1', null);
+INSERT INTO `rabbit_ingredients` VALUES ('6', 'ceshi', '2018-09-06 07:03:48', '1', null);
+INSERT INTO `rabbit_ingredients` VALUES ('7', 'ceshi', '2018-09-06 07:03:48', '1', '222');
+INSERT INTO `rabbit_ingredients` VALUES ('8', 'ceshi', '2018-09-06 07:03:48', '1', '333');
+INSERT INTO `rabbit_ingredients` VALUES ('9', 'ceshi', '2018-09-08 07:03:48', '1', '2333');
+INSERT INTO `rabbit_ingredients` VALUES ('10', 'ceshi', '2018-09-06 07:03:48', '1', '333');
 
 -- ----------------------------
 -- Table structure for rabbit_materials_record
