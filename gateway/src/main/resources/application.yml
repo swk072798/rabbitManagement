@@ -1,35 +1,27 @@
-spring:
-  application:
-    name: eureka-zuul
-
-server:
-  port: 8399
+server.port: 11234
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://116.62.150.116:8888/eureka/
 
-zuul:
-  routes:
-    account-login-management: /userActions/**
-  host:
-    connect-timeout-millis: 30000
-    socket-timeout-millis: 30000
-
-ribbon:
-  ConnectTimeout:  10000
-  ReadTimeout:  10000
-  eager-load:
-    enabled: true
-  eureka:
-    enabled: true
-
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeout-in-milliseconds: 300000
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: database-oprations
+          uri: http://localhost:8412
+          order: 0
+          predicates:
+            - Path=/actions/**
+          filters:
+            - StripPrefix=1
+        - id: account-login-management
+          uri: http://localhost:8300
+          order: 0
+          predicates:
+            - Path=/account/**
+          filters:
+            - StripPrefix=1
