@@ -22,7 +22,7 @@ import java.util.List;
 
 @Api(value = "繁殖信息管理")
 @RestController
-@RequestMapping("/{dbName}/{username}/actions")
+@RequestMapping("/{dbName}/{username}")
 @Slf4j
 public class BreedingRecordController {
 
