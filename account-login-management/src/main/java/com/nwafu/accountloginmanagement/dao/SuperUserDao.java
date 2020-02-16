@@ -14,5 +14,6 @@ public interface SuperUserDao {
     int updateNormalUserInfo(String oldNormalUsername, String newNormalUsername, String newPassword);
     int deleteNormalUserInfo(String username);
     int deleteDatabase(String dbName);
+    int deleteDatabaseInfo(String dbName);
     List<NormalUserInfo> getAllNormalUserInfo();
 }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50646
 File Encoding         : 65001
 
-Date: 2020-01-15 13:27:56
+Date: 2020-02-15 09:38:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,7 +36,7 @@ INSERT INTO `farm_infomation` VALUES ('jiwoeuriowue', '哈哈兔场', 'lqc', '�
 -- ----------------------------
 DROP TABLE IF EXISTS `rabbit_breeding`;
 CREATE TABLE `rabbit_breeding` (
-  `breedingInformationId` int(11) NOT NULL,
+  `breedingInformationId` int(11) NOT NULL AUTO_INCREMENT,
   `femaleRabbitNo` varchar(255) DEFAULT NULL,
   `maleRabbitNo` varchar(255) DEFAULT NULL,
   `breedingTime` datetime DEFAULT NULL,
@@ -75,19 +75,36 @@ CREATE TABLE `rabbit_breeding` (
 DROP TABLE IF EXISTS `rabbit_change_record`;
 CREATE TABLE `rabbit_change_record` (
   `recordId` int(11) NOT NULL AUTO_INCREMENT,
-  `rabbitNo` varchar(255) DEFAULT NULL,
-  `sex` varchar(255) DEFAULT NULL,
-  `oldCageNo` varchar(255) DEFAULT NULL,
-  `oldRabbitHouseNo` varchar(255) DEFAULT NULL,
-  `newCageNo` varchar(255) DEFAULT NULL,
-  `newRabbitHouseNo` varchar(255) DEFAULT NULL,
-  `actionUser` varchar(255) DEFAULT NULL,
+  `rabbitNo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `sex` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `oldCageNo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `oldRabbitHouseNo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `newCageNo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `newRabbitHouseNo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `actionUser` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `changeDate` datetime DEFAULT NULL,
   PRIMARY KEY (`recordId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of rabbit_change_record
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for rabbit_death
+-- ----------------------------
+DROP TABLE IF EXISTS `rabbit_death`;
+CREATE TABLE `rabbit_death` (
+  `rabbitNo` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `deathDate` date DEFAULT NULL,
+  `rabbitHouseNo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `cageNo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `deathReason` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`rabbitNo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of rabbit_death
 -- ----------------------------
 
 -- ----------------------------
@@ -138,14 +155,32 @@ CREATE TABLE `rabbit_dynamic_information` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for rabbit_eliminate
+-- ----------------------------
+DROP TABLE IF EXISTS `rabbit_eliminate`;
+CREATE TABLE `rabbit_eliminate` (
+  `rabbitNo` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `eliminateDate` date DEFAULT NULL,
+  `rabbitHouseNo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `cageNo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `eliminateReason` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`rabbitNo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of rabbit_eliminate
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for rabbit_health
 -- ----------------------------
 DROP TABLE IF EXISTS `rabbit_health`;
 CREATE TABLE `rabbit_health` (
   `healRecordId` varchar(255) NOT NULL,
   `farmUuid` varchar(255) DEFAULT NULL,
-  `rabbitHouseNo` int(11) DEFAULT NULL,
-  `rabbitNo` int(11) DEFAULT NULL,
+  `cageNo` varchar(255) DEFAULT NULL,
+  `rabbitHouseNo` varchar(255) DEFAULT NULL,
+  `rabbitNo` varchar(255) DEFAULT NULL,
   `bodyCondition` varchar(255) DEFAULT NULL,
   `mentalCondition` varchar(255) DEFAULT NULL,
   `feeding` varchar(255) DEFAULT NULL,
@@ -217,7 +252,11 @@ CREATE TABLE `rabbit_health` (
   `microscopicExaminationResult` varchar(255) DEFAULT NULL,
   `bacterialCultureConclusion` varchar(255) DEFAULT NULL,
   `diagnosisConclusion` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`healRecordId`)
+  PRIMARY KEY (`healRecordId`),
+  KEY `farmUuid` (`farmUuid`) USING BTREE,
+  KEY `cageNo` (`cageNo`) USING BTREE,
+  KEY `rabbitHouseNo` (`rabbitHouseNo`) USING BTREE,
+  KEY `rabbitNo` (`rabbitNo`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -249,6 +288,22 @@ CREATE TABLE `rabbit_house` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for rabbit_house_basic_info
+-- ----------------------------
+DROP TABLE IF EXISTS `rabbit_house_basic_info`;
+CREATE TABLE `rabbit_house_basic_info` (
+  `rabbitHouseNo` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `rabbitHouseType` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `principal` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `farmUuid` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  PRIMARY KEY (`rabbitHouseNo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of rabbit_house_basic_info
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for rabbit_illness
 -- ----------------------------
 DROP TABLE IF EXISTS `rabbit_illness`;
@@ -269,16 +324,40 @@ CREATE TABLE `rabbit_illness` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for rabbit_illness_record
+-- ----------------------------
+DROP TABLE IF EXISTS `rabbit_illness_record`;
+CREATE TABLE `rabbit_illness_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rabbitNo` varchar(255) DEFAULT NULL,
+  `illnessName` varchar(255) DEFAULT NULL,
+  `medicine` varchar(255) DEFAULT NULL,
+  `effect` varchar(255) DEFAULT NULL,
+  `reuse` varchar(255) DEFAULT NULL,
+  `farm_Uuid` varchar(255) DEFAULT NULL,
+  `rabbitHouse` varchar(255) DEFAULT NULL,
+  `cageNo` varchar(255) DEFAULT NULL,
+  `uploadUser` varchar(255) DEFAULT NULL,
+  `remark` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of rabbit_illness_record
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for rabbit_info
 -- ----------------------------
 DROP TABLE IF EXISTS `rabbit_info`;
 CREATE TABLE `rabbit_info` (
   `rabbitNo` varchar(20) NOT NULL,
   `cageNo` varchar(255) DEFAULT NULL,
+  `rabbitHouseNo` varchar(255) DEFAULT NULL,
+  `farmUuid` varchar(255) DEFAULT NULL,
   `birthParity` int(11) DEFAULT NULL,
   `initialWeight` double DEFAULT NULL,
   `coatGloss` varchar(255) DEFAULT NULL,
-  `rabbitHouseNo` varchar(255) DEFAULT NULL,
   `identicalRabbits` int(11) DEFAULT NULL,
   `economiType` varchar(255) DEFAULT NULL,
   `photo` text,
@@ -352,24 +431,21 @@ CREATE TABLE `rabbit_materials_record` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for rebbit_illness_record
+-- Table structure for rabbit_sale_record
 -- ----------------------------
-DROP TABLE IF EXISTS `rebbit_illness_record`;
-CREATE TABLE `rebbit_illness_record` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rabbitNo` varchar(255) DEFAULT NULL,
-  `illnessName` varchar(255) DEFAULT NULL,
-  `medicine` varchar(255) DEFAULT NULL,
-  `effect` varchar(255) DEFAULT NULL,
-  `reuse` varchar(255) DEFAULT NULL,
-  `farm_Uuid` varchar(255) DEFAULT NULL,
-  `rabbitHouse` varchar(255) DEFAULT NULL,
-  `cageNo` varchar(255) DEFAULT NULL,
-  `uploadUser` varchar(255) DEFAULT NULL,
-  `remark` text,
-  PRIMARY KEY (`id`)
+DROP TABLE IF EXISTS `rabbit_sale_record`;
+CREATE TABLE `rabbit_sale_record` (
+  `rabbitNo` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+  `farmUuid` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `rabbitHouseNo` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `cageNo` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `saleDate` date DEFAULT NULL,
+  `price` double(10,2) DEFAULT NULL,
+  `client` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `executive` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  PRIMARY KEY (`rabbitNo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of rebbit_illness_record
+-- Records of rabbit_sale_record
 -- ----------------------------

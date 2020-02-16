@@ -1,5 +1,9 @@
 package com.nwafu.databaseoprations.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.nwafu.databaseoprations.config.DateJsonDeserializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -47,6 +51,8 @@ public class RabbitIllness implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonDeserialize(using = DateJsonDeserializer.class)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date infectionTime;
 
     /**

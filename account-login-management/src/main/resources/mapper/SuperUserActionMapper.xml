@@ -43,6 +43,10 @@
         drop database ${_parameter}
     </delete>
 
+    <delete id="deleteDatabaseInfo" parameterType="java.lang.String">
+        delete from datasource_Info where dbName=#{dbName}
+    </delete>
+
     <resultMap id="NormalUserInfo" type="com.nwafu.accountloginmanagement.entity.NormalUserInfo">
         <id property="username" column="username" javaType="String" jdbcType="VARCHAR"></id>
         <result property="password" javaType = "String" jdbcType="VARCHAR" column="password"></result>
