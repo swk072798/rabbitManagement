@@ -51,7 +51,7 @@ public class BaseRabbitInfoServiceImpl implements BaseRabbitInfoService {
     }
 
     /** 
-    * @Description: 插入种兔基本信息（可以批量插入） 
+    * @Description: 新增种兔基本信息（可以批量新增）
     * @Param:  
     * @return:  
     * @Author: liu qinchang
@@ -69,7 +69,7 @@ public class BaseRabbitInfoServiceImpl implements BaseRabbitInfoService {
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
         int flag = rabbitInfoMapper.insert(rabbitInfoList);
         if(flag == 0){
-            throw new RuntimeException("insertRabbitInfo  插入失败");
+            throw new RuntimeException("insertRabbitInfo  新增失败");
         }
 
         return new ResponseMessage<>("success", 1);

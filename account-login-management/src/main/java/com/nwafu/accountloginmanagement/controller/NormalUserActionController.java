@@ -6,6 +6,8 @@ import com.nwafu.accountloginmanagement.entity.SubAccountInfoPO;
 import com.nwafu.accountloginmanagement.entity.SubAccountInfoVO;
 import com.nwafu.accountloginmanagement.service.NormalUserActionService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
@@ -23,6 +25,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
+@Api(value = "普通用户账号操作")
 public class NormalUserActionController {
 
     @Autowired
@@ -34,6 +37,7 @@ public class NormalUserActionController {
      * @Author: liu qinchang
      * @Date: 2019/12/12
      */
+    @ApiOperation(value = "创建子用户")
     @PostMapping("/{normalUsername}/normal/addSubAccount")
     public ResponseMessage addSubAccount(@RequestBody SubAccountInfoVO subAccountInfo, @PathVariable String normalUsername) throws ServerException {
         log.info("addSubAccount入参为:{}",subAccountInfo);
@@ -57,6 +61,7 @@ public class NormalUserActionController {
     * @Author: liu qinchang
     * @Date: 2019/12/17
     */
+    @ApiOperation(value = "删除子用户")
     @GetMapping("/{normalUsername}/normal/deleteSubAccount")
     public ResponseMessage<Integer> deleteSubAccount(@RequestParam String username, @PathVariable(value = "normalUsername") String parentUser) throws ServerException {
         log.info("deleteSubAccount  入参  {},{}",username,parentUser);
@@ -75,6 +80,7 @@ public class NormalUserActionController {
     * @Author: liu qinchang
     * @Date: 2019/12/18
     */
+    @ApiOperation(value = "普通用户给子用户分配权限")
     @PostMapping("/{normalUsername}/normal/updateSubPermissions")
     public ResponseMessage<Integer> addSubPermissions(@RequestParam String permissions, @RequestParam String subUsername, @PathVariable String normalUsername) throws ServerException {
         log.info("addSubPermissions  入参: {}, {}",permissions, normalUsername);
@@ -92,6 +98,7 @@ public class NormalUserActionController {
     * @Author: liu qinchang
     * @Date: 2019/12/18
     */
+    @ApiOperation(value = "获取所有子用户信息")
     @GetMapping("/{normalUsername}/normal/getAllSubUserInfo")
     public ResponseMessage<List<SubAccountInfoPO>> getAllSubUserInfo(@PathVariable String normalUsername) throws ServerException {
         log.info("getAllSubUserInfo  传入参数： {}", normalUsername);

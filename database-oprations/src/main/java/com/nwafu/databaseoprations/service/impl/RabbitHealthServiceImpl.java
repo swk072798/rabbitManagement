@@ -68,15 +68,15 @@ public class RabbitHealthServiceImpl implements RabbitHealthService {
         }
         List<String> permissions = redisUtils.getPermissionsToList(username);
         if(!permissions.contains("c")){
-            throw new RuntimeException("没有插入权限");
+            throw new RuntimeException("没有新增权限");
         }
         if(rabbitHealthList == null || rabbitHealthList.size() == 0){
-            throw new RuntimeException("插入数据不能为空");
+            throw new RuntimeException("新增数据不能为空");
         }
         DynamicDataSourceContextHolder.setDataSourceKey(username);
         int flag = rabbitHealthMapper.insert(rabbitHealthList);
         if(flag == 0){
-            throw new RuntimeException("插入失败");
+            throw new RuntimeException("新增失败");
         }
         return new ResponseMessage<>("success", 1);
     }

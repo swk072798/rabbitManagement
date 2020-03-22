@@ -75,7 +75,7 @@ public class MaterialsRecordServiceImpl implements MaterialsRecordService {
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
         int flag = rabbitMaterialsRecordMapper.insert(rabbitMaterialsRecordList);
         if(flag == 0){
-            throw new RuntimeException("插入信息失败");
+            throw new RuntimeException("新增信息失败");
         }
         return new ResponseMessage<>("success", 1);
     }

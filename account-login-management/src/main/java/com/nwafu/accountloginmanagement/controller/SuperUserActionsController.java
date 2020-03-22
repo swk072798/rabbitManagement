@@ -5,6 +5,7 @@ import com.nwafu.accountloginmanagement.entity.NormalUserVO;
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.service.SuperUserActionService;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class SuperUserActionsController {
     @Autowired
     SuperUserActionService superUserActionService;
 
+    @ApiOperation(value = "超级用户修改普通用户信息")
     @GetMapping("/{superUsername}/super/updateNormalUserInfo")
     public ResponseMessage<Integer> updateNormalUserInfo(@PathVariable String superUsername, @RequestParam String oldNormalUsername,
                                                          @RequestParam(required = false) String newNormalUsername, @RequestParam(required = false) String newPassword) throws ServerException {
@@ -37,6 +39,7 @@ public class SuperUserActionsController {
         return responseMessage;
     }
 
+    @ApiOperation(value = "超级用户删除普通用户")
     @GetMapping("/{superUsername}/super/deleteNormalUserInfo")
     public ResponseMessage<Integer> deleteNormalUserInfo(@PathVariable String superUsername, @RequestParam String username){
         log.info("deleteNormalUserInfo  入参: {},{}",superUsername, username);
@@ -46,6 +49,7 @@ public class SuperUserActionsController {
         return responseMessage;
     }
 
+    @ApiOperation(value = "超级用户获取所有普通用户信息")
     @GetMapping("/{superUsername}/super/getAllNormalUserInfo")
     public ResponseMessage<List<NormalUserVO>> getAllNormalUserInfo(@PathVariable String superUsername){
         log.info("getAllNormalUserInfo  传入参数:  {}",superUsername);

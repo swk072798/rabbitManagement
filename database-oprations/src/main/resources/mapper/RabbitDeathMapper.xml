@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.databaseoprations.dao.RabbitDeathMapper">
+	<resultMap id="BaseResultMap" type="com.nwafu.databaseoprations.entity.RabbitDeath">
+		<result column="rabbitNo" jdbcType="VARCHAR" property="rabbitNo"/>
+		<result column="deathDate" jdbcType="TIMESTAMP" property="deathDate"/>
+		<result column="rabbitHouseNo" jdbcType="VARCHAR" property="rabbitHouseNo"/>
+		<result column="cageNo" jdbcType="VARCHAR" property="cageNo"/>
+		<result column="deathReason" jdbcType="VARCHAR" property="deathReason"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="java.util.List">
+		insert into rabbit_death(rabbitNo,deathDate,rabbitHouseNo,cageNo,deathReason) values
+		<foreach collection="list" index="index" item="item" separator=",">(#{item.rabbitNo,jdbcType=VARCHAR}, 
+		#{item.deathDate},
+		#{item.rabbitHouseNo,jdbcType=VARCHAR},
+		#{item.cageNo,jdbcType=VARCHAR},
+		#{item.deathReason,jdbcType=VARCHAR}
+		)</foreach>
+	</insert>
+
+	<select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from rabbit_death
+	</select>
+
+	<select id="selectByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from rabbit_death where ${condition}=#{value}
+	</select>
+
+	<delete id="deleteRabbitDeathInfo" parameterType="java.util.List">
+		delete from rabbit_death where rabbitNo in
+		<foreach close=")" collection="list" item="item" open="(" separator=",">
+		#{item}
+		</foreach>
+	</delete>
+</mapper>

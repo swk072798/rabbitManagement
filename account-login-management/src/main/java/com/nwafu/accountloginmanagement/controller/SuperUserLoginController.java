@@ -5,6 +5,7 @@ import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.entity.SuperAdminInfo;
 import com.nwafu.accountloginmanagement.service.SuperAdminLoginService;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,7 @@ public class SuperUserLoginController {
     * @Author: liu qinchang
     * @Date: 2019/12/19
     */
+    @ApiOperation(value = "超级用户登录")
     @GetMapping("/superUser/login")
     public ResponseMessage<Integer> superUserLogin(@RequestParam String superUsername, @RequestParam String superPassword) throws ServerException {
         log.info("superUserLogin  传入参数: {}, {}", superUsername, superPassword);
@@ -48,6 +50,7 @@ public class SuperUserLoginController {
     * @Author: liu qinchang
     * @Date: 2019/12/19 
     */
+    @ApiOperation(value = "超级用户退出登录")
     @GetMapping("/{superUsername}/super/exitLogin")
     public ResponseMessage<Integer> superUseEexitLogin(@PathVariable String superUsername) throws ServerException {
         log.info("superUseEexitLogin  传入参数: {}",superUsername);
@@ -65,6 +68,7 @@ public class SuperUserLoginController {
     * @Author: liu qinchang
     * @Date: 2019/12/19
     */
+    @ApiOperation(value = "超级用户注册")
     @PostMapping("/superUser/register")
     public ResponseMessage<Integer> addSuperUserAccount(@RequestBody SuperAdminInfo superAdminInfo) throws ServerException {
         log.info("addSuperUserAccount  入参为: {}",superAdminInfo);

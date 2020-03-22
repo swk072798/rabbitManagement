@@ -32,10 +32,10 @@ public class BreedingRecordServiceImpl implements BreedingRecordService {
     @Override
     public ResponseMessage<Integer> insertBreedingRecord(String dbName, String username, List<RabbitBreeding> rabbitBreedingList) {
         if(!redisUtils.checkPermission("c", username)){
-            throw new RuntimeException("没有插入权限");
+            throw new RuntimeException("没有新增权限");
         }
         if(rabbitBreedingList == null || rabbitBreedingList.size() == 0){
-            throw new RuntimeException("插入列表不能为空");
+            throw new RuntimeException("新增列表不能为空");
         }
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
         List<RabbitBreedingPO> rabbitBreedingPOS = new ArrayList<>();
@@ -45,7 +45,7 @@ public class BreedingRecordServiceImpl implements BreedingRecordService {
         }
         int flag = rabbitBreedingMapper.insert(rabbitBreedingPOS);
         if(flag == 0){
-            throw new RuntimeException("插入失败");
+            throw new RuntimeException("新增失败");
         }
         return new ResponseMessage<>("success", 1);
     }

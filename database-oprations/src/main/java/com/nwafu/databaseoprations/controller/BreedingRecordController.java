@@ -84,13 +84,13 @@ public class BreedingRecordController {
     }
     
     /** 
-    * @Description: 插入繁殖信息
+    * @Description: 新增繁殖信息
     * @Param:  
     * @return:  
     * @Author: liu qinchang
     * @Date: 2020/1/15 
     */
-    @ApiOperation(value = "插入繁殖信息")
+    @ApiOperation(value = "新增繁殖信息")
     @PostMapping("/insertBreedingInfo")
     public ResponseMessage<Integer> insertBreedingInfo(@PathVariable String dbName, @PathVariable String username, @RequestBody List<RabbitBreeding> rabbitBreedingList){
         log.info("insertBreedingInfo  入参:{}, {}, {}", dbName, username, rabbitBreedingList);

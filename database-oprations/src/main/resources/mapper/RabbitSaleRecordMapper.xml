@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.databaseoprations.dao.RabbitSaleRecordMapper">
+	<resultMap id="BaseResultMap" type="com.nwafu.databaseoprations.entity.RabbitSaleRecord">
+		<result column="rabbitNo" jdbcType="VARCHAR" property="rabbitNo"/>
+		<result column="farmUuid" jdbcType="VARCHAR" property="farmUuid"/>
+		<result column="rabbitHouseNo" jdbcType="VARCHAR" property="rabbitHouseNo"/>
+		<result column="cageNo" jdbcType="VARCHAR" property="cageNo"/>
+		<result column="saleDate" jdbcType="TIMESTAMP" property="saleDate"/>
+		<result column="price" jdbcType="DOUBLE" property="price"/>
+		<result column="client" jdbcType="VARCHAR" property="client"/>
+		<result column="executive" jdbcType="VARCHAR" property="executive"/>
+	</resultMap>
+	<insert id="insert" parameterType="java.util.List">
+		insert into rabbit_sale_record(rabbitNo,farmUuid,rabbitHouseNo,cageNo,saleDate,price,client,executive) values
+		<foreach collection="list" index="index" item="item" separator=",">(#{item.rabbitNo,jdbcType=VARCHAR}, 
+			#{item.farmUuid,jdbcType=VARCHAR},
+			#{item.rabbitHouseNo,jdbcType=VARCHAR},
+			#{item.cageNo,jdbcType=VARCHAR},
+			#{item.saleDate},
+			#{item.price,jdbcType=DOUBLE},
+			#{item.client,jdbcType=VARCHAR},
+			#{item.executive,jdbcType=VARCHAR}
+		)</foreach>
+	</insert>
+
+	<select id="getAllRabbitSaleRecord" parameterType="java.lang.String"  resultMap="BaseResultMap">
+		select * from rabbit_sale_record
+	</select>
+
+	<select id="getRabbitSaleRecordByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from rabbit_sale_record where ${condition}=#{value}
+	</select>
+	<delete id="deleteRabbitSaleRecordById" parameterType="java.util.List">
+		delete from rabbit_sale_record where rabbitNo in
+		<foreach close=")" collection="list" item="item" open="(" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

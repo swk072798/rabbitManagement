@@ -6,6 +6,8 @@ import com.nwafu.accountloginmanagement.entity.NormalUserInfo;
 import com.nwafu.accountloginmanagement.entity.ResponseMessage;
 import com.nwafu.accountloginmanagement.service.NormalUserLoginService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import java.rmi.ServerException;
 
 @RestController
 @Slf4j
+@Api(value = "普通用户登录类")
 public class NormalUserLoginController {
 
     @Autowired
@@ -33,6 +36,7 @@ public class NormalUserLoginController {
     * @Author: liu qinchang
     * @Date: 2019/12/12 
     */
+    @ApiOperation(value = "普通用户账号登录")
     @GetMapping("/normalUser/login")
     public ResponseMessage normalUserLogin(@RequestParam(value = "username") String username, @RequestParam(value = "password", required = false) String password) throws ServerException {
         log.info("normalUserLogin  入参：{},{}",username,password);
@@ -50,6 +54,7 @@ public class NormalUserLoginController {
     * @Author: liu qinchang
     * @Date: 2019/12/12 
     */
+    @ApiOperation(value = "普通用户注册")
     @PostMapping("/normalUser/register")
     public ResponseMessage<Integer> normalUserRegister(@RequestBody AccountInfo accountInfo) throws ServerException {
         log.info("normalUserRegister  入参为:{}",accountInfo);
@@ -69,6 +74,7 @@ public class NormalUserLoginController {
     * @Author: liu qinchang
     * @Date: 2019/12/17 
     */
+    @ApiOperation(value = "普通用户退出登录")
     @GetMapping("/{normalUser}/normal/normalUserExitLogin")
     public ResponseMessage exitLogin(@PathVariable String normalUser) throws ServerException {
         if(normalUser == null || normalUser.length() == 0){
