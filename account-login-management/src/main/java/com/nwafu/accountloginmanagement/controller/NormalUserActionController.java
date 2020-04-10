@@ -49,7 +49,7 @@ public class NormalUserActionController {
             throw new ServerException("normalUsername不一致");
         }
         String securityPassword = DigestUtils.md5DigestAsHex(subAccountInfo.getSubPassword().getBytes());
-        ResponseMessage responseMessage = normalUserActionService.addSubAccount(subAccountInfo.getSubUsername(), securityPassword, subAccountInfo.getParentUser(), subAccountInfo.getPermissions().toString());
+        ResponseMessage responseMessage = normalUserActionService.addSubAccount(subAccountInfo.getSubUsername(), securityPassword, subAccountInfo.getParentUser(), subAccountInfo.getPermissions().toString(), subAccountInfo.getEmployeeNo());
 
         return responseMessage;
     }

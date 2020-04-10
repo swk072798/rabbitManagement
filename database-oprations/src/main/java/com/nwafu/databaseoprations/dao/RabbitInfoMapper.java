@@ -30,4 +30,6 @@ public interface RabbitInfoMapper {
     List<RabbitInfo> getMaleRabbitInfo();
 
     List<RabbitInfo> getLittleRabbitInfo();
+
+    List<String> getAllRabbitNo();
 }

@@ -9,6 +9,7 @@
         <result property="subPassword" javaType = "java.lang.String" jdbcType="VARCHAR" column="subPassword"></result>
         <result property="parentUser" javaType = "java.lang.String" jdbcType="VARCHAR" column="parentUser"></result>
         <result property="permissions" javaType = "java.lang.String" jdbcType="VARCHAR" column="permissions"></result>
+        <result property="employeeNo" javaType="java.lang.String" jdbcType="VARCHAR" column="employeeNo"></result>
     </resultMap>
 
 

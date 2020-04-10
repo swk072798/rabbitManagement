@@ -17,4 +17,5 @@ public class SubAccountInfoVO {
     private String subPassword;
     private String parentUser;
     private List<String> permissions;
+    private String employeeNo;
 }

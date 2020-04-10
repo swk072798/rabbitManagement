@@ -85,4 +85,8 @@
   <select id="getLittleRabbitInfo" resultMap="BaseResultMap">
     select * from rabbit_info where age &lt;= 1
   </select>
+
+  <select id="getAllRabbitNo" resultType="java.lang.String">
+    select rabbitNo from rabbit_info
+  </select>
 </mapper>

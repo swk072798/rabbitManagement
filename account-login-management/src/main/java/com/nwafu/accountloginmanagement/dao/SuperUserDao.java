@@ -16,4 +16,5 @@ public interface SuperUserDao {
     int deleteDatabase(String dbName);
     int deleteDatabaseInfo(String dbName);
     List<NormalUserInfo> getAllNormalUserInfo();
+    int deleteSubUserByParentUser(String parentUser);
 }

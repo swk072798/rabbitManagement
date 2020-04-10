@@ -1,7 +1,6 @@
 package com.nwafu.databaseoprations.dao;
 
 import com.nwafu.databaseoprations.entity.RabbitEliminate;
-import com.nwafu.databaseoprations.entity.RabbitEliminatePO;
 
 import java.util.List;
 

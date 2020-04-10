@@ -24,10 +24,11 @@ public class NormalUserActionServiceImpl implements NormalUserActionService {
     NormalUserDao normalUserDao;
 
     @Override
-    public ResponseMessage<Integer> addSubAccount(String subUsername, String subPassword, String parentUser, String permissions) {
+    public ResponseMessage<Integer> addSubAccount(String subUsername, String subPassword, String parentUser, String permissions, String employeeNo) {
+        String newPermissions = permissions.substring(1, permissions.length() - 1);
         int flag = 0;
         try{
-            flag = normalUserDao.addSubAccount(subUsername,subPassword,parentUser);
+            flag = normalUserDao.addSubAccount(subUsername,subPassword,parentUser, newPermissions, employeeNo);
         }catch (Exception e){
             log.error(e.getMessage());
         }

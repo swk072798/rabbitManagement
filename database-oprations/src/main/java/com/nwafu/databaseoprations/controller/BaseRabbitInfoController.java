@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
 import com.nwafu.databaseoprations.entity.RabbitInfo;
+import com.nwafu.databaseoprations.entity.RabbitInfoVO;
 import com.nwafu.databaseoprations.entity.ResponseMessage;
 import com.nwafu.databaseoprations.entity.UserCacheInfo;
 import com.nwafu.databaseoprations.redis.RedisUtils;
@@ -65,7 +66,7 @@ public class BaseRabbitInfoController {
     */
     @ApiOperation(value = "添加种兔信息")
     @PostMapping("/insertRabbitInfo")
-    public ResponseMessage<Integer> insertRabbitInfo(@PathVariable String dbName, @RequestBody List<RabbitInfo> rabbitInfoList, @PathVariable String username){
+    public ResponseMessage<Integer> insertRabbitInfo(@PathVariable String dbName, @RequestBody List<RabbitInfoVO> rabbitInfoList, @PathVariable String username){
         log.info("insertRabbitInfo  传参：{}", rabbitInfoList);
         long startTime = System.currentTimeMillis();
         ResponseMessage<Integer> responseMessage = baseRabbitInfoService.insertRabbitInfo(dbName, rabbitInfoList, username);

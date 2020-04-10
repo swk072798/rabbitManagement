@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.databaseoprations.dao.EmployeeInfoMapper">
+	<resultMap id="BaseResultMap" type="com.nwafu.databaseoprations.entity.EmployeeInfo">
+		<result column="employeeNo" jdbcType="VARCHAR" property="employeeNo"/>
+		<result column="name" jdbcType="VARCHAR" property="name"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="com.nwafu.databaseoprations.entity.EmployeeInfo">
+		insert into employee_info(employeeNo,name) values
+		<foreach collection="list" index="index" item="item" separator=",">(#{item.employeeNo,jdbcType=VARCHAR}, 
+			#{item.name,jdbcType=VARCHAR}
+		)</foreach>
+	</insert>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select * from employee_info
+	</select>
+
+	<select id="selectByCondition" resultMap="BaseResultMap">
+		select * from employee_info where ${condition}=#{value}
+	</select>
+
+	<delete id="deleteById" parameterType="java.util.List">
+		delete from employee_info where employeeNo in
+		<foreach close=")" collection="list" item="item" open="(" separator=",">#{item}</foreach>
+	</delete>
+</mapper>

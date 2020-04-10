@@ -44,7 +44,7 @@
     </delete>
 
     <delete id="deleteDatabaseInfo" parameterType="java.lang.String">
-        delete from datasource_Info where dbName=#{dbName}
+        delete from datasource_info where dbName=#{dbName}
     </delete>
 
     <resultMap id="NormalUserInfo" type="com.nwafu.accountloginmanagement.entity.NormalUserInfo">
@@ -58,4 +58,8 @@
     <select id="getAllNormalUserInfo" resultMap="NormalUserInfo">
         select username, farmUuids, status, registrationTime from user_info
     </select>
+
+    <delete id="deleteSubUserByParentUser" parameterType="java.lang.String">
+        delete from sub_user_info where parentUser=#{parentUser}
+    </delete>
 </mapper>

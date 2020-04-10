@@ -1,5 +1,6 @@
 package com.nwafu.databaseoprations.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -191,6 +192,7 @@ public class RabbitInfo implements Serializable {
      *
      * @mbg.generated
      */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date bornDate;
 
     /**
@@ -227,6 +229,32 @@ public class RabbitInfo implements Serializable {
      *
      * @mbg.generated
      */
+
+    public RabbitInfo(RabbitInfoVO rabbitInfoVO){
+        this.farmUuid = rabbitInfoVO.getFarmUuid();
+        this.age = rabbitInfoVO.getAge();
+        this.birthParity = rabbitInfoVO.getBirthParity();
+        this.bornDate = rabbitInfoVO.getBornDate();
+        this.cageNo = rabbitInfoVO.getCageNo();
+        this.coatColor = rabbitInfoVO.getCoatColor();
+        this.coatFeature = rabbitInfoVO.getCoatFeature();
+        this.coatGloss = rabbitInfoVO.getCoatGloss();
+        this.economiType = rabbitInfoVO.getEconomiType();
+        this.fineHairType = rabbitInfoVO.getFineHairType();
+        this.identicalRabbits = rabbitInfoVO.getIdenticalRabbits();
+        this.initialAge = rabbitInfoVO.getInitialAge();
+        this.initialWeight = rabbitInfoVO.getInitialWeight();
+        this.mainCoatColor = rabbitInfoVO.getMainCoatColor();
+        this.maternalNo = rabbitInfoVO.getMaternalNo();
+        this.nipplesNumber = rabbitInfoVO.getNipplesNumber();
+        this.origin = rabbitInfoVO.getOrigin();
+        this.paternalNo = rabbitInfoVO.getPaternalNo();
+        this.photo = rabbitInfoVO.getPhoto();
+        this.rabbitHouseNo = rabbitInfoVO.getRabbitHouseNo();
+        this.roughType = rabbitInfoVO.getRoughType();
+        this.sex = rabbitInfoVO.getSex();
+    }
+
     public String getRabbitNo() {
         return rabbitNo;
     }

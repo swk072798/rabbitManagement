@@ -25,7 +25,7 @@
     </update>
 
     <insert id="addSubAccount" parameterType="java.lang.String">
-        insert into sub_user_info(subUsername, subPassword, parentUser) value (#{subUsername},#{subPassword},#{parentUser})
+        insert into sub_user_info(subUsername, subPassword, parentUser, permissions, employeeNo) value (#{subUsername},#{subPassword},#{parentUser},#{permissions}, #{employeeNo})
     </insert>
 
     <update id="createDatabase" parameterType="java.lang.String">

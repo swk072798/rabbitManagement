@@ -10,10 +10,54 @@ Target Server Type    : MYSQL
 Target Server Version : 50646
 File Encoding         : 65001
 
-Date: 2020-02-15 09:38:44
+Date: 2020-04-05 11:42:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for company_base_info
+-- ----------------------------
+DROP TABLE IF EXISTS `company_base_info`;
+CREATE TABLE `company_base_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `companyName` varchar(255) DEFAULT NULL,
+  `companyAbbreviation` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of company_base_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for employee_farm_relation
+-- ----------------------------
+DROP TABLE IF EXISTS `employee_farm_relation`;
+CREATE TABLE `employee_farm_relation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `employeeNo` varchar(255) DEFAULT NULL,
+  `farmUuid` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of employee_farm_relation
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for employee_info
+-- ----------------------------
+DROP TABLE IF EXISTS `employee_info`;
+CREATE TABLE `employee_info` (
+  `employeeNo` varchar(25) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`employeeNo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of employee_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for farm_infomation
@@ -29,7 +73,6 @@ CREATE TABLE `farm_infomation` (
 -- ----------------------------
 -- Records of farm_infomation
 -- ----------------------------
-INSERT INTO `farm_infomation` VALUES ('jiwoeuriowue', '哈哈兔场', 'lqc', '中国');
 
 -- ----------------------------
 -- Table structure for rabbit_breeding
@@ -296,6 +339,7 @@ CREATE TABLE `rabbit_house_basic_info` (
   `rabbitHouseType` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
   `principal` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
   `farmUuid` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `cageNoList` text CHARACTER SET utf8,
   PRIMARY KEY (`rabbitHouseNo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -401,15 +445,6 @@ CREATE TABLE `rabbit_ingredients` (
 -- ----------------------------
 -- Records of rabbit_ingredients
 -- ----------------------------
-INSERT INTO `rabbit_ingredients` VALUES ('2', 'ceshi', '2018-09-06 15:03:48', '1', null);
-INSERT INTO `rabbit_ingredients` VALUES ('3', 'ceshi', '2018-09-06 15:03:48', '1', null);
-INSERT INTO `rabbit_ingredients` VALUES ('4', 'ceshi', '2018-09-06 07:03:48', '1', null);
-INSERT INTO `rabbit_ingredients` VALUES ('5', 'ceshi', '2018-09-06 07:03:48', '1', null);
-INSERT INTO `rabbit_ingredients` VALUES ('6', 'ceshi', '2018-09-06 07:03:48', '1', null);
-INSERT INTO `rabbit_ingredients` VALUES ('7', 'ceshi', '2018-09-06 07:03:48', '1', '222');
-INSERT INTO `rabbit_ingredients` VALUES ('8', 'ceshi', '2018-09-06 07:03:48', '1', '333');
-INSERT INTO `rabbit_ingredients` VALUES ('9', 'ceshi', '2018-09-08 07:03:48', '1', '2333');
-INSERT INTO `rabbit_ingredients` VALUES ('10', 'ceshi', '2018-09-06 07:03:48', '1', '333');
 
 -- ----------------------------
 -- Table structure for rabbit_materials_record

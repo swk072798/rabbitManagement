@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.databaseoprations.dao.EmployeeFarmRelationMapper">
+	<resultMap id="BaseResultMap" type="com.nwafu.databaseoprations.entity.EmployeeFarmRelation">
+		<result column="id" jdbcType="INTEGER" property="id"/>
+		<result column="employeeNo" jdbcType="VARCHAR" property="employeeNo"/>
+		<result column="farmUuid" jdbcType="INTEGER" property="farmUuid"/>
+	</resultMap>
+	<insert id="insert" parameterType="java.util.List">
+		insert into employee_farm_relation(employeeNo,farmUuid) values
+		<foreach collection="list" index="index" item="item" separator=",">(
+			#{item.employeeNo,jdbcType=VARCHAR},
+			#{item.farmUuid,jdbcType=INTEGER}
+		)</foreach>
+	</insert>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select * from employee_farm_relation
+	</select>
+
+	<select id="selectByCondition" resultMap="BaseResultMap">
+		select * from employee_farm_relation where ${condition}=#{value}
+	</select>
+
+	<delete id="deleteById" parameterType="java.util.List">
+		delete from employee_farm_relation where id in
+		<foreach close=")" collection="list" item="item" open="(" separator=",">#{item}</foreach>
+	</delete>
+</mapper>

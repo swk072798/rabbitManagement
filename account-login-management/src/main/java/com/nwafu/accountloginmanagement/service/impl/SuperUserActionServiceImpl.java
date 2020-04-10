@@ -75,7 +75,15 @@ public class SuperUserActionServiceImpl implements SuperUserActionService {
         if(flagDeleteDatabase == 0){
             throw new RuntimeException("删除数据库失败");
         }
-
+        int flagDeleteDatabaseInfo;
+        flagDeleteDatabaseInfo = superUserDao.deleteDatabaseInfo(username);
+        if(flagDeleteDatabaseInfo == 0){
+            throw new RuntimeException("删除数据库链接信息失败");
+        }
+        int flagDeleteSubUser = superUserDao.deleteSubUserByParentUser(username);
+        if(flagDeleteSubUser == 0){
+            throw new RuntimeException("删除相关子用户失败");
+        }
         log.info("deleteNormalUserInfo  删除普通用户成功");
         ResponseMessage<Integer> responseMessage = new ResponseMessage<>("success", 1);
         return responseMessage;

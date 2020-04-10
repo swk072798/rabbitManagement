@@ -7,6 +7,8 @@ import org.springframework.core.io.Resource;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -35,7 +37,9 @@ public class JdbcActions {
         ScriptRunner scriptRunner = new ScriptRunner(conn);
         scriptRunner.setStopOnError(true);
         Resource resource = new ClassPathResource("sql_files/rabbit_manage_system.sql");
-        FileReader reader = new FileReader(resource.getFile());
+//        FileReader reader = new FileReader(resource.getFile());
+        //打包后的resource.getFile()没法获取jar包中的文件
+        InputStreamReader reader = new InputStreamReader(resource.getInputStream());
         scriptRunner.runScript(reader);
     }
 

@@ -17,7 +17,7 @@ import java.util.List;
 public interface NormalUserDao {
     NormalUserInfo getNormalUserInfoByUsername(String username);
     int addAccount(String username,String password);
-    int addSubAccount(String subUsername, String subPassword, String parentUser);
+    int addSubAccount(String subUsername, String subPassword, String parentUser, String permissions, String employeeNo);
     int createDatabase(String dbName);
     int updataLoginStatus(String newStatus, String username);
     int deleteSubAccount(String subUsername,String parentUser);

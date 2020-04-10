@@ -16,5 +16,6 @@ public class SubAccountInfoPO {
     private String subPassword;
     private String parentUser;
     private String permissions;
+    private String employeeNo;
     private String status;
 }
