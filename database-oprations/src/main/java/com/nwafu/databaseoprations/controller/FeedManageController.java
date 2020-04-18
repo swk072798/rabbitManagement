@@ -88,10 +88,19 @@ public class FeedManageController {
     * @Date: 2020/1/13
     */
     @ApiOperation(value = "删除饲料信息")
-    @DeleteMapping("deleteFeedById")
+    @DeleteMapping("/deleteFeedById")
     public ResponseMessage<Integer> deleteFeedById(@RequestParam List<String> deleteId, @PathVariable String dbName, @PathVariable String username){
         log.info("deleteFeedById  入参： {},{}", deleteId, dbName);
         ResponseMessage responseMessage = feedManageService.deleteFeedInfo(deleteId, dbName, username);
+        return responseMessage;
+    }
+
+    @ApiOperation(value = "按照条件筛选饲料")
+    @GetMapping("/getFeedByCondition")
+    public ResponseMessage<PageInfo<RabbitIngredients>>getFeedByCondition(@PathVariable String dbName, @PathVariable String username, @RequestParam Integer limit,
+                                                                          @RequestParam Integer page, @RequestParam String condition, @RequestParam String value){
+        log.info("getFeedByCondition 传参:{},{},{},{},{},{}", dbName, username, limit, page, condition, value);
+        ResponseMessage<PageInfo<RabbitIngredients>> responseMessage = feedManageService.getFeedInfoByCondition(dbName, username, limit, page, condition, value);
         return responseMessage;
     }
 

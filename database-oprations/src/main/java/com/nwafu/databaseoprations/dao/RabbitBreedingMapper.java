@@ -31,4 +31,6 @@ public interface RabbitBreedingMapper {
     int deleteByFemaleRabbit(String femaleRabitNo);
 
     int deleteByMaleRabbit(String maleRabitNo);
+
+    List<RabbitBreeding> getRabbitBreedingByCondition(String condition, String value);
 }

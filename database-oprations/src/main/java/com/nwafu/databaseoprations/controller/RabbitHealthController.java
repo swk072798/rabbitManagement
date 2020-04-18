@@ -48,13 +48,13 @@ public class RabbitHealthController {
     * @Author: liu qinchang
     * @Date: 2020/2/10
     */
-    @GetMapping("/getRabbitInfoByCondition")
+    @GetMapping("/getRabbitHealthInfoByCondition")
     @ApiOperation(value = "按照条件筛选健康信息")
-    public ResponseMessage<PageInfo<RabbitHealth>> getRabbitInfoByCondition(@PathVariable String dbName, @PathVariable String username, @RequestParam Integer page,
+    public ResponseMessage<PageInfo<RabbitHealth>> getRabbitHealthInfoByCondition(@PathVariable String dbName, @PathVariable String username, @RequestParam Integer page,
                                                                             @RequestParam Integer limit, @RequestParam String condition, @RequestParam String value){
         log.info("getRabbitInfoByCondition 传参, {},{},{},{},{},{}", dbName, username, page, limit, condition, value);
         long startTime = System.currentTimeMillis();
-        ResponseMessage<PageInfo<RabbitHealth>> responseMessage = rabbitHealthService.getRabbitHealth(dbName, username, page, limit, condition, value);
+        ResponseMessage<PageInfo<RabbitHealth>> responseMessage = rabbitHealthService.getRabbitHealthByCondition(dbName, username, page, limit, condition, value);
         log.info("getRabbitInfoByCondition 耗时：{} ms", System.currentTimeMillis() - startTime);
         return responseMessage;
     }

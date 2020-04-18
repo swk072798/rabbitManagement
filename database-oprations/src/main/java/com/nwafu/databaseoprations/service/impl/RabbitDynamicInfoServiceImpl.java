@@ -101,4 +101,24 @@ public class RabbitDynamicInfoServiceImpl implements RabbitDynamicInfoService {
         }
         return new ResponseMessage<>("success", 1);
     }
+
+    @Override
+    public ResponseMessage<PageInfo<RabbitDynamicInformation>> getDynamicInfoByCondition(String dbName, String username, Integer limit, Integer page, String condition, String value){
+        if(dbName == null || username == null || limit == null || page == null){
+            throw new RuntimeException("必要参数不能为空");
+        }
+        if(condition == null || condition.equals("")){
+            throw new RuntimeException("查询条件不能为空");
+        }
+        List<String> permissions = redisUtils.getPermissionsToList(username);
+        if(!permissions.contains("r")){
+            throw new RuntimeException("没有查询权限");
+        }
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        PageHelper.startPage(page, limit);
+        List<RabbitDynamicInformation> rabbitDynamicInformations = rabbitDynamicInformationMapper.getDynamicInfoByCondition(condition, value);
+        PageInfo<RabbitDynamicInformation> pageInfo = new PageInfo<>(rabbitDynamicInformations);
+        ResponseMessage<PageInfo<RabbitDynamicInformation>> responseMessage = new ResponseMessage<>("success", pageInfo);
+        return responseMessage;
+    }
 }

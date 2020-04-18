@@ -150,6 +150,15 @@ public class BreedingRecordController {
         log.info("deleteBreedingRecordByMaleRabbit 执行时间: {}ms", System.currentTimeMillis() - startTime);
         return responseMessage;
     }
+
+    @GetMapping("/getBreedingRecordByCondition")
+    @ApiOperation(value = "按照条件筛选信息")
+    public ResponseMessage<PageInfo<RabbitBreeding>> getBreedingRecordByCondition(@PathVariable String dbName, @PathVariable String username, @RequestParam Integer limit,
+                                                                                  @RequestParam Integer page, @RequestParam String condition, @RequestParam String value){
+        log.info("getBreedingRecordByCondition 传参：{}，{}，{}，{}，{}，{}", dbName, username, limit, page, condition, value);
+        ResponseMessage<PageInfo<RabbitBreeding>> responseMessage = breedingRecordService.getBreedingRecordByCondition(dbName, username, limit, page, condition, value);
+        return responseMessage;
+    }
     
     
 }

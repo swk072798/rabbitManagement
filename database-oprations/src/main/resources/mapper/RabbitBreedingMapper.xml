@@ -97,4 +97,8 @@
   <delete id="deleteByMaleRabbit" parameterType="java.lang.String">
     delete from rabbit_breeding where maleRabbitNo=#{maleRabbitNo}
   </delete>
+
+  <select id="getRabbitBreedingByCondition" resultMap="BaseResultMap">
+    select * from rabbit_breeding where ${condition}=#{value}
+  </select>
 </mapper>

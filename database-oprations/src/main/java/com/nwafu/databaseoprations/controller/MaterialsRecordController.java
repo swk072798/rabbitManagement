@@ -60,4 +60,13 @@ public class MaterialsRecordController {
         return responseMessage;
     }
 
+    @GetMapping("/getMaterialsRecord")
+    @ApiOperation(value = "按照条件筛选饲料信息")
+    public ResponseMessage<PageInfo<RabbitMaterialsRecord>> getMaterialsRecord(@PathVariable String dbName, @PathVariable String username, @RequestParam Integer limit,
+                                                                               @RequestParam Integer page, @RequestParam String condition, @RequestParam String value){
+        log.info("getMaterialsRecord 传参: {},{},{},{},{},{}", dbName, username, limit, page, condition, value);
+        ResponseMessage<PageInfo<RabbitMaterialsRecord>> responseMessage = materialsRecordService.getMaterialsRecordByCondition(dbName, username, limit, page, condition, value);
+        return responseMessage;
+    }
+
 }

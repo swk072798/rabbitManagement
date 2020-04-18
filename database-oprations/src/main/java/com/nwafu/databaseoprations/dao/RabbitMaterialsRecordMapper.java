@@ -26,4 +26,6 @@ public interface RabbitMaterialsRecordMapper {
     List<RabbitMaterialsRecord> selectByFeedType(String feedType);
 
     int deleteRecordById(List<String> id);
+
+    List<RabbitMaterialsRecord> getRecordByCondition(String condition, String value);
 }

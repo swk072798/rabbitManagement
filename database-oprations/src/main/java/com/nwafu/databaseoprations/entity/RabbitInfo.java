@@ -230,6 +230,10 @@ public class RabbitInfo implements Serializable {
      * @mbg.generated
      */
 
+    public RabbitInfo(){
+
+    }
+
     public RabbitInfo(RabbitInfoVO rabbitInfoVO){
         this.farmUuid = rabbitInfoVO.getFarmUuid();
         this.age = rabbitInfoVO.getAge();

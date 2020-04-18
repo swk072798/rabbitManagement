@@ -187,5 +187,20 @@ public class BaseRabbitInfoServiceImpl implements BaseRabbitInfoService {
         return responseMessage;
     }
 
+    public ResponseMessage<PageInfo<RabbitInfo>> getRabbitInfoByCondition(String dbName, String username, Integer page, Integer limit, String condition, String value){
+        if(limit == null || page == null || dbName == null || username == null){
+            throw new RuntimeException("必要参数不能为空");
+        }
+        List<String> permissions = redisUtils.getPermissionsToList(username);
+        if(!permissions.contains("r")){
+            throw new RuntimeException("getLittleFemaleRabbit 没有相关操作权限");
+        }
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        PageHelper.startPage(page, limit);
+        List<RabbitInfo> rabbitInfoList = rabbitInfoMapper.getRabbitInfoByCondition(condition, value);
+        PageInfo<RabbitInfo> pageInfo = new PageInfo<>(rabbitInfoList);
+        ResponseMessage<PageInfo<RabbitInfo>> responseMessage = new ResponseMessage<>("success", pageInfo);
+        return responseMessage;
+    }
 
 }

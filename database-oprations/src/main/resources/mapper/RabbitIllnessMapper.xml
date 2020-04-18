@@ -53,4 +53,8 @@
       #{item}
     </foreach>
   </delete>
+
+  <select id="getAllIllnessByCondition" resultMap="BaseResultMap">
+    select * from rabbit_illness where ${condition}=#{value}
+  </select>
 </mapper>

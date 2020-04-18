@@ -44,4 +44,8 @@
       #{item}
     </foreach>
   </delete>
+
+  <select id="getInfoByCondition" resultMap="BaseResultMap">
+    select * from rabbit_ingredients where ${condition}=#{value}
+  </select>
 </mapper>

@@ -45,7 +45,7 @@ public class RabbitHealthServiceImpl implements RabbitHealthService {
     }
 
     @Override
-    public ResponseMessage<PageInfo<RabbitHealth>> getRabbitHealth(String dbName, String username, Integer limit, Integer page, String condition, String value) {
+    public ResponseMessage<PageInfo<RabbitHealth>> getRabbitHealthByCondition(String dbName, String username, Integer limit, Integer page, String condition, String value) {
         if(dbName == null || username == null || page == null || condition == null){
             throw new RuntimeException("必要参数不能为空");
         }

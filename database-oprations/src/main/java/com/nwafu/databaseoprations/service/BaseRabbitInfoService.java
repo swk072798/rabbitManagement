@@ -9,11 +9,12 @@ import com.nwafu.databaseoprations.entity.ResponseMessage;
 import java.util.List;
 
 public interface BaseRabbitInfoService {
-    ResponseMessage<PageInfo<RabbitInfo>> getAllRabbitInfo(Integer page, Integer limit, String dbName, String username);
+    ResponseMessage<PageInfo<RabbitInfo>> getAllRabbitInfo(Integer limit, Integer page, String dbName, String username);
     ResponseMessage<Integer> insertRabbitInfo(String dbName, List<RabbitInfoVO> rabbitInfoList, String username);
     ResponseMessage<Integer> deleteRabbitInfo(String dbName, List<String> rabbitNoList, String username);
     ResponseMessage<PageInfo<RabbitInfo>> getFemaleRabbit(String dbName, Integer page, Integer limit, String username);
     ResponseMessage<PageInfo<RabbitInfo>> getMaleRabbit(String dbName, Integer page, Integer limit, String username);
     ResponseMessage<PageInfo<RabbitInfo>> getLittleFemaleRabbit(String dbName, Integer page, Integer limit, String username);
+    ResponseMessage<PageInfo<RabbitInfo>> getRabbitInfoByCondition(String dbName, String username, Integer page, Integer limit, String condition, String value);
 
 }

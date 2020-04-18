@@ -50,4 +50,8 @@
       #{item}
     </foreach>
   </delete>
+
+  <select id="getRecordByCondition" resultMap="BaseResultMap">
+    select * from rabbit_materials_record where ${condition}=#{value}
+  </select>
 </mapper>

@@ -51,7 +51,7 @@ public class BreedingRecordServiceImpl implements BreedingRecordService {
     }
 
     @Override
-    public ResponseMessage<PageInfo<RabbitBreeding>> selectBreedingRecord(String dbName, String username, int limit, int page) {
+    public ResponseMessage<PageInfo<RabbitBreeding>> selectBreedingRecord(String dbName, String username, Integer limit, Integer page) {
         if(!redisUtils.checkPermission("r", username)){
             throw new RuntimeException("没有查询权限");
         }
@@ -64,7 +64,7 @@ public class BreedingRecordServiceImpl implements BreedingRecordService {
     }
 
     @Override
-    public ResponseMessage<PageInfo<RabbitBreeding>> selectBreedingRecordByFemaleRabbit(String dbName, String username, int limit, int page, String femaleRabbitNo) {
+    public ResponseMessage<PageInfo<RabbitBreeding>> selectBreedingRecordByFemaleRabbit(String dbName, String username, Integer limit, Integer page, String femaleRabbitNo) {
         if(!redisUtils.checkPermission("r", username)){
             throw new RuntimeException("没有查询权限");
         }
@@ -77,7 +77,7 @@ public class BreedingRecordServiceImpl implements BreedingRecordService {
     }
 
     @Override
-    public ResponseMessage<PageInfo<RabbitBreeding>> selectBreedingRecordByMaleRabbit(String dbName, String username, int limit, int page, String maleRabbitNo) {
+    public ResponseMessage<PageInfo<RabbitBreeding>> selectBreedingRecordByMaleRabbit(String dbName, String username, Integer limit, Integer page, String maleRabbitNo) {
         if(!redisUtils.checkPermission("r", username)){
             throw new RuntimeException("没有查询权限");
         }
@@ -126,5 +126,18 @@ public class BreedingRecordServiceImpl implements BreedingRecordService {
             throw new RuntimeException("删除失败");
         }
         return new ResponseMessage<>("success", 1);
+    }
+
+    @Override
+    public ResponseMessage<PageInfo<RabbitBreeding>> getBreedingRecordByCondition(String dbName, String username, Integer limit, Integer page, String condition, String value){
+        if (!redisUtils.checkPermission("r", username)) {
+            throw new RuntimeException("没有查询权限");
+        }
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        PageHelper.startPage(page, limit);
+        List<RabbitBreeding> rabbitBreedingList = rabbitBreedingMapper.getRabbitBreedingByCondition(condition, value);
+        PageInfo<RabbitBreeding> pageInfo = new PageInfo<>(rabbitBreedingList);
+        ResponseMessage<PageInfo<RabbitBreeding>> responseMessage = new ResponseMessage<>("sucess", pageInfo);
+        return responseMessage;
     }
 }

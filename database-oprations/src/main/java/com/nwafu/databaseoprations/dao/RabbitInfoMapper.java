@@ -32,4 +32,6 @@ public interface RabbitInfoMapper {
     List<RabbitInfo> getLittleRabbitInfo();
 
     List<String> getAllRabbitNo();
+
+    List<RabbitInfo> getRabbitInfoByCondition(String condition, String value);
 }

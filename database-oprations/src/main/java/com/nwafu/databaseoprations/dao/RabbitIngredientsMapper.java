@@ -27,4 +27,6 @@ public interface RabbitIngredientsMapper {
     List<RabbitIngredients> selectByName(String feedType);
 
     int deleteById(List<String> id);
+
+    List<RabbitIngredients> getInfoByCondition(String condition, String value);
 }

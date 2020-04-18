@@ -10,6 +10,7 @@ import java.util.List;
 public interface DiseaseRecordService {
     ResponseMessage<PageInfo<RabbitIllness>> getIllnessByIllnessName(String dbName, String username, Integer page, Integer limit, String illnessName);
     ResponseMessage<PageInfo<RabbitIllness>> getAllIllness(String dbName, String username, Integer page, Integer limit);
+    ResponseMessage<PageInfo<RabbitIllness>> getIllnessByCondition(String dbName, String username, Integer page, Integer limit, String condition, String value);
     ResponseMessage<Integer> addIllnessInfo(String dbName, String username, List<RabbitIllness> rabbitIllnessList);
     ResponseMessage<Integer> deleteInfoById(String dbName, String username, List<String> id);
 
@@ -17,4 +18,5 @@ public interface DiseaseRecordService {
     ResponseMessage<PageInfo<RabbitIllnessRecord>> getRecordByIllnessName(String dbName, String username, Integer page, Integer limit, String illnessName);
     ResponseMessage<Integer> addRabbitIllnessRecord(String dbName, String username, List<RabbitIllnessRecord> rabbitIllnessRecordList);
     ResponseMessage<Integer> deleteRecordById(String dbName, String username, List<String> id);
+    ResponseMessage<PageInfo<RabbitIllnessRecord>> getIllnessRecordByCondition(String dbName, String username, Integer page, Integer limit, String condition, String value);
 }

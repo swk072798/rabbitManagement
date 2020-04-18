@@ -1,13 +1,10 @@
 package com.nwafu.databaseoprations.controller;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
 import com.nwafu.databaseoprations.entity.RabbitInfo;
 import com.nwafu.databaseoprations.entity.RabbitInfoVO;
 import com.nwafu.databaseoprations.entity.ResponseMessage;
-import com.nwafu.databaseoprations.entity.UserCacheInfo;
-import com.nwafu.databaseoprations.redis.RedisUtils;
 import com.nwafu.databaseoprations.service.BaseRabbitInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -17,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -48,11 +44,11 @@ public class BaseRabbitInfoController {
     @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "页码"), @ApiImplicitParam(name = "limit", value = "每页显示几个"),
                         @ApiImplicitParam(name = "dbName", value = "数据库名称"), @ApiImplicitParam(name = "username", value = "用户名")})
     @GetMapping("/getAllRabbitInfo")
-    public ResponseMessage<PageInfo<RabbitInfo>> getAllRabbitInfo(@RequestParam int page, @RequestParam int limit,
+    public ResponseMessage<PageInfo<RabbitInfo>> getAllRabbitInfo(@RequestParam Integer page, @RequestParam Integer limit,
                                                                   @PathVariable String dbName, @PathVariable String username){
         log.info("getAllRabbitInfo  参数： {}, {}, {}", page, limit, dbName);
         long startTime = System.currentTimeMillis();
-        ResponseMessage<PageInfo<RabbitInfo>> responseMessage= baseRabbitInfoService.getAllRabbitInfo(page, limit, dbName, username);
+        ResponseMessage<PageInfo<RabbitInfo>> responseMessage= baseRabbitInfoService.getAllRabbitInfo(limit, page, dbName, username);
         log.info("getAllRabbitInfo 执行完毕，耗时： {} ms", System.currentTimeMillis() - startTime);
         return responseMessage;
     }
@@ -98,7 +94,7 @@ public class BaseRabbitInfoController {
     */
     @ApiOperation(value = "获取母兔信息")
     @GetMapping("/getFamaleRabbitInfo")
-    public ResponseMessage<PageInfo<RabbitInfo>> getFamaleRabbitInfo(@PathVariable String dbName, @RequestParam int page, @RequestParam int limit, @PathVariable String username){
+    public ResponseMessage<PageInfo<RabbitInfo>> getFamaleRabbitInfo(@PathVariable String dbName, @RequestParam Integer page, @RequestParam Integer limit, @PathVariable String username){
         log.info("getFamaleRabbitInfo  参数：{},{},{}", dbName, page, limit);
         if(dbName == null){
             throw new RuntimeException("dbName 不能为空");
@@ -117,7 +113,7 @@ public class BaseRabbitInfoController {
     */
     @ApiOperation(value = "获取公兔信息")
     @GetMapping("/getMaleRabbitInfo")
-    public ResponseMessage<PageInfo<RabbitInfo>> getMaleRabbitInfo(@PathVariable String dbName, @RequestParam int page, @RequestParam int limit, @PathVariable String username){
+    public ResponseMessage<PageInfo<RabbitInfo>> getMaleRabbitInfo(@PathVariable String dbName, @RequestParam Integer page, @RequestParam Integer limit, @PathVariable String username){
         log.info("getMaleRabbitInfo  参数：{},{},{}", dbName, page, limit);
         if(dbName == null){
             throw new RuntimeException("dbName 不能为空");
@@ -137,7 +133,7 @@ public class BaseRabbitInfoController {
     */
     @ApiOperation(value = "获取仔兔信息")
     @GetMapping("/getLittleRabbitInfo")
-    public ResponseMessage<PageInfo<RabbitInfo>> getLittleRabbitInfo(@PathVariable String dbName, @RequestParam int page, @RequestParam int limit, @PathVariable String username) {
+    public ResponseMessage<PageInfo<RabbitInfo>> getLittleRabbitInfo(@PathVariable String dbName, @RequestParam Integer page, @RequestParam Integer limit, @PathVariable String username) {
         log.info("getLittleRabbitInfo  参数：{},{},{}", dbName, page, limit);
         if (dbName == null) {
             throw new RuntimeException("dbName 不能为空");
@@ -146,6 +142,17 @@ public class BaseRabbitInfoController {
         log.info("getLittleRabbitInfo  调用完毕");
         return responseMessage;
     }
+
+    @GetMapping("/getRabbitInfoByCondition")
+    @ApiOperation(value = "按照条件筛选信息")
+    public ResponseMessage<PageInfo<RabbitInfo>> getRabbitInfoByCondition(@PathVariable String dbName, @RequestParam Integer page,
+                                                                          @RequestParam Integer limit, @PathVariable String username,
+                                                                          @RequestParam String condition, @RequestParam String value) {
+        log.info("getRabbitInfoByCondition 传参:{},{},{},{},{},{}", dbName, username, page, limit, condition, value);
+        ResponseMessage<PageInfo<RabbitInfo>> responseMessage = baseRabbitInfoService.getRabbitInfoByCondition(dbName, username, page, limit, condition, value);
+        return responseMessage;
+    }
+
 
 
 }

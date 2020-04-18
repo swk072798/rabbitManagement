@@ -105,4 +105,8 @@
       #{item}
     </foreach>
   </delete>
+
+  <select id="getDynamicInfoByCondition" resultMap="BaseResultMap">
+    select * from rabbit_dynamic_information where ${condition}=#{value}
+  </select>
 </mapper>

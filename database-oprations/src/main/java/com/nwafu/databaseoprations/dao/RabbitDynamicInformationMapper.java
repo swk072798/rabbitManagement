@@ -27,4 +27,6 @@ public interface RabbitDynamicInformationMapper {
     List<RabbitDynamicInformation> selectInfoByNo(String rabbitNo);
 
     int deleteInfoByRabbitNo(List<String> rabbitNo);
+
+    List<RabbitDynamicInformation> getDynamicInfoByCondition(String condition, String value);
 }

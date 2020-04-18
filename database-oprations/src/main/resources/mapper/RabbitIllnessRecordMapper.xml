@@ -32,10 +32,10 @@
       remark)
     values
       <foreach collection="list" item="item" separator="," index="index">
-        (#{rabbitNo,jdbcType=VARCHAR}, #{illnessName,jdbcType=VARCHAR}, #{medicine,jdbcType=VARCHAR},
-        #{effect,jdbcType=VARCHAR}, #{reuse,jdbcType=VARCHAR}, #{farm_Uuid,jdbcType=VARCHAR},
-        #{rabbitHouse,jdbcType=VARCHAR}, #{cageNo,jdbcType=VARCHAR}, #{uploadUser,jdbcType=VARCHAR},
-        #{remark,jdbcType=LONGVARCHAR})
+        (#{item.rabbitNo,jdbcType=VARCHAR}, #{item.illnessName,jdbcType=VARCHAR}, #{item.medicine,jdbcType=VARCHAR},
+        #{item.effect,jdbcType=VARCHAR}, #{item.reuse,jdbcType=VARCHAR}, #{item.farm_Uuid,jdbcType=VARCHAR},
+        #{item.rabbitHouse,jdbcType=VARCHAR}, #{item.cageNo,jdbcType=VARCHAR}, #{item.uploadUser,jdbcType=VARCHAR},
+        #{item.remark,jdbcType=LONGVARCHAR})
       </foreach>
   </insert>
   <select id="selectAll" resultMap="BaseResultMap">
@@ -50,6 +50,10 @@
 
   <select id="selectInfoByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from rabbit_illness_record where illnessName=#{name}
+  </select>
+
+  <select id="selectInfoByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from rabbit_illness_record where ${condition}=#{value}
   </select>
 
   <delete id="deleteInfoById" parameterType="java.util.List">

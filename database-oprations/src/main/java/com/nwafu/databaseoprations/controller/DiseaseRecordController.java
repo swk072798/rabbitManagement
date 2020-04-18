@@ -61,6 +61,8 @@ public class DiseaseRecordController {
         return responseMessage;
     }
 
+
+
     /**
     * @Description: 添加疾病信息
     * @Param:

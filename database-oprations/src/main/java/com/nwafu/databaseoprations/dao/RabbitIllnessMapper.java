@@ -27,4 +27,6 @@ public interface RabbitIllnessMapper {
     List<RabbitIllness> selectInfoByName(String name);
 
     int deleteInfoById(List<String> id);
+
+    List<RabbitIllness> getAllIllnessByCondition(String condition, String value);
 }

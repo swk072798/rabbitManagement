@@ -69,6 +69,22 @@ public class DiseaseRecordServiceImpl implements DiseaseRecordService {
         ResponseMessage<PageInfo<RabbitIllness>> responseMessage = new ResponseMessage<>("success", pageInfo);
         return responseMessage;
     }
+    @Override
+    public ResponseMessage<PageInfo<RabbitIllness>> getIllnessByCondition(String dbName, String username, Integer page, Integer limit, String condition, String value){
+        if(dbName == null || username == null || page == null || limit == null){
+            throw new RuntimeException("必要参数不能为空");
+        }
+        List<String> permissions = redisUtils.getPermissionsToList(username);
+        if(!permissions.contains("r")){
+            throw new RuntimeException("没有查询权限");
+        }
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        PageHelper.startPage(page, limit);
+        List<RabbitIllness> rabbitIllnessList = rabbitIllnessMapper.getAllIllnessByCondition(condition, value);
+        PageInfo<RabbitIllness> pageInfo = new PageInfo<>(rabbitIllnessList);
+        ResponseMessage<PageInfo<RabbitIllness>> responseMessage = new ResponseMessage<>("success", pageInfo);
+        return responseMessage;
+    }
 
     @Override
     public ResponseMessage<Integer> addIllnessInfo(String dbName, String username, List<RabbitIllness> rabbitIllnessList) {
@@ -184,5 +200,25 @@ public class DiseaseRecordServiceImpl implements DiseaseRecordService {
             throw new RuntimeException("删除数据失败");
         }
         return new ResponseMessage<>("success", 1);
+    }
+
+    @Override
+    public ResponseMessage<PageInfo<RabbitIllnessRecord>> getIllnessRecordByCondition(String dbName, String username, Integer page, Integer limit, String condition, String value){
+        if(dbName == null || username == null || page == null || limit == null){
+            throw new RuntimeException("必要参数不能为空");
+        }
+        List<String> permissions = redisUtils.getPermissionsToList(username);
+        if(!permissions.contains("r")){
+            throw new RuntimeException("没有查询权限");
+        }
+        if(condition == null || condition.equals("")){
+            throw new RuntimeException("查询条件不能为空");
+        }
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        PageHelper.startPage(page, limit);
+        List<RabbitIllnessRecord> rabbitIllnessList = rabbitIllnessRecordMapper.selectInfoByCondition(condition, value);
+        PageInfo<RabbitIllnessRecord> pageInfo = new PageInfo<>(rabbitIllnessList);
+        ResponseMessage<PageInfo<RabbitIllnessRecord>> responseMessage = new ResponseMessage<>("success", pageInfo);
+        return responseMessage;
     }
 }

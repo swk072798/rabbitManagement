@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.management.relation.RoleUnresolved;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +41,15 @@ public class FeedManageServiceImpl implements FeedManageService {
     */
     @Override
     public ResponseMessage<Integer> addFeedInfo(String dbName, List<RabbitIngredients> rabbitIngredients, String username) {
+        if(dbName == null || username == null){
+            throw new RuntimeException("必要参数不能为空");
+        }
         List<String> permissions = redisUtils.getPermissionsToList(username);
-        if(!permissions.contains("r")){
-            throw new RuntimeException("getAllRabbitInfo 没有相关操作权限");
+        if(!permissions.contains("c")){
+            throw new RuntimeException("getAllRabbitInfo 没有新增权限");
         }
         if(rabbitIngredients.size() == 0){
-            throw new RuntimeException("addFeedInfo 列表不为空");
+            throw new RuntimeException("addFeedInfo 列表不能为空");
         }
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
         List<RabbitIngredientsPO> rabbitIngredientsPOList = new ArrayList<>();
@@ -66,7 +70,13 @@ public class FeedManageServiceImpl implements FeedManageService {
     * @Date: 2020/1/13
     */
     @Override
-    public ResponseMessage<PageInfo<RabbitIngredients>> getAllFeedInfo(int limit, int page, String dbName, String username) {
+    public ResponseMessage<PageInfo<RabbitIngredients>> getAllFeedInfo(Integer limit, Integer page, String dbName, String username) {
+        if(dbName == null || username == null || limit == null || page == null){
+            throw new RuntimeException("必要参数不能为空");
+        }
+        if(!redisUtils.checkPermission("r", username)){
+            throw new RuntimeException("没有查询权限");
+        }
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
         PageHelper.startPage(limit, page);
         List<RabbitIngredients> rabbitIngredients = rabbitIngredientsMapper.selectAll();
@@ -83,10 +93,37 @@ public class FeedManageServiceImpl implements FeedManageService {
     * @Date: 2020/1/13
     */
     @Override
-    public ResponseMessage<PageInfo<RabbitIngredients>> getFeedInfoByName(int limit, int page, String feedType, String dbName, String username) {
+    public ResponseMessage<PageInfo<RabbitIngredients>> getFeedInfoByName(Integer limit, Integer page, String feedType, String dbName, String username) {
+        if(dbName == null || username == null || limit == null || page == null){
+            throw new RuntimeException("必要参数不能为空");
+        }
+        if(feedType == null || feedType.equals("")){
+            throw new RuntimeException("查询条件不能为空");
+        }
+        if(!redisUtils.checkPermission("r", username)){
+            throw new RuntimeException("没有查询权限");
+        }
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
         PageHelper.startPage(limit, page);
         List<RabbitIngredients> rabbitIngredients = rabbitIngredientsMapper.selectByName(feedType);
+        log.info("getFeedInfoByName 总数：{}", rabbitIngredients.size());
+        PageInfo<RabbitIngredients> pageInfo = new PageInfo<>(rabbitIngredients);
+        return new ResponseMessage<>("success", pageInfo);
+    }
+
+    public ResponseMessage<PageInfo<RabbitIngredients>> getFeedInfoByCondition(String dbName, String username, Integer limit, Integer page, String condition, String value){
+        if(dbName == null || username == null || limit == null || page == null){
+            throw new RuntimeException("必要参数不能为空");
+        }
+        if(condition == null || condition.equals("")){
+            throw new RuntimeException("查询条件不能为空");
+        }
+        if(!redisUtils.checkPermission("r", username)){
+            throw new RuntimeException("没有查询权限");
+        }
+        DynamicDataSourceContextHolder.setDataSourceKey(dbName);
+        PageHelper.startPage(limit, page);
+        List<RabbitIngredients> rabbitIngredients = rabbitIngredientsMapper.getInfoByCondition(condition, value);
         log.info("getFeedInfoByName 总数：{}", rabbitIngredients.size());
         PageInfo<RabbitIngredients> pageInfo = new PageInfo<>(rabbitIngredients);
         return new ResponseMessage<>("success", pageInfo);
@@ -101,6 +138,15 @@ public class FeedManageServiceImpl implements FeedManageService {
     */
     @Override
     public ResponseMessage<Integer> deleteFeedInfo(List<String> deleteId, String dbName, String username) {
+        if(dbName == null || username == null ){
+            throw new RuntimeException("必要参数不能为空");
+        }
+        if(deleteId == null || deleteId.size() == 0){
+            throw new RuntimeException("删除列表不能为空");
+        }
+        if(!redisUtils.checkPermission("d", username)){
+            throw new RuntimeException("没有删除权限");
+        }
         DynamicDataSourceContextHolder.setDataSourceKey(dbName);
         int flag = rabbitIngredientsMapper.deleteById(deleteId);
         if(flag == 0){
