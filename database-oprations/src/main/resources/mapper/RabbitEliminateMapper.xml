@@ -31,4 +31,8 @@
 		<foreach close=")" collection="list" item="item" open="(" separator=",">#{item}
 		</foreach>
 	</delete>
+
+	<select id="getEliminateCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from rabbit_eliminate where rabbitHouseNo=#{rabbitHouseNo} and eliminateDate &gt; #{startDate} and eliminateDate &lt; #{endDate}
+	</select>
 </mapper>

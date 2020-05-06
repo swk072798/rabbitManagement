@@ -93,4 +93,24 @@
   <select id="getRabbitInfoByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from rabbit_info where ${condition}=#{value}
   </select>
+  
+  <select id="getTotalByCondition" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from rabbit_info where ${type} and farmUuid=#{farmUuid}
+  </select>
+
+  <select id="getMaleCountByCondition" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from rabbit_info where ${type} and farmUuid=#{farmUuid} and sex="male"
+  </select>
+
+  <select id="getFemaleCountByCondition" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from rabbit_info where ${type} and farmUuid=#{farmUuid} and sex="female"
+  </select>
+  
+  <select id="getMaleRabbitCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from rabbit_info where farmUuid=#{farmUuid} and sex="male"
+  </select>
+
+  <select id="getFemaleRabbitCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from rabbit_info where farmUuid=#{farmUuid} and sex="female"
+  </select>
 </mapper>

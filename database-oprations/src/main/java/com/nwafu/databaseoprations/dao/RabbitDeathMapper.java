@@ -14,4 +14,6 @@ public interface RabbitDeathMapper {
     int insert(List<RabbitDeath> rabbitDeathList);
 
     int deleteRabbitDeathInfo(List<String> id);
+
+    int getDeathCount(String rabbitHouseNo, String startDate, String endDate);
 }

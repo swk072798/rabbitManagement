@@ -34,4 +34,14 @@ public interface RabbitInfoMapper {
     List<String> getAllRabbitNo();
 
     List<RabbitInfo> getRabbitInfoByCondition(String condition, String value);
+
+    int getTotalByCondition(String farmUuid, String type);
+
+    int getMaleCountByCondition(String farmUuid, String type);
+
+    int getFemaleCountByCondition(String farmUuid, String type);
+
+    int getMaleRabbitCount(String farmUuid);
+
+    int getFemaleRabbitCount(String farmUuid);
 }

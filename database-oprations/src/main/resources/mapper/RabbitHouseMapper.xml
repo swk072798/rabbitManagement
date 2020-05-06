@@ -45,4 +45,6 @@
     wetCurtainOperation, lightingControl
     from rabbit_house
   </select>
+
+
 </mapper>

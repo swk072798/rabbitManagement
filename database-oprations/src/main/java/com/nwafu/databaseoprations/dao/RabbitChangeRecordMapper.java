@@ -19,4 +19,8 @@ public interface RabbitChangeRecordMapper {
      * @mbg.generated
      */
     List<RabbitChangeRecord> selectAll();
+
+    int getInRabbitCount(String rabbitHouseNo, String startDate, String endDate);
+
+    int getOutRabbitCount(String rabbitHosueNo, String startDate, String endDate);
 }

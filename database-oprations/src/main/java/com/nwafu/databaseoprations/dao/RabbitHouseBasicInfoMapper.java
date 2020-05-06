@@ -11,4 +11,5 @@ public interface RabbitHouseBasicInfoMapper {
     List<RabbitHouseBasicInfo> selectAllInfo();
     List<RabbitHouseBasicInfo> selectInfoByCondition(String condition, String value);
     int deleteById(List<String> id);
+    List<String> getRabbitHouseNo(String farmUUid);
 }

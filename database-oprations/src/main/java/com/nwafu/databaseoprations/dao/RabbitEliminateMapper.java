@@ -9,4 +9,5 @@ public interface RabbitEliminateMapper {
     List<RabbitEliminate> selectAll();
     List<RabbitEliminate> selectRabbitEliminateRecordByCondition(String condition, String value);
     int deleteById(List<String> id);
+    int getEliminateCount(String rabbitHouseNo, String startDate, String endDate);
 }

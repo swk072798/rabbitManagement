@@ -31,4 +31,8 @@
 			#{item}
 		</foreach>
 	</delete>
+
+	<select id="getRabbitHouseNo" resultType="java.lang.String" parameterType="java.lang.String">
+    	select rabbitHouseNo from rabbit_house_basic_info where farmUuid=#{farmUUid}
+  	</select>
 </mapper>

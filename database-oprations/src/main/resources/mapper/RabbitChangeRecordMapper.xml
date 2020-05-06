@@ -39,4 +39,12 @@
     actionUser, changeDate
     from rabbit_change_record
   </select>
+
+  <select id="getInRabbitCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT count(*) from rabbit_change_record where newRabbitHouseNo=#{rabbitHouseNo} and changeDate &gt; #{startDate} and changeDate &lt; #{endDate}
+  </select>
+
+  <select id="getOutRabbitCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT count(*) from rabbit_change_record where oldRabbitHouseNo=#{rabbitHosueNo} and changeDate &gt; #{startDate} and changeDate &lt; #{endDate}
+  </select>
 </mapper>
