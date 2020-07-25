@@ -27,7 +27,7 @@ public class AddNewDatabase {
     Map<Object, Object> datasourceMap = new HashMap<>();
 
     /**
-    * @Description: 读取数据库中的配置进行动态数据源的初始化
+    * @Description: 读取数据库中的数据源链接配置进行动态数据源的初始化
     * @Param:
     * @return:
     * @Author: liu qinchang
@@ -37,7 +37,7 @@ public class AddNewDatabase {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        DatabaseInfo[] databaseInfoList = restTemplate.getForObject("http://116.62.150.116:8300/getAllDatabaseInfo", DatabaseInfo[].class);
+        DatabaseInfo[] databaseInfoList = restTemplate.getForObject("http://47.93.186.213:8300/getAllDatabaseInfo", DatabaseInfo[].class);
 
         for(DatabaseInfo databaseInfo : databaseInfoList){
             HikariDataSource hikariDataSource = new HikariDataSource();

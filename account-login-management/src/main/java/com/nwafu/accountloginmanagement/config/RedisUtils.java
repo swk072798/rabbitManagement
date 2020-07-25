@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 
 /**
  * @program: rabbitManagement
- * @description: redis工具类
+ * @description: redis工具类，负责一些权限验证的功能
  * @author: liu qinchang
  * @create: 2020-01-14 10:17
  **/

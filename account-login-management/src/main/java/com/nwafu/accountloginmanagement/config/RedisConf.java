@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @program: rabbitManagement
- * @description: 读取redis的配置类
+ * @description: 读取redis的配置类，如要修改端口，在这里修改
  * @author: liu qinchang
  * @create: 2020-01-14 10:59
  **/
@@ -12,7 +12,7 @@ import lombok.Data;
 
 public class RedisConf {
 
-    private String server = "116.62.150.116";
+    private String server = "localhost";
 
     private String port = "6379";
 }

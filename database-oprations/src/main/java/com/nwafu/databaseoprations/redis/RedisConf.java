@@ -12,7 +12,7 @@ import lombok.Data;
 
 public class RedisConf {
 
-    private String server = "116.62.150.116";
+    private String server = "localhost";
 
     private String port = "6379";
 }

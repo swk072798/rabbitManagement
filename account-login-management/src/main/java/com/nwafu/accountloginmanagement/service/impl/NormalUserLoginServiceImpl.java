@@ -96,7 +96,7 @@ public class NormalUserLoginServiceImpl implements NormalUserLoginService {
             throw new RuntimeException(e.getMessage());
         }
         log.info("----数据库创建成功-----");
-        String jdbcUrl = "jdbc:mysql://116.62.150.116:3306/" + username + "?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=true&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true";
+        String jdbcUrl = "jdbc:mysql://47.93.186.213:3306/" + username + "?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=true&verifyServerCertificate=false&autoReconnct=true&autoReconnectForPools=true&allowMultiQueries=true";
         int addDatabaseInfoFlag = databaseInfoDao.addDatabaseInfo(username,username, jdbcUrl,"root", "123456", "com.mysql.cj.jdbc.Driver");
 
         if(addDatabaseInfoFlag == 0){
